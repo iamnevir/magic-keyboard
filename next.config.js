@@ -6,6 +6,12 @@ const nextConfig = {
       {
         hostname: "utfs.io",
       },
+      {
+        hostname: "files.edgestore.dev",
+      },
+      {
+        hostname: "epomaker.com",
+      },
     ],
   },
 };

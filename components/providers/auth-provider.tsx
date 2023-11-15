@@ -30,6 +30,14 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 headerSubtitle: "dark:text-[#A1A1A1] text-gray-500",
                 footerActionText:
                   "dark:bg-black bg-white dark:text-white text-black ",
+                userButtonPopoverActionButtonText: "dark:text-white text-black",
+                userButtonPopoverActionButtonIcon:
+                  "dark:text-white text-black ",
+                userPreviewSecondaryIdentifier: "dark:text-white text-black",
+                userPreviewMainIdentifier: "dark:text-white text-black",
+                userButtonPopoverFooter: "hidden opacity-0",
+                userButtonPopoverActionButton:
+                  "dark:hover:bg-[#0A0A0A] hover:bg-gray-100",
               },
               layout: {
                 socialButtonsPlacement: "bottom",

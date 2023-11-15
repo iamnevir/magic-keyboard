@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
 import {
   Navbar,
@@ -32,6 +33,7 @@ const NavbarPage = () => {
     "Help & Feedback",
     "Log Out",
   ];
+
   return (
     <Navbar
       className=" bg-transparent"
@@ -76,8 +78,8 @@ const NavbarPage = () => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link color="foreground" href="#">
-              News
+            <Link color="foreground" href="/library">
+              Library
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -109,6 +111,7 @@ const NavbarPage = () => {
           </>
         )}
       </NavbarContent>
+
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
