@@ -27,7 +27,7 @@ export default function Billboard() {
         className=" w-full h-full"
       >
         {billboards?.map((billboard) => (
-          <SwiperSlide>
+          <SwiperSlide key={billboard._id}>
             <BillboardItem billboard={billboard} />
           </SwiperSlide>
         ))}

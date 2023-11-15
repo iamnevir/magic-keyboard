@@ -62,6 +62,7 @@ const Footer = () => {
       >
         {andress.map((item) => (
           <motion.li
+            key={item.text}
             className={` group-hover/address:ml-${item.ml}  duration-400`}
             initial="hidden"
             whileInView="show"
@@ -96,6 +97,7 @@ const Footer = () => {
         >
           {socialMedia.map((item) => (
             <motion.li
+              key={item.text}
               className={`hover:ml-5  duration-400 group flex`}
               initial="hidden"
               whileInView="show"
