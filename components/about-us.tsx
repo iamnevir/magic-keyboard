@@ -129,7 +129,7 @@ const AboutUs = () => {
           variants={fadeIn("left", "spring", 0.2, 1.6)}
           className=" w-40 h-10 mt-10"
         >
-          <AnimateButton text="ABOUT US" />
+          <AnimateButton color="white" text="ABOUT US" />
         </motion.div>
       </div>
     </div>

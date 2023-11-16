@@ -21,7 +21,7 @@ const ProductList = () => {
           <span className="text-slate-500">Yes, even that.</span>
         </p>
         <div className=" absolute right-0 top-0">
-          <AnimateButton text="SHOP MORE" />
+          <AnimateButton color="white" text="SHOP MORE" />
         </div>
         <Swiper
           slidesPerView={4}
