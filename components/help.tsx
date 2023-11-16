@@ -3,45 +3,12 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import UnderlineText from "./underline-animate";
 import { useTheme } from "next-themes";
+import { container, fadeIn } from "@/lib/motion";
 const Help = () => {
   const { theme } = useTheme();
   const color = theme === "light" ? "black" : "white";
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-  const fadeIn = (
-    direction: string,
-    type: string,
-    delay: number,
-    duration: number
-  ) => ({
-    hidden: {
-      x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-      y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
-      opacity: 0,
-    },
-    show: {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      transition: {
-        type,
-        delay,
-        duration,
-        ease: "easeOut",
-      },
-    },
-  });
   return (
-    <motion.div className="w-full items-center justify-center sm:px-28 px-2 sm:py-10 py-5 ">
+    <div className="w-full items-center justify-center sm:px-28 px-2 sm:py-10 py-5 ">
       <div className="md:grid md:grid-cols-2 lg:grid-cols-3 items-start sm:w-[384] w-full sm:h-full h-[400px]">
         <motion.div
           initial="hidden"
@@ -226,7 +193,7 @@ const Help = () => {
           </motion.div>
         </motion.div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

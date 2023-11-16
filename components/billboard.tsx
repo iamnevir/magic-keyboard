@@ -20,6 +20,7 @@ export default function Billboard() {
           delay: 5000,
           disableOnInteraction: false,
         }}
+        loop={true}
         pagination={{
           clickable: true,
         }}

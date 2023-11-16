@@ -5,7 +5,6 @@ import AuthProvider from "@/components/providers/auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import ConvexClientProvider from "@/components/providers/client-convex-provider";
 import { Providers } from "@/components/providers/nextui-provider";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

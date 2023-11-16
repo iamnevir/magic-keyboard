@@ -66,34 +66,33 @@ const NavbarPage = () => {
             <p className="font-bold text-inherit">KEYBOARD</p>{" "}
           </Link>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-3">
-          <NavbarItem>
-            <Link color="foreground" href="/magic">
-              Magic
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="#" color="foreground">
-              Products
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="/library">
-              Library
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Discord
-            </Link>
-          </NavbarItem>
-        </NavbarContent>
       </NavbarContent>
-
-      <NavbarContent justify="end">
+      <NavbarContent className="hidden sm:flex gap-3 absolute right-20 z-50">
+        <NavbarItem>
+          <Link color="foreground" href="/magic">
+            Magic
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="#" color="foreground">
+            Products
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/library">
+            Library
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/discord">
+            Discord
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarContent className=" absolute right-0">
         {auth.userId ? (
           <>
-            <NavbarItem className="max-sm:absolute max-sm:-left-10 max-sm:w-8">
+            <NavbarItem className="max-sm:absolute max-sm:-left-20 max-sm:w-8">
               <UserButton afterSignOutUrl="/" />
             </NavbarItem>
             <ModeToggle />

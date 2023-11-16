@@ -1,5 +1,6 @@
 "use client";
-import { LibraryCanvas } from "@/components/library-keyboard";
+import { LibraryCanvas } from "@/components/library/library-keyboard";
+import TransitionPage from "@/components/transition-page";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 
@@ -73,7 +74,7 @@ const LibraryPage = () => {
       >
         back
       </div>
-      {/* <Suspense
+      <Suspense
         fallback={
           <div className=" absolute left-[50%] top-[50%] font-semibold w-10 h-10 dark:text-white">
             loading...
@@ -81,7 +82,7 @@ const LibraryPage = () => {
         }
       >
         <LibraryCanvas images={images} />
-      </Suspense> */}
+      </Suspense>
     </div>
   );
 };

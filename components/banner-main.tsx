@@ -1,39 +1,26 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  useGLTF,
-  Float,
-  Text,
-  ContactShadows,
-  MeshTransmissionMaterial,
-} from "@react-three/drei";
+import { Text, MeshTransmissionMaterial } from "@react-three/drei";
 import { easing } from "maath";
 import { useTheme } from "next-themes";
-import { Stars } from "./star";
-
-useGLTF.preload("/bomb-gp.glb");
 
 export const BannerMain = () => {
   const { theme } = useTheme();
   return (
     <>
-      <Canvas
-        eventPrefix="client"
-        shadows
-        camera={{ position: [0, 0, 20], fov: 50 }}
-      >
+      <Canvas camera={{ position: [0, 0, 20], fov: 50 }}>
         <color
           attach="background"
           args={theme === "dark" ? ["#000000"] : ["#00000000"]}
         />
-        <spotLight
+        {/* <spotLight
           position={[20, 20, 10]}
           penumbra={1}
           castShadow
           angle={0.2}
-        />
+        /> */}
         <Status position={[0, 0, -10]} />
-        <Float floatIntensity={2}>
+        {/* <Float floatIntensity={2}>
           <Knot />
         </Float>
         <ContactShadows
@@ -42,9 +29,8 @@ export const BannerMain = () => {
           blur={1}
           far={100}
           opacity={0.85}
-        />
+        /> */}
         <Rig />
-        <Stars />
       </Canvas>
     </>
   );

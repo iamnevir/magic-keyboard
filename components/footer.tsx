@@ -47,91 +47,43 @@ const Footer = () => {
         textStyles="sm:absolute font-semibold ml-5 sm:ml-0 sm:left-20 sm:top-14 top-5 text-3xl"
       />
 
-      <motion.ul
-        initial="hidden"
-        whileInView="show"
-        className="flex-col flex ml-14 font-medium group/address"
-        variants={{
-          show: {
-            transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-          },
-          hidden: {
-            transition: { staggerChildren: 0.05, staggerDirection: -1 },
-          },
-        }}
-      >
+      <div className="flex-col flex ml-14 font-medium group/address">
         {andress.map((item) => (
-          <motion.li
+          <div
             key={item.text}
             className={` group-hover/address:ml-${item.ml}  duration-400`}
-            initial="hidden"
-            whileInView="show"
-            variants={{
-              show: {
-                transition: { staggerChildren: 0.5, delayChildren: 0.5 },
-              },
-              hidden: {
-                transition: { staggerChildren: 0.5, staggerDirection: -1 },
-              },
-            }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
           >
             <TypingText title={item.text} textStyles="font-medium" />
-          </motion.li>
+          </div>
         ))}
-      </motion.ul>
-      <motion.div className=" flex-col flex items-start space-y-10">
-        <motion.ul
-          initial="hidden"
-          whileInView="show"
-          className="flex-col flex ml-10 font-medium"
-          variants={{
-            show: {
-              transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-            },
-            hidden: {
-              transition: { staggerChildren: 0.05, staggerDirection: -1 },
-            },
-          }}
-        >
+      </div>
+      <div className=" flex-col flex items-start space-y-10">
+        <div className="flex-col flex ml-10 font-medium">
           {socialMedia.map((item) => (
-            <motion.li
+            <div
               key={item.text}
               className={`hover:ml-5  duration-400 group flex`}
-              initial="hidden"
-              whileInView="show"
-              variants={{
-                show: {
-                  transition: { staggerChildren: 0.5, delayChildren: 0.5 },
-                },
-                hidden: {
-                  transition: { staggerChildren: 0.5, staggerDirection: -1 },
-                },
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
             >
               <ExternalLinkIcon className=" group-hover:opacity-100 opacity-0 h-4 w-4 mr-1 mt-1 duration-300" />
               <TypingText title={item.text} textStyles="font-medium" />
-            </motion.li>
+            </div>
           ))}
-        </motion.ul>
-        <motion.div className=" ml-14 flex-col flex">
+        </div>
+        <div className=" ml-14 flex-col flex">
           <TypingText title="Hiring Dev" textStyles=" font-medium" />
 
-          <motion.span className="group/email cursor-pointer flex-col flex">
+          <span className="group/email cursor-pointer flex-col flex">
             <UnderlineText>
               <TypingText
                 title="iamnevir@magic.com"
                 textStyles=" font-medium"
               />
             </UnderlineText>
-          </motion.span>
-        </motion.div>
-        <motion.div className="ml-14 flex-col flex">
+          </span>
+        </div>
+        <div className="ml-14 flex-col flex">
           <TypingText title="Contact enquires" textStyles=" font-medium" />
-          <motion.span className="group/email  cursor-pointer flex-col flex">
+          <span className="group/email  cursor-pointer flex-col flex">
             <UnderlineText>
               {" "}
               <TypingText
@@ -140,19 +92,19 @@ const Footer = () => {
               />
             </UnderlineText>
 
-            <motion.div className=" dark:bg-white bg-black group-hover/email:w-full h-[2px] w-0 duration-300" />
-          </motion.span>
-        </motion.div>
-      </motion.div>
+            <div className=" dark:bg-white bg-black group-hover/email:w-full h-[2px] w-0 duration-300" />
+          </span>
+        </div>
+      </div>
 
-      <motion.div layoutId="underline" className="space-y-10 ml-5 sm:ml-0">
-        <motion.span className=" flex flex-col">
+      <div className="space-y-10 ml-5 sm:ml-0">
+        <span className=" flex flex-col">
           <TypingText title="Subscribe to" textStyles=" font-medium text-5xl" />
           <TypingText
             title="our newsletter"
             textStyles=" font-medium text-5xl"
           />
-        </motion.span>
+        </span>
         <div className=" relative items-center">
           <Input
             type="email"
@@ -161,8 +113,8 @@ const Footer = () => {
           />
           <ArrowRight className=" absolute sm:right-3 top-[20%] right-10 z-10 w-8 h-8 cursor-pointer" />
         </div>
-      </motion.div>
-      <motion.div className="sm:flex-row flex flex-col items-start sm:absolute w-full ml-5 sm:ml-0 h-[50px] bottom-0 sm:space-x-[300px]">
+      </div>
+      <div className="sm:flex-row flex flex-col items-start sm:absolute w-full ml-5 sm:ml-0 h-[50px] bottom-0 sm:space-x-[300px]">
         <TypingText
           title="@2023 MAGIC KEYBOARD STUDIO"
           textStyles="font-normal text-[15px]"
@@ -179,12 +131,14 @@ const Footer = () => {
           textStyles="font-normal text-[15px]"
         />
         <div
-          onClick={() => {}}
-          className=" absolute dark:bg-white bg-black rounded-full items-center p-4 cursor-pointer right-40 bottom-5"
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          className=" absolute dark:bg-white bg-black rounded-full items-center sm:p-4 p-3 cursor-pointer sm:right-40 sm:bottom-5 right-2"
         >
-          <ArrowUp className=" w-7 h-7 text-white dark:text-black" />
+          <ArrowUp className=" sm:w-7 sm:h-7 h-4 w-4 text-white dark:text-black" />
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };

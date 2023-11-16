@@ -9,8 +9,8 @@ import { Children } from "react";
 const TextUnderMagic = () => {
   const state = useStore();
   return (
-    <div className=" w-full h-full">
-      <div className={cn(" bottom-0 w-full h-10 left-0 absolute")}>
+    <div className=" w-full h-full ">
+      <div className={cn(" bottom-0 w-full h-10 left-0 absolute ")}>
         <a
           href="https://github.com/iamnevir"
           className=" absolute bottom-10 left-10 text-sm"
@@ -32,7 +32,14 @@ const TextUnderMagic = () => {
           />
         </Link>
       </div>
-      <div className=" info top-[50%] left-[80%] w-[400px] absolute pl-10 border-l-1 border-black select-none">
+      <div
+        className={cn(
+          state.open
+            ? "bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-lg"
+            : "bg-transparent",
+          " info top-[50%] left-[80%] p-3 w-[400px] absolute pl-10 border-l-1 border-black select-none"
+        )}
+      >
         <h1 className="font-mono text-[2em] mb-8">RK65</h1>
         <List open={state.open}>
           <h3 className=" font-extrabold text-7xl">NV65</h3>
@@ -70,7 +77,7 @@ const item = {
 function List({ children, open }: any) {
   return (
     <motion.ul
-      className="flex flex-col overflow-hidden"
+      className="flex flex-col overflow-hidden "
       variants={container}
       initial="hidden"
       animate={open ? "show" : "hidden"}

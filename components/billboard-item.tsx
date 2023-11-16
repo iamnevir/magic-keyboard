@@ -1,6 +1,8 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import AnimateButton from "./animate-button";
 const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
   return (
     <motion.div className=" relative w-full h-full flex items-center justify-center">
@@ -21,18 +23,15 @@ const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
         <span className="md:text-xl mb-3 md:mb-7 text-white">
           {billboard.subTitle}
         </span>
-        <div
-          className="inline-block rounded-[6px] border-white border-1 items-center px-5 py-2 hover:bg-white hover:text-black  duration-500 cursor-pointer hover:rounded-[10px]
-         hover:scale-105"
-        >
-          <span className=" font-bold uppercase">
-            {billboard.order === "preorder"
+        <AnimateButton
+          text={
+            billboard.order === "preorder"
               ? "Pre-Order"
               : billboard.order === "order"
               ? "Order Now"
-              : "Comming Soon"}
-          </span>
-        </div>
+              : "Comming Soon"
+          }
+        />
       </div>
     </motion.div>
   );

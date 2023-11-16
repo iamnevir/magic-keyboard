@@ -13,6 +13,7 @@ export default defineSchema({
   }).index("by_producer", ["producer"]),
   category: defineTable({
     name: v.string(),
+    imageUrl: v.optional(v.string()),
   }).index("by_name", ["name"]),
   collection: defineTable({
     name: v.string(),
