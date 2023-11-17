@@ -15,7 +15,7 @@ import { ElementRef, useRef, useState } from "react";
 const ProductList = () => {
   const products = useQuery(api.product.getProducts);
   return (
-    <div className=" overflow-hidden p-4">
+    <div className=" overflow-hidden sm:p-4 p-2">
       <div className={cn("relative")}>
         <p className="mb-10 sm:text-2xl text-xl sm:w-full w-[50vw]  font-semibold">
           Magic Keyboards{" "}
@@ -37,7 +37,7 @@ const ProductList = () => {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: 1,
               spaceBetween: 40,
             },
             1024: {
@@ -65,7 +65,13 @@ const ProductList = () => {
 
 export default ProductList;
 
-const SwipeDirection = ({ direction }: { direction: "left" | "right" }) => {
+export const SwipeDirection = ({
+  direction,
+  className,
+}: {
+  direction: "left" | "right";
+  className?: string;
+}) => {
   const swiper = useSwiper();
   return (
     <button
@@ -75,13 +81,14 @@ const SwipeDirection = ({ direction }: { direction: "left" | "right" }) => {
       className={cn(
         direction === "left"
           ? "absolute left-0 top-[50%] z-30 rounded-r-xl bg-slate-100/30 p-3 pl-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pl-3"
-          : "absolute right-0 top-[50%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pr-3"
+          : "absolute right-0 top-[50%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pr-3",
+        className
       )}
     >
       {direction === "left" ? (
-        <ChevronLeft className=" w-8 h-8" />
+        <ChevronLeft className=" w-8 h-8 dark:text-black" />
       ) : (
-        <ChevronRight className=" w-8 h-8" />
+        <ChevronRight className=" w-8 h-8 dark:text-black" />
       )}
     </button>
   );
@@ -96,7 +103,7 @@ const ProductItem = ({ product }: { product: Doc<"product"> }) => {
         variants={fadeIn("up", "spring", 0.1, 0.1)}
         style={{ backgroundImage: `url(${bg})` }}
         className={cn(
-          `relative w-[350px] h-[350px] bg-cover  bg-shrink-0 cursor-pointer rounded-2xl shadow-md transition-all hover:scale-[1.015] hover:shadow-xl`
+          `relative sm:w-[350px] h-[350px] w-full bg-cover bg-shrink-0 cursor-pointer rounded-2xl transition-all duration-1000`
         )}
       >
         <div

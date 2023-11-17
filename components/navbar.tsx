@@ -19,7 +19,7 @@ import { ModeToggle } from "./mode-toggle";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
-  const isMobile = false;
+  const isMobile = true;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
   const menuItems = [
@@ -51,7 +51,7 @@ const NavbarPage = () => {
   }
   return (
     <Navbar
-      className="sm:bg-transparent"
+      className="sm:bg-transparent sm:fixed"
       isBordered={false}
       isBlurred={isMobile ? true : false}
       maxWidth="full"

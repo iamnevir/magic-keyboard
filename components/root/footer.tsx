@@ -3,6 +3,7 @@ import { TypingText } from "../typing-text";
 import { ArrowRight, ArrowUp, ExternalLinkIcon } from "lucide-react";
 import { Input } from "@nextui-org/react";
 import UnderlineText from "../underline-animate";
+import { fadeIn } from "@/lib/motion";
 
 const Footer = () => {
   const andress = [
@@ -21,55 +22,42 @@ const Footer = () => {
       initial="hidden"
       whileInView="show"
       className="flex-col flex sm:flex-row sm:items-start pt-40 items-start w-[99vw] h-[100vh] overflow-x-clip relative sm:space-x-28 space-y-20"
-      variants={{
-        hidden: {
-          opacity: 0,
-          y: 50,
-          transition: {
-            type: "spring",
-            stiffness: 300,
-            damping: 140,
-          },
-        },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: {
-            type: "spring",
-            stiffness: 80,
-            delay: 0.5,
-          },
-        },
-      }}
     >
       <TypingText
         title="Magic Keyboard"
         textStyles="sm:absolute font-semibold ml-5 sm:ml-0 sm:left-20 sm:top-14 top-5 text-3xl"
       />
-
-      <div className="flex-col flex ml-14 font-medium group/address">
-        {andress.map((item) => (
-          <div
-            key={item.text}
-            className={` group-hover/address:ml-${item.ml}  duration-400`}
-          >
-            <TypingText title={item.text} textStyles="font-medium" />
-          </div>
-        ))}
-      </div>
-      <div className=" flex-col flex items-start space-y-10">
-        <div className="flex-col flex ml-10 font-medium">
-          {socialMedia.map((item) => (
+      <motion.div initial="hidden" whileInView="show" className=" flex">
+        <div className="flex-col flex sm:ml-5 ml-14 font-medium group/address">
+          {andress.map((item) => (
             <div
               key={item.text}
-              className={`hover:ml-5  duration-400 group flex`}
+              className={` group-hover/address:ml-${item.ml}  duration-400`}
             >
-              <ExternalLinkIcon className=" group-hover:opacity-100 opacity-0 h-4 w-4 mr-1 mt-1 duration-300" />
               <TypingText title={item.text} textStyles="font-medium" />
             </div>
           ))}
         </div>
-        <div className=" ml-14 flex-col flex">
+        <div className=" flex-col flex items-start space-y-10">
+          <div className="flex-col flex ml-10 font-medium">
+            {socialMedia.map((item) => (
+              <div
+                key={item.text}
+                className={`hover:translate-x-5  duration-400 group flex`}
+              >
+                <ExternalLinkIcon className=" group-hover:opacity-100 opacity-0 h-4 w-4 mr-1 mt-1 duration-300" />
+                <TypingText title={item.text} textStyles="font-medium" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+      <motion.div className=" flex flex-col space-y-20">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          className=" ml-14 flex-col flex"
+        >
           <TypingText title="Hiring Dev" textStyles=" font-medium" />
 
           <span className="group/email cursor-pointer flex-col flex">
@@ -80,8 +68,12 @@ const Footer = () => {
               />
             </UnderlineText>
           </span>
-        </div>
-        <div className="ml-14 flex-col flex">
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          className="ml-14 flex-col flex"
+        >
           <TypingText title="Contact enquires" textStyles=" font-medium" />
           <span className="group/email  cursor-pointer flex-col flex">
             <UnderlineText>
@@ -94,27 +86,44 @@ const Footer = () => {
 
             <div className=" dark:bg-white bg-black group-hover/email:w-full h-[2px] w-0 duration-300" />
           </span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="space-y-10 ml-5 sm:ml-0">
-        <span className=" flex flex-col">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        className="space-y-10 ml-5 sm:ml-0"
+      >
+        <motion.span
+          initial="hidden"
+          whileInView="show"
+          className=" flex flex-col"
+        >
           <TypingText title="Subscribe to" textStyles=" font-medium text-5xl" />
           <TypingText
             title="our newsletter"
             textStyles=" font-medium text-5xl"
           />
-        </span>
-        <div className=" relative items-center">
+        </motion.span>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          variants={fadeIn("right", "spring", 0.1, 1)}
+          className=" relative items-center"
+        >
           <Input
             type="email"
             placeholder="Your Email"
             className=" max-w-3xl w-[300px] sm:w-[470px] h-[61px] dark:text-white"
           />
           <ArrowRight className=" absolute sm:right-3 top-[20%] right-10 z-10 w-8 h-8 cursor-pointer" />
-        </div>
-      </div>
-      <div className="sm:flex-row flex flex-col items-start sm:absolute w-full ml-5 sm:ml-0 h-[50px] bottom-0 sm:space-x-[300px]">
+        </motion.div>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        className="sm:flex-row flex flex-col items-start sm:absolute w-full ml-5 sm:ml-0 h-[50px] bottom-0 sm:space-x-[300px]"
+      >
         <TypingText
           title="@2023 MAGIC KEYBOARD STUDIO"
           textStyles="font-normal text-[15px]"
@@ -138,7 +147,7 @@ const Footer = () => {
         >
           <ArrowUp className=" sm:w-7 sm:h-7 h-4 w-4 text-white dark:text-black" />
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

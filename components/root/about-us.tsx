@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import work from "@/public/work.json";
 
 const AboutUs = () => {
-  const isMobile = false;
+  const isMobile = true;
   return (
     <div className=" w-full h-full relative p-10">
       <div className=" absolute">

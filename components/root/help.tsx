@@ -9,7 +9,7 @@ const Help = () => {
   const color = theme === "light" ? "black" : "white";
   return (
     <div className="w-full items-center justify-center sm:px-28 px-2 sm:py-10 py-5 ">
-      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 items-start sm:w-[384] w-full sm:h-full h-[400px]">
+      <div className="md:grid md:grid-cols-2 lg:grid-cols-3 items-start sm:w-[384] w-full sm:h-full h-[630px]">
         <motion.div
           initial="hidden"
           whileInView="show"

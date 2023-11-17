@@ -13,12 +13,14 @@ const CarouselCategoryList = () => {
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-
-  const x = useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
+  const isMobile = true;
+  const x = isMobile
+    ? useTransform(scrollYProgress, [0, 2], ["44%", "-135%"])
+    : useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
 
   return (
     <section ref={targetRef} className="relative h-[400vh]">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+      <div className="sticky sm:top-0 top-[10vh] flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-4">
           {categories?.map((category) => (
             <CategoryItem category={category} key={category._id} />
