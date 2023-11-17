@@ -19,7 +19,7 @@ import { ModeToggle } from "./mode-toggle";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
-  const isMobile = true;
+  const isMobile = window.screen.width <= 768;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
   const menuItems = [

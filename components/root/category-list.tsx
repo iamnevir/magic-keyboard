@@ -13,11 +13,10 @@ const CarouselCategoryList = () => {
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
-  const isMobile = true;
-  const x = isMobile
-    ? useTransform(scrollYProgress, [0, 2], ["44%", "-135%"])
-    : useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
-
+  const isMobile = window.screen.width <= 768;
+  const x1 = useTransform(scrollYProgress, [0, 2], ["44%", "-135%"]);
+  const x2 = useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
+  const x = isMobile ? x1 : x2;
   return (
     <section ref={targetRef} className="relative h-[400vh]">
       <div className="sticky sm:top-0 top-[10vh] flex h-screen items-center overflow-hidden">

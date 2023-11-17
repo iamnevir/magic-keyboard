@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const Intro = async () => {
   const [isLoading, setIsLoading] = useState(false);
-  const isMobile = true;
+  const isMobile = window.screen.width <= 768;
   useEffect(() => {
     if (!isMobile) {
       setIsLoading(true);

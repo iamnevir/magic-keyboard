@@ -78,7 +78,7 @@ const News = () => {
         <SwipeDirection direction="right" className=" sm:top-[30%] top-[20%]" />
 
         {news.map((item) => (
-          <SwiperSlide>
+          <SwiperSlide key={item.thumnail}>
             <div className=" w-[350px] h-full bg-transparent space-y-4 sm:ml-0 ml-5">
               <Image
                 src={item.thumnail}
