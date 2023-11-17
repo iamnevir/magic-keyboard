@@ -79,7 +79,7 @@ const News = () => {
 
         {news.map((item) => (
           <SwiperSlide key={item.thumnail}>
-            <div className=" w-[350px] h-full bg-transparent space-y-4 sm:ml-0 ml-5">
+            <div className=" w-[350px] h-full bg-transparent space-y-4 sm:ml-5 ml-[5vw]">
               <Image
                 src={item.thumnail}
                 width={350}
