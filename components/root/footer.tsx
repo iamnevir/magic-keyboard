@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { TypingText } from "./typing-text";
+import { TypingText } from "../typing-text";
 import { ArrowRight, ArrowUp, ExternalLinkIcon } from "lucide-react";
 import { Input } from "@nextui-org/react";
-import UnderlineText from "./underline-animate";
+import UnderlineText from "../underline-animate";
 
 const Footer = () => {
   const andress = [

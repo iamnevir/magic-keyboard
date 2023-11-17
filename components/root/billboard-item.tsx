@@ -2,7 +2,7 @@ import { Doc } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import AnimateButton from "./animate-button";
+import AnimateButton from "../animate-button";
 const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
   return (
     <motion.div className=" relative w-full h-full flex items-center justify-center">

@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
-import { Line } from "./line";
+import { Line } from "../line";
 import { fadeIn } from "@/lib/motion";
-import AnimateButton from "./animate-button";
+import AnimateButton from "../animate-button";
+import Lottie from "lottie-react";
+import work from "@/public/work.json";
 
 const AboutUs = () => {
+  const isMobile = false;
   return (
     <div className=" w-full h-full relative p-10">
       <div className=" absolute">
         <Line />
       </div>
-      <motion.div className=" relative z-50 h-[100vh]">
-        <div className=" absolute grid w-full h-[40vh] space-y-10 text-[10vw] font-normal">
+      <motion.div className="relative z-50 h-[30vh] sm:h-[100vh]">
+        <div className="absolute grid w-full h-full sm:h-[40vh] space-y-10 text-[10vw] font-normal">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -23,7 +26,7 @@ const AboutUs = () => {
               variants={{
                 hidden: { marginLeft: 0 },
                 show: {
-                  marginLeft: 240,
+                  marginLeft: isMobile ? 50 : 240,
                   transition: {
                     delay: 0.65,
                     duration: 0.4,
@@ -40,7 +43,7 @@ const AboutUs = () => {
               variants={{
                 hidden: { marginLeft: 0 },
                 show: {
-                  marginLeft: 240,
+                  marginLeft: isMobile ? 50 : 240,
                   transition: {
                     delay: 0.5,
                     duration: 0.4,
@@ -65,7 +68,8 @@ const AboutUs = () => {
               variants={{
                 hidden: { marginTop: 0 },
                 show: {
-                  marginTop: 240,
+                  marginTop: isMobile ? -50 : 240,
+                  marginLeft: isMobile ? -20 : 0,
                   transition: {
                     delay: 0.5,
                     duration: 0.5,
@@ -76,11 +80,27 @@ const AboutUs = () => {
             >
               With
             </motion.div>
-            <motion.div className="absolute left-[33vw] ">Magic</motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              variants={{
+                hidden: { marginTop: 0 },
+                show: {
+                  marginTop: isMobile ? -100 : 0,
+                  transition: {
+                    delay: 0.5,
+                    duration: 0.5,
+                  },
+                },
+              }}
+              className="absolute left-[33vw] "
+            >
+              Magic
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
-      <div className=" ml-auto w-[45vw] mr-20">
+      <div className=" ml-auto sm:w-[45vw] w-full mr-20">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -131,6 +151,9 @@ const AboutUs = () => {
         >
           <AnimateButton color="white" text="ABOUT US" />
         </motion.div>
+      </div>
+      <div className="sm:w-[30vw] w-full sm:absolute left-10 bottom-0">
+        <Lottie animationData={work} />
       </div>
     </div>
   );

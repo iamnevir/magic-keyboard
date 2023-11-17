@@ -12,6 +12,7 @@ const AnimateButton = ({
 }) => {
   return (
     <div
+      onClick={onClick}
       className={cn(
         color === "white"
           ? "dark:bg-zinc-950 bg-zinc-200"

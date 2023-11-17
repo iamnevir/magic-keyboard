@@ -20,7 +20,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 card: "rounded-tr-[20px] rounded-br-[20px] rounded-tl-[0px] rounded-bl-[0px] border-transparent h-[550px] dark:bg-black bg-white",
                 modalCloseButton:
                   " rounded-full dark:bg-black bg-white dark:text-white text-black  ",
-                rootBox: "ml-[400px]",
+                rootBox: "sm:ml-[400px] mr-5",
                 formFieldInput:
                   " focus-visible:ring-0 dark:bg-black bg-white dark:text-white text-black dark:border-white border-black border-1 dark:border-opacity-10 border-opacity-10 ",
                 headerTitle:

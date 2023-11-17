@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import UnderlineText from "./underline-animate";
+import UnderlineText from "../underline-animate";
 import { useTheme } from "next-themes";
 import { container, fadeIn } from "@/lib/motion";
 const Help = () => {

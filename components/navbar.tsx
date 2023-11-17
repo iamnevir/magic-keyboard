@@ -14,11 +14,12 @@ import {
 import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ModeToggle } from "./mode-toggle";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
+  const isMobile = false;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
   const menuItems = [
@@ -33,13 +34,28 @@ const NavbarPage = () => {
     "Help & Feedback",
     "Log Out",
   ];
-
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (!isMobile) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else {
+      setIsLoading(false);
+    }
+  }, [isMobile]);
+  if (isLoading) {
+    return null;
+  }
   return (
     <Navbar
-      className=" bg-transparent"
+      className="sm:bg-transparent"
       isBordered={false}
+      isBlurred={isMobile ? true : false}
+      maxWidth="full"
       shouldHideOnScroll
-      isBlurred
     >
       <NavbarContent justify="start">
         <NavbarMenuToggle
@@ -47,11 +63,7 @@ const NavbarPage = () => {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <Link
-            href="/"
-            color="foreground"
-            className=" mr-5 flex items-center gap-4 left-0"
-          >
+          <Link href="/" className="flex items-center gap-4 ml-5">
             <Image
               src={
                 theme === "dark"
@@ -60,14 +72,16 @@ const NavbarPage = () => {
               }
               width={25}
               height={25}
-              objectFit="contain"
               alt="logo"
             />
             <p className="font-bold text-inherit">KEYBOARD</p>{" "}
           </Link>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-3 absolute right-20 z-50">
+      <NavbarContent
+        justify="center"
+        className="hidden sm:flex space-x-10  z-50"
+      >
         <NavbarItem>
           <Link color="foreground" href="/magic">
             Magic
@@ -89,7 +103,7 @@ const NavbarPage = () => {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent className=" absolute right-0">
+      <NavbarContent justify="end" className=" right-0">
         {auth.userId ? (
           <>
             <NavbarItem className="max-sm:absolute max-sm:-left-20 max-sm:w-8">
@@ -99,7 +113,7 @@ const NavbarPage = () => {
           </>
         ) : (
           <>
-            <NavbarItem className="hidden lg:flex">
+            <NavbarItem className="flex">
               <SignInButton mode="modal">
                 <span className=" hover:text-gray-400 duration-500 cursor-pointer">
                   Sign In
