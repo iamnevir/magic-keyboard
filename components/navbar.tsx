@@ -24,18 +24,7 @@ const NavbarPage = () => {
   const isMobile = window.screen.width <= 768;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const menuItems = ["Magic", "Library", "Products", "Discord"];
   const lottieRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [isSound, setIsSound] = useState(false);
@@ -167,11 +156,19 @@ const NavbarPage = () => {
           )}
         </NavbarContent>
 
-        <NavbarMenu>
+        <NavbarMenu className="">
           {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color="foreground" className="w-full" href="#" size="lg">
-                {item}
+            <NavbarMenuItem key={`${item}-${index}`} className=" w-full">
+              <Link
+                href={`/${item.toLowerCase()}`}
+                className=" w-full flex flex-col px-1"
+              >
+                <div className="flex items-center h-full w-full ml-2 hover:border-l-1 hover:border-[#2670E9] border-l-0 hover:bg-gradient-to-r px-2 py-3 from-[#2670E9]/30 to-[2670E9]/0">
+                  <div className="text-foreground font-semibold text-xl">
+                    {item}
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r w-[90%] from-slate-200 mt-2 via-slate-500 to-slate-200 dark:from-slate-950  dark:via-slate-400 dark:to-slate-950 h-[1px]" />
               </Link>
             </NavbarMenuItem>
           ))}

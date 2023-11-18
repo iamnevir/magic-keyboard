@@ -10,9 +10,10 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useStore } from "@/hooks/use-valtio-store";
 
 export function Keyboard1Canvas() {
+  const isMobile = window.screen.width <= 768;
   return (
     <Canvas eventPrefix="client" camera={{ position: [0, 0, 4], fov: 50 }}>
-      <OrbitControls enableZoom={false} />
+      <OrbitControls enableZoom={isMobile} />
       <ambientLight intensity={0.7} />
       <spotLight
         intensity={0.5}

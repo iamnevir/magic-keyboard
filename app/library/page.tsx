@@ -67,7 +67,7 @@ const LibraryPage = () => {
     },
   ];
   return (
-    <div className=" h-full w-full">
+    <div className=" sm:h-full sm:w-full w-[100vw] h-[100vh]">
       <div
         className="absolute dark:text-white left-10 top-10 w-10 h-5 z-50 cursor-pointer "
         onClick={() => router.push("/")}
@@ -76,7 +76,7 @@ const LibraryPage = () => {
       </div>
       <Suspense
         fallback={
-          <div className=" absolute left-[50%] top-[50%] font-semibold w-10 h-10 dark:text-white">
+          <div className=" absolute sm:left-[50%] sm:top-[50%] left-[40%] top-[40%] font-semibold w-10 h-10 dark:text-white">
             loading...
           </div>
         }

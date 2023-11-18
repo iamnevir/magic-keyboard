@@ -13,15 +13,17 @@ const TextUnderMagic = () => {
       <div className={cn(" bottom-0 w-full h-10 left-0 absolute ")}>
         <a
           href="https://github.com/iamnevir"
-          className=" absolute bottom-10 left-10 text-sm"
+          className=" absolute  sm:bottom-10 sm:left-10 bottom-4 left-4 text-sm"
         >
           NEVIR.RN
           <br />
           DEV COLLECTIVE
         </a>
-        <div className=" absolute bottom-10 right-10 text-sm">05/02/2023</div>
+        <div className=" absolute sm:bottom-10 sm:right-10 bottom-4 right-4 text-sm">
+          05/02/2023
+        </div>
       </div>
-      <div className="  top-[8%] left-[5%] w-10 absolute">
+      <div className="  sm:top-[8%] left-[5%] top-[4%] sm:w-10 w-8 absolute">
         <Link href="/">
           <Image
             src="https://utfs.io/f/aa690307-8655-4f7b-ba0e-ed88b08ae4fc-sfgo65.png"
@@ -37,21 +39,21 @@ const TextUnderMagic = () => {
           state.open
             ? "bg-gradient-to-br from-white/20 to-white/0 backdrop-blur-lg"
             : "bg-transparent",
-          " info top-[50%] left-[80%] p-3 w-[400px] absolute pl-10 border-l-1 border-black select-none"
+          " info top-[50%] left-[80%] p-3 sm:w-[400px] w-[200px] absolute sm:pl-10 pl-2 border-l-1 border-black select-none"
         )}
       >
         <h1 className="font-mono text-[2em] mb-8">RK65</h1>
         <List open={state.open}>
-          <h3 className=" font-extrabold text-7xl">NV65</h3>
-          <h3 className=" font-extrabold text-7xl">“SUGAR”</h3>
-          <h3 className=" font-extrabold text-7xl">
+          <h3 className=" font-extrabold sm:text-7xl text-3xl">NV65</h3>
+          <h3 className=" font-extrabold sm:text-7xl text-3xl">“SUGAR”</h3>
+          <h3 className=" font-extrabold sm:text-7xl text-3xl">
             <span className="accent">PEGASUS</span>
           </h3>
           <h4 className=" font-light text-lg my-2">Magic Keyboard</h4>
           <p className="price inline-block text-white bg-black rounded-full py-1 px-2 font-mono">
             $98.97
           </p>
-          <p className=" mb-5 text-base pt-2">
+          <p className=" mb-5 text-base pt-2 line-clamp-5  sm:line-clamp-none">
             Year after year, Pegasus has proven itself in the hands of plastic
             addicts everywhere. Now our most trusted style returns with new
             improvements that makes it more of itself than ever. Meet

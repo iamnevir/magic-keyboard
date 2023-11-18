@@ -11,8 +11,13 @@ const GOLDENRATIO = 1.61803398875;
 
 export const LibraryCanvas = ({ images }: any) => {
   const { theme } = useTheme();
+  const isMobile = window.screen.width <= 768;
   return (
-    <Canvas dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
+    <Canvas
+      dpr={[1, 1.5]}
+      camera={{ fov: isMobile ? 90 : 70, position: [0, 2, 15] }}
+      className=""
+    >
       <color
         attach="background"
         args={theme === "dark" ? ["#000000"] : ["#ffffff"]}
