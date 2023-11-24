@@ -10,9 +10,8 @@ import ProductItem from "./product-item";
 import { SwipeDirection } from "./swiper-navigation";
 import { Doc } from "@/convex/_generated/dataModel";
 const ProductList = ({ productList }: { productList?: Doc<"product">[] }) => {
-  const products = productList
-    ? productList
-    : useQuery(api.product.getProducts);
+  const productsList = useQuery(api.product.getProducts);
+  const products = productList ? productList : productsList;
   return (
     <div className=" overflow-hidden sm:p-4 p-2">
       <div className={cn("relative")}>

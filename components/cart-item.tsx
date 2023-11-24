@@ -25,7 +25,7 @@ const CartItem = ({ item }: { item: ProductCart }) => {
       <div className=" flex flex-col items-start w-full font-semibold text-xs gap-1">
         <span>{item.name}</span>
         {item.options?.map((o) => (
-          <span>
+          <span key={o.key}>
             {o.key}
             {": "}
             <span className="font-normal"> {o.value}</span>

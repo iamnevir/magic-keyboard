@@ -115,8 +115,8 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
               const ratingB = b[0].rating;
               return ratingB - ratingA; // Sắp xếp giảm dần
             })
-            .map((item) => (
-              <div className=" flex items-center gap-2">
+            .map((item, index) => (
+              <div key={index} className=" flex items-center gap-2">
                 <RatingStar className=" h-4" rating={item[0].rating} />
                 <Progress
                   value={Math.round((item.length / reviews!.length) * 100)}
@@ -247,8 +247,11 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
         <span className=" text-2xl font-medium">
           Đánh giá {`(${reviews?.length})`}
         </span>
-        {reviewsList?.[page].map((item) => (
-          <ReviewItem review={item} />
+        {reviewsList?.[page].map((item, index) => (
+          <div key={index}>
+            {" "}
+            <ReviewItem review={item} />
+          </div>
         ))}
         <div>
           <Pagination

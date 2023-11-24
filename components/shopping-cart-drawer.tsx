@@ -32,8 +32,11 @@ const ShoppingCartDrawer = () => {
               <ExternalLinkIcon className="w-5 h-5 opacity-0 group-hover:opacity-100 duration-500" />
               Giỏ hàng
             </div>
-            {cart.items.map((item) => (
-              <CartItem item={item} />
+            {cart.items.map((item, index) => (
+              <div key={index}>
+                {" "}
+                <CartItem item={item} />
+              </div>
             ))}
           </div>
           <div className=" fixed dark:bg-black bg-white w-full bottom-0 h-[30%] px-4 ">

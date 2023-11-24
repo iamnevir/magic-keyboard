@@ -148,7 +148,9 @@ export default function CartTable() {
           {cart.items.map((item) => (
             <TableRow key={item.productId}>
               {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
+                <TableCell key={columnKey}>
+                  {renderCell(item, columnKey)}
+                </TableCell>
               )}
             </TableRow>
           ))}
