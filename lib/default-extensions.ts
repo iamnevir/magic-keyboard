@@ -7,7 +7,6 @@ import TextStyle from "@tiptap/extension-text-style";
 import { Color } from "@tiptap/extension-color";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
-import { Markdown } from "tiptap-markdown";
 import Highlight from "@tiptap/extension-highlight";
 import { InputRule } from "@tiptap/core";
 import Image from "@tiptap/extension-image";
@@ -130,9 +129,5 @@ export const defaultExtensions = [
       class: "flex items-start my-4",
     },
     nested: true,
-  }),
-  Markdown.configure({
-    html: false,
-    transformCopiedText: true,
   }),
 ];
