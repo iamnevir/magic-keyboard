@@ -21,7 +21,7 @@ const Footer = () => {
     <motion.div
       initial="hidden"
       whileInView="show"
-      className="flex-col flex sm:flex-row sm:items-start pt-40 items-start w-[99vw] h-[100vh] overflow-x-clip relative sm:space-x-28 space-y-20"
+      className="flex-col flex sm:flex-row sm:items-start pt-40 items-start w-[99dvw] h-[100dvh] overflow-x-clip relative sm:space-x-28 space-y-20"
     >
       <TypingText
         title="Magic Keyboard"

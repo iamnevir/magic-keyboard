@@ -17,8 +17,13 @@ import type {
 import type * as billboard from "../billboard";
 import type * as category from "../category";
 import type * as collection from "../collection";
+import type * as comment from "../comment";
+import type * as music from "../music";
+import type * as musicBackground from "../musicBackground";
 import type * as order from "../order";
+import type * as post from "../post";
 import type * as product from "../product";
+import type * as review from "../review";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -32,8 +37,13 @@ declare const fullApi: ApiFromModules<{
   billboard: typeof billboard;
   category: typeof category;
   collection: typeof collection;
+  comment: typeof comment;
+  music: typeof music;
+  musicBackground: typeof musicBackground;
   order: typeof order;
+  post: typeof post;
   product: typeof product;
+  review: typeof review;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

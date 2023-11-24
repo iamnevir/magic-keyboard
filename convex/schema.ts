@@ -22,8 +22,10 @@ export default defineSchema({
 
   product: defineTable({
     name: v.string(),
+    slug: v.optional(v.string()),
     producer: v.optional(v.string()),
-    description: v.optional(v.string()),
+    description: v.optional(v.any()),
+    infomation: v.optional(v.any()),
     price: v.optional(v.number()),
     pay: v.optional(v.string()),
     quantity: v.optional(v.number()),
@@ -46,6 +48,17 @@ export default defineSchema({
     images: v.optional(v.array(v.string())),
     isPublish: v.boolean(),
   }).index("by_category", ["collectionId"]),
+  review: defineTable({
+    productId: v.id("product"),
+    userName: v.optional(v.string()),
+    email: v.string(),
+    rating: v.number(),
+    title: v.optional(v.string()),
+    comments: v.string(),
+    images: v.optional(v.array(v.string())),
+    like: v.optional(v.number()),
+    dislike: v.optional(v.number()),
+  }).index("by_productId", ["productId"]),
   order: defineTable({
     phone: v.string(),
     address: v.string(),
@@ -59,4 +72,27 @@ export default defineSchema({
       })
     ),
   }).index("by_phone", ["phone"]),
+  music: defineTable({
+    name: v.string(),
+    url: v.string(),
+  }),
+  musicBackground: defineTable({
+    music: v.id("music"),
+  }),
+  post: defineTable({
+    title: v.string(),
+    subTitle: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    type: v.string(),
+    author: v.string(),
+    content: v.optional(v.any()),
+    thumnail: v.string(),
+    isPublish: v.boolean(),
+  }).index("by_type", ["type"]),
+  comment: defineTable({
+    postId: v.id("post"),
+    name: v.string(),
+    email: v.string(),
+    content: v.string(),
+  }).index("by_postId", ["postId"]),
 });

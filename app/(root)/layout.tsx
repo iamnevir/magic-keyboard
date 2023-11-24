@@ -1,5 +1,5 @@
-import NavbarPage from "@/components/navbar";
-
+import dynamic from "next/dynamic";
+const NavbarPage = dynamic(() => import("@/components/navbar"), { ssr: false });
 export default function HomeLayout({
   children,
 }: {
@@ -8,6 +8,7 @@ export default function HomeLayout({
   return (
     <>
       <NavbarPage />
+
       {children}
     </>
   );

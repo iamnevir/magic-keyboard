@@ -13,7 +13,7 @@ const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
         alt="billboard"
         className=" object-cover absolute w-full h-full"
       />
-      <div className=" max-w-4xl w-[60vw] text-center absolute flex flex-col items-center justify-center text-white">
+      <div className=" max-w-4xl w-[60dvw] text-center absolute flex flex-col items-center justify-center text-white">
         <span className="text-xl font-semibold mb-2 md:mb-[14px] text-white">
           {billboard.producer}
         </span>

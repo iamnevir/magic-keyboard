@@ -18,15 +18,20 @@ const CarouselCategoryList = () => {
   const x2 = useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
   const x = isMobile ? x1 : x2;
   return (
-    <section ref={targetRef} className="relative h-[400vh]">
-      <div className="sticky sm:top-0 top-[10vh] flex h-screen items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-4">
-          {categories?.map((category) => (
-            <CategoryItem category={category} key={category._id} />
-          ))}
-        </motion.div>
+    <div className="flex flex-col items-center justify-center w-full h-full overflow-clip">
+      <div className=" font-medium text-4xl sm:mt-20 mt-10">
+        Shop by Categories
       </div>
-    </section>
+      <div ref={targetRef} className="relative h-[400dvh]">
+        <div className="sticky sm:top-0 top-[10dvh] flex h-screen items-center overflow-hidden">
+          <motion.div style={{ x }} className="flex gap-4">
+            {categories?.map((category) => (
+              <CategoryItem category={category} key={category._id} />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </div>
   );
 };
 

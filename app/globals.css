@@ -17,7 +17,8 @@ body {
   overscroll-behavior: none;
   font-family: "Inter var", sans-serif;
 }
-body::-webkit-scrollbar {
+
+*::-webkit-scrollbar {
   width: 0.5em;
 }
 
@@ -123,4 +124,20 @@ h1 {
 
 .hoverText:has(+ .hoverText + .hoverText:hover) {
   font-weight: 300;
+}
+.mySwiper .swiper-slide-thumb-active {
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  transition-duration: 800ms;
+  transition-property: all;
+  transition-timing-function: ease;
+}
+.pswp__img {
+  object-fit: contain;
+  background: #ffffff !important;
+}
+.pswp__item,
+pswp__scroll-wrap {
+  background: #ffffff !important;
 }

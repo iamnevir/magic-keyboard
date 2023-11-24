@@ -12,13 +12,13 @@ const AboutUs = () => {
       <div className=" absolute">
         <Line />
       </div>
-      <motion.div className="relative z-50 h-[30vh] sm:h-[100vh]">
-        <div className="absolute grid w-full h-full sm:h-[40vh] space-y-10 text-[10vw] font-normal">
+      <motion.div className="relative z-50 h-[30dvh] sm:h-[100dvh]">
+        <div className="absolute grid w-full h-full sm:h-[40dvh] space-y-10 text-[10dvw] font-normal">
           <motion.div
             initial="hidden"
             whileInView="show"
             variants={fadeIn("up", "spring", 0.2, 1.25)}
-            className="  inline-block  h-[10vh] relative"
+            className="  inline-block  h-[10dvh] relative"
           >
             <motion.div
               initial="hidden"
@@ -33,7 +33,7 @@ const AboutUs = () => {
                   },
                 },
               }}
-              className=" absolute left-[8vw]"
+              className=" absolute left-[8dvw]"
             >
               Al
             </motion.div>
@@ -50,7 +50,7 @@ const AboutUs = () => {
                   },
                 },
               }}
-              className=" absolute left-[21vw]"
+              className=" absolute left-[21dvw]"
             >
               Generation
             </motion.div>
@@ -60,7 +60,7 @@ const AboutUs = () => {
             initial="hidden"
             whileInView="show"
             variants={fadeIn("down", "spring", 0.2, 1.25)}
-            className=" inline-block h-[10vh] relative"
+            className=" inline-block h-[10dvh] relative"
           >
             <motion.div
               initial="hidden"
@@ -76,7 +76,7 @@ const AboutUs = () => {
                   },
                 },
               }}
-              className="absolute left-[8vw] "
+              className="absolute left-[8dvw] "
             >
               With
             </motion.div>
@@ -93,14 +93,14 @@ const AboutUs = () => {
                   },
                 },
               }}
-              className="absolute left-[33vw] "
+              className="absolute left-[33dvw] "
             >
               Magic
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
-      <div className=" ml-auto sm:w-[45vw] w-full mr-20">
+      <div className=" ml-auto sm:w-[45dvw] w-full mr-20">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -152,7 +152,7 @@ const AboutUs = () => {
           <AnimateButton color="white" text="ABOUT US" />
         </motion.div>
       </div>
-      <div className="sm:w-[30vw] w-full sm:absolute left-10 bottom-0">
+      <div className="sm:w-[30dvw] w-full sm:absolute left-10 bottom-0">
         <Lottie animationData={work} />
       </div>
     </div>

@@ -18,8 +18,8 @@ const Intro = async () => {
   }, [isMobile]);
   if (isLoading) {
     return (
-      <div className="h-[100vh] w-[100vw] bg-white overflow-hidden">
-        <Lottie animationData={loading} className="-mt-[30vh]" />
+      <div className="h-[100dvh] w-[100dvw] bg-white overflow-hidden">
+        <Lottie animationData={loading} className="-mt-[30dvh]" />
       </div>
     );
   }

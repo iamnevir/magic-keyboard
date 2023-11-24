@@ -6,6 +6,8 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/components/button.js",
+    "./node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input).js",
   ],
 
   theme: {
@@ -76,7 +78,24 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: "#0072f5",
+          },
+        },
+        dark: {
+          colors: {
+            primary: "#0072f5",
+          },
+        },
+      },
+    }),
+  ],
+
   darkMode: "class",
-  plugins: [nextui()],
 };

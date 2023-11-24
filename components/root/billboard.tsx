@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 export default function Billboard() {
   const billboards = useQuery(api.billboard.getBillboard);
   return (
-    <div className=" w-full h-[100vh]">
+    <div className=" w-full h-[100dvh]">
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

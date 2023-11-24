@@ -5,9 +5,9 @@ import "swiper/css/pagination";
 import { Pagination, Navigation } from "swiper/modules";
 import Image from "next/image";
 import AnimateButton from "../animate-button";
-import { SwipeDirection } from "./product-list";
 import { fadeIn } from "@/lib/motion";
 import { motion } from "framer-motion";
+import { SwipeDirection } from "./swiper-navigation";
 const News = () => {
   const news = [
     {
@@ -79,7 +79,7 @@ const News = () => {
 
         {news.map((item) => (
           <SwiperSlide key={item.thumnail}>
-            <div className=" w-[350px] h-full bg-transparent space-y-4 sm:ml-5 ml-[5vw]">
+            <div className=" w-[350px] h-full bg-transparent space-y-4 sm:ml-5 ml-[5dvw]">
               <Image
                 src={item.thumnail}
                 width={350}

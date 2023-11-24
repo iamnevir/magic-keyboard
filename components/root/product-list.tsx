@@ -1,23 +1,22 @@
 import { api } from "@/convex/_generated/api";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useQuery } from "convex/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/motion";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import AnimateButton from "../animate-button";
-import { Tilt } from "@jdion/tilt-react";
+import ProductItem from "./product-item";
+import { SwipeDirection } from "./swiper-navigation";
 import { Doc } from "@/convex/_generated/dataModel";
-import { ElementRef, useRef, useState } from "react";
-const ProductList = () => {
-  const products = useQuery(api.product.getProducts);
+const ProductList = ({ productList }: { productList?: Doc<"product">[] }) => {
+  const products = productList
+    ? productList
+    : useQuery(api.product.getProducts);
   return (
     <div className=" overflow-hidden sm:p-4 p-2">
       <div className={cn("relative")}>
-        <p className="mb-10 sm:text-2xl text-xl sm:w-full w-[50vw]  font-semibold">
+        <p className="mb-10 sm:text-2xl text-xl sm:w-full w-[50dvw]  font-semibold">
           Magic Keyboards{" "}
           <span className="text-slate-500">Yes, even that.</span>
         </p>
@@ -64,68 +63,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
-export const SwipeDirection = ({
-  direction,
-  className,
-}: {
-  direction: "left" | "right";
-  className?: string;
-}) => {
-  const swiper = useSwiper();
-  return (
-    <button
-      onClick={() =>
-        direction === "left" ? swiper.slidePrev() : swiper.slideNext()
-      }
-      className={cn(
-        direction === "left"
-          ? "absolute left-0 top-[50%] z-30 rounded-r-xl bg-slate-100/30 p-3 pl-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pl-3"
-          : "absolute right-0 top-[50%] z-30 rounded-l-xl bg-slate-100/30 p-3 pr-2 text-4xl text-white backdrop-blur-sm transition-[padding] hover:pr-3",
-        className
-      )}
-    >
-      {direction === "left" ? (
-        <ChevronLeft className=" w-8 h-8 dark:text-black" />
-      ) : (
-        <ChevronRight className=" w-8 h-8 dark:text-black" />
-      )}
-    </button>
-  );
-};
-const ProductItem = ({ product }: { product: Doc<"product"> }) => {
-  const [bg, setBg] = useState(product.images?.[0]);
-  return (
-    <Tilt>
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        variants={fadeIn("up", "spring", 0.1, 0.1)}
-        style={{ backgroundImage: `url(${bg})` }}
-        className={cn(
-          `relative sm:w-[350px] h-[350px] w-full bg-cover bg-shrink-0 cursor-pointer rounded-2xl transition-all duration-1000`
-        )}
-      >
-        <div
-          onMouseEnter={() => {
-            setBg(product.images?.[1]);
-          }}
-          onMouseLeave={() => {
-            setBg(product.images?.[0]);
-          }}
-        >
-          <div className="absolute bg-center inset-0 z-20 rounded-2xl bg-gradient-to-b from-black/90 via-black/60 to-black/0 p-6 text-white transition-[backdrop-filter] ">
-            <span className="text-xs font-semibold uppercase text-violet-300">
-              {product.producer}
-            </span>
-            <p className="my-2 text-2xl font-bold">{product.name}</p>
-            <p className="text-lg text-slate-300">
-              {" "}
-              {formatCurrency(product.price!)}
-            </p>
-          </div>
-        </div>
-      </motion.div>
-    </Tilt>
-  );
-};

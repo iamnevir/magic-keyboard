@@ -9,6 +9,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  Badge,
 } from "@nextui-org/react";
 import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -18,27 +19,38 @@ import { ModeToggle } from "./mode-toggle";
 import BackgroundMusic from "./root/bg-music";
 import Lottie from "lottie-react";
 import sound from "@/public/sound.json";
+import cartIcon from "@/public/cart.json";
+import { usePathname } from "next/navigation";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import useCart from "@/hooks/use-shopping-cart";
+import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
-  const isMobile = window.screen.width <= 768;
+  const isMobile = false;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
+  const cart = useCart();
+  const cartDrawer = useCartDrawer();
   const menuItems = ["Magic", "Library", "Products", "Discord"];
   const lottieRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [isSound, setIsSound] = useState(false);
+  const pathname = usePathname();
   useEffect(() => {
-    if (!isMobile) {
-      setIsLoading(true);
-      const timer = setTimeout(() => {
+    if (pathname === "/") {
+      if (!isMobile) {
+        setIsLoading(true);
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+      } else {
         setIsLoading(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    } else {
-      setIsLoading(false);
+      }
     }
-  }, [isMobile]);
+  }, [isMobile, pathname]);
   if (isLoading) {
     return null;
   }
@@ -67,6 +79,7 @@ const NavbarPage = () => {
                 }
                 width={25}
                 height={25}
+                className=" w-[25px] h-[25px]"
                 alt="logo"
               />
               <p className="font-bold text-inherit">KEYBOARD</p>{" "}
@@ -98,31 +111,12 @@ const NavbarPage = () => {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <NavbarContent justify="end" className=" right-0">
+        <NavbarContent justify="end" className=" flex items-center">
           {auth.userId ? (
             <>
               <NavbarItem className="max-sm:absolute max-sm:-left-20 max-sm:w-8">
                 <UserButton afterSignOutUrl="/" />
               </NavbarItem>
-              <div
-                onClick={() => {
-                  if (isSound) {
-                    setIsSound(false);
-                    lottieRef.current.play();
-                  } else {
-                    setIsSound(true);
-                    lottieRef.current.stop();
-                  }
-                }}
-                className="  w-10 h-10 rounded-full cursor-pointer bg-slate-100 dark:bg-black items-center flex"
-              >
-                <Lottie
-                  lottieRef={lottieRef}
-                  animationData={sound}
-                  loop={isSound}
-                />
-              </div>
-              <ModeToggle />
             </>
           ) : (
             <>
@@ -133,27 +127,47 @@ const NavbarPage = () => {
                   </span>
                 </SignInButton>
               </NavbarItem>
-              <div
-                onClick={() => {
-                  if (isSound) {
-                    setIsSound(false);
-                    lottieRef.current.play();
-                  } else {
-                    setIsSound(true);
-                    lottieRef.current.stop();
-                  }
-                }}
-                className=" w-10 h-10 rounded-full cursor-pointer bg-slate-100 dark:bg-black items-center flex"
-              >
-                <Lottie
-                  lottieRef={lottieRef}
-                  animationData={sound}
-                  loop={isSound}
-                />
-              </div>
-              <ModeToggle />
             </>
           )}
+          {pathname !== "/" && (
+            <Badge
+              content={cart.items.length}
+              color="danger"
+              variant="shadow"
+              showOutline={false}
+            >
+              <div
+                onClick={() => cartDrawer.toggle()}
+                className=" w-10 h-10 rounded-[10px] p-1 cursor-pointer dark:bg-slate-400 bg-transparent  items-center flex"
+              >
+                <Lottie
+                  animationData={cartIcon}
+                  color={theme === "dark" ? "#ffffff" : "#000000"}
+                  loop={false}
+                />
+              </div>
+            </Badge>
+          )}
+
+          <div
+            onClick={() => {
+              if (isSound) {
+                setIsSound(false);
+                lottieRef.current.play();
+              } else {
+                setIsSound(true);
+                lottieRef.current.stop();
+              }
+            }}
+            className=" w-10 h-10 rounded-full cursor-pointer bg-slate-100 dark:bg-black items-center flex"
+          >
+            <Lottie
+              lottieRef={lottieRef}
+              animationData={sound}
+              loop={isSound}
+            />
+          </div>
+          <ModeToggle />
         </NavbarContent>
 
         <NavbarMenu className="">
