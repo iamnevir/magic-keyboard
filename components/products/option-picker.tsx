@@ -74,20 +74,23 @@ const OptionPicker = ({ product }: { product: Doc<"product"> }) => {
   return (
     <div className=" flex flex-col items-start gap-3">
       {product.options?.map((item, index) => (
-        <OptionPickerItem
-          selectedOption={optionList?.find((o) => o.key === item.name)!}
-          onChange={({ key, value }: { key: string; value: string }) => {
-            const newArray = optionList;
-            const index = newArray?.findIndex((o) => o.key === key);
-            if (index !== -1 && index !== undefined) {
-              newArray![index].value = value;
-              setOptionList([...newArray!]);
-            } else {
-              setOptionList([...optionList!, { key, value }]);
-            }
-          }}
-          options={item}
-        />
+        <div key={index}>
+          {" "}
+          <OptionPickerItem
+            selectedOption={optionList?.find((o) => o.key === item.name)!}
+            onChange={({ key, value }: { key: string; value: string }) => {
+              const newArray = optionList;
+              const index = newArray?.findIndex((o) => o.key === key);
+              if (index !== -1 && index !== undefined) {
+                newArray![index].value = value;
+                setOptionList([...newArray!]);
+              } else {
+                setOptionList([...optionList!, { key, value }]);
+              }
+            }}
+            options={item}
+          />
+        </div>
       ))}
       <span className="text-xl md:text-2xl font-bold my-2">
         {" "}
