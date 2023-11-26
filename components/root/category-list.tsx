@@ -5,8 +5,9 @@ import { container, fadeIn } from "@/lib/motion";
 import { useQuery } from "convex/react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-
+import slugify from "react-slugify";
 import { Tilt } from "@jdion/tilt-react";
+import { useRouter } from "next/navigation";
 const CarouselCategoryList = () => {
   const targetRef = useRef(null);
   const categories = useQuery(api.category.getCategories);
@@ -15,7 +16,7 @@ const CarouselCategoryList = () => {
   });
   const isMobile = window.screen.width <= 768;
   const x1 = useTransform(scrollYProgress, [0, 2], ["44%", "-135%"]);
-  const x2 = useTransform(scrollYProgress, [0, 2], ["33%", "-95%"]);
+  const x2 = useTransform(scrollYProgress, [0, 2], ["35%", "-105%"]);
   const x = isMobile ? x1 : x2;
   return (
     <div className="flex flex-col items-center justify-center w-full h-full overflow-clip">
@@ -36,9 +37,11 @@ const CarouselCategoryList = () => {
 };
 
 const CategoryItem = ({ category }: { category: Doc<"category"> }) => {
+  const router = useRouter();
   return (
     <Tilt>
       <motion.div
+        onClick={() => router.push(`/collections/${category._id}`)}
         initial="hidden"
         whileInView="show"
         variants={fadeIn("up", "spring", 0.2, 0.5)}

@@ -1,6 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import OptionPickerItem from "./option-picker-item";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -8,13 +8,20 @@ import { useRouter, useSearchParams } from "next/navigation";
 import AnimateButton from "../animate-button";
 import useCart from "@/hooks/use-shopping-cart";
 import QuantityPicker from "./quantity-picker";
-const OptionPicker = ({ product }: { product: Doc<"product"> }) => {
+const OptionPicker = ({
+  product,
+  onOptionChange,
+}: {
+  product: Doc<"product">;
+  onOptionChange: (v: { key: string; value: string }) => void;
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const cart = useCart();
   const [optionList, setOptionList] = useState<
     { key: string; value: string }[] | undefined
   >([]);
+
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     if (searchParams.toString()) {
@@ -87,15 +94,25 @@ const OptionPicker = ({ product }: { product: Doc<"product"> }) => {
               } else {
                 setOptionList([...optionList!, { key, value }]);
               }
+              onOptionChange({ key, value });
             }}
             options={item}
           />
         </div>
       ))}
-      <span className="text-xl md:text-2xl font-bold my-2">
-        {" "}
-        {formatCurrency(price ? price : product?.price!)}
-      </span>{" "}
+      <div className=" flex items-center gap-3">
+        <p className="text-xl md:text-2xl font-bold my-2">
+          {formatCurrency(price ? price : product?.price!)}
+        </p>
+        <p
+          className={cn(
+            "text-xl md:text-2xl font-bold my-2",
+            product.isSale ? " text-default-400 line-through" : ""
+          )}
+        >
+          {product.isSale ? formatCurrency(product.salePrice!) : null}
+        </p>
+      </div>
       <span className="font-semibold">Số lượng</span>
       {product.pay === "order" ? (
         <>

@@ -126,12 +126,10 @@ h1 {
   font-weight: 300;
 }
 .mySwiper .swiper-slide-thumb-active {
-  border-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
   transition-duration: 800ms;
   transition-property: all;
   transition-timing-function: ease;
+  border-radius: 10px;
 }
 .pswp__img {
   object-fit: contain;

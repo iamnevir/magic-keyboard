@@ -16,13 +16,12 @@ import { formatCurrency } from "@/lib/utils";
 import QuantityPicker from "../products/quantity-picker";
 import { Trash2 } from "lucide-react";
 import AnimateButton from "../animate-button";
-
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/motion";
 export default function CartTable() {
   const cart = useCart();
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMobile = window.screen.width <= 768;
+
   const renderCell = React.useCallback(
     (product: ProductCart, columnKey: React.Key) => {
       switch (columnKey) {
@@ -36,7 +35,7 @@ export default function CartTable() {
                   alt="image"
                   width={150}
                   height={100}
-                  className=" w-[150px] h-[100px]"
+                  className=" sm:w-[150px] sm:h-[100px] w-[100px] h-[70px] object-contain"
                 />
               </div>
               <div className=" flex flex-col items-start w-full font-semibold text-xs gap-1">
@@ -48,18 +47,47 @@ export default function CartTable() {
                     <span className="font-normal"> {o.value}</span>
                   </span>
                 ))}{" "}
+                {isMobile ? (
+                  <span
+                    className=" text-white/50 underline underline-offset-1"
+                    onClick={() => cart.removeItem(product)}
+                  >
+                    {" "}
+                    Remove
+                  </span>
+                ) : null}
               </div>{" "}
             </div>
           );
         case "price":
           return (
-            <span className="font-semibold text-xl">
-              {formatCurrency(product.price ? product.price : 0)}
-            </span>
+            <div className=" space-y-2">
+              <span className="sm:font-semibold sm:text-xl">
+                {formatCurrency(product.price ? product.price : 0)}
+              </span>
+              {isMobile ? (
+                <QuantityPicker
+                  quantity={product.quantity}
+                  minus={() =>
+                    cart.updateItem({
+                      data: product,
+                      quantity: product.quantity - 1,
+                    })
+                  }
+                  plus={() =>
+                    cart.updateItem({
+                      data: product,
+                      quantity: product.quantity + 1,
+                    })
+                  }
+                  size="sm"
+                />
+              ) : null}
+            </div>
           );
         case "quantity":
           return (
-            <div className=" w-[115px]">
+            <div className=" sm:w-[115px] w-[50px]">
               {" "}
               <QuantityPicker
                 quantity={product.quantity}
@@ -81,7 +109,7 @@ export default function CartTable() {
           );
         case "totalPrice":
           return (
-            <div className=" w-20">
+            <div className="sm:w-20 hidden">
               {" "}
               <span className=" font-semibold text-xl">
                 {formatCurrency(product.totalPrice ? product.totalPrice : 0)}
@@ -132,45 +160,71 @@ export default function CartTable() {
     0
   );
   return (
-    <div className="flex flex-col items-end px-20 space-y-5">
+    <div className="flex flex-col items-end sm:px-20 p-2 space-y-5">
       <Table aria-label="Shopping Cart Item Table">
         <TableHeader>
-          {columns.map((column) => (
-            <TableColumn
-              key={column.key}
-              align={column.key === "actions" ? "center" : "start"}
-            >
-              {column.label}
-            </TableColumn>
-          ))}
+          {!isMobile
+            ? columns.map((column) => (
+                <TableColumn
+                  key={column.key}
+                  align={column.key === "actions" ? "center" : "start"}
+                >
+                  {column.label}
+                </TableColumn>
+              ))
+            : columns
+                .filter((i) => ["product", "price"].includes(i.key))
+                .map((column) => (
+                  <TableColumn
+                    key={column.key}
+                    align={column.key === "actions" ? "center" : "start"}
+                  >
+                    {column.label}
+                  </TableColumn>
+                ))}
         </TableHeader>
         <TableBody>
           {cart.items.map((item) => (
             <TableRow key={item.productId}>
               {(columnKey) => (
-                <TableCell key={columnKey}>
-                  {renderCell(item, columnKey)}
-                </TableCell>
+                <TableCell>{renderCell(item, columnKey)}</TableCell>
               )}
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <div className=" flex flex-col w-[20dvw]">
-        <div className=" w-full flex items-center justify-between  font-semibold py-3">
+      <div className=" flex flex-col sm:w-[20dvw] w-full">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn("left", "spring", 0.1, 1)}
+          className=" w-full flex items-center justify-between  font-semibold py-3"
+        >
           <span className="">Tổng tiền</span>
           <span>{formatCurrency(subTotal)}</span>
-        </div>
-        <AnimateButton
-          text="Đặt hàng"
-          color="white"
-          className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
-        />
-        <AnimateButton
-          text="Thanh toán ngay"
-          color="white"
-          className="mt-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
-        />
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn("left", "spring", 0.3, 1)}
+        >
+          <AnimateButton
+            text="Đặt hàng"
+            color="white"
+            className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+          />
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeIn("left", "spring", 0.5, 1)}
+        >
+          <AnimateButton
+            text="Thanh toán ngay"
+            color="white"
+            className="my-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+          />
+        </motion.div>
       </div>
     </div>
   );

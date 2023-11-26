@@ -15,13 +15,13 @@ export default function Home() {
   return (
     <>
       <div className=" h-full w-full">
-        <Intro />
+        {/* <Intro />
         <Billboard />
         <Shipping />
-        <Help />
+        <Help /> */}
         <ProductList />
 
-        <CarouselCategoryList />
+        {/* <CarouselCategoryList />
         <AboutUs />
         <div className=" w-full h-full sm:flex sm:my-20 my-5 space-y-5 sm:space-y-0">
           <News />
@@ -29,7 +29,7 @@ export default function Home() {
           <Feedback />
         </div>
 
-        <Footer />
+        <Footer /> */}
       </div>
     </>
   );

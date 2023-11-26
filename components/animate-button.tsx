@@ -22,7 +22,10 @@ const AnimateButton = ({
       <div
         onMouseEnter={() => setIsPlay(true)}
         onMouseLeave={() => setIsPlay(false)}
-        onClick={onClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick ? onClick() : null;
+        }}
         className={cn(
           color === "white"
             ? "dark:bg-zinc-950 bg-zinc-200"

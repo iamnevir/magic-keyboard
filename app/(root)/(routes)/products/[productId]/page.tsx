@@ -31,7 +31,6 @@ const ProductPage = ({ params }: { params: { productId: Id<"product"> } }) => {
 
   return (
     <div className=" relative">
-      <ShoppingCartDrawer />
       <Product product={product} />
     </div>
   );

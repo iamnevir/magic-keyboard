@@ -38,7 +38,8 @@ export default function ProductImageGallery({
   lightbox.on("uiRegister", function () {
     lightbox.pswp?.ui?.registerElement({
       name: "TopBar",
-      className: " flex items-center absolute bottom-5 left-[45dvw] gap-5",
+      className:
+        " flex items-center absolute bottom-5 sm:left-[45dvw] right-[25dvw] gap-5",
       appendTo: "wrapper",
       onInit: (el, pswp) => {
         const bullets: any = [];

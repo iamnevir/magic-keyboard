@@ -11,7 +11,7 @@ const Recommendation = ({
   const products = useQuery(api.product.getProductsByCollection, {
     collectionId,
   });
-  return <ProductList productList={products} />;
+  return <ProductList collectionId={collectionId} productList={products} />;
 };
 
 export default Recommendation;

@@ -14,7 +14,7 @@ const QuantityPicker = ({
   return (
     <div
       className={cn(
-        "flex items-center shadow-md dark:shadow-slate-500 shadow-black/50 rounded-[4px]  bg-white dark:bg-black",
+        "flex items-center shadow-md justify-between dark:shadow-slate-500 shadow-black/50 rounded-[4px]  bg-white dark:bg-black",
         size === "md" ? "px-2 mx-1" : "px-1"
       )}
     >

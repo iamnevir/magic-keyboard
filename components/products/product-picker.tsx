@@ -6,7 +6,14 @@ import GenerateHtml from "@/lib/json-to-html";
 import OptionPicker from "./option-picker";
 import RatingStar from "../rating-star";
 import { ArrowUpDown, HelpCircle, Share2 } from "lucide-react";
-const ProductPicker = ({ product }: { product: Doc<"product"> }) => {
+import { useState } from "react";
+const ProductPicker = ({
+  product,
+  onOptionChange,
+}: {
+  product: Doc<"product">;
+  onOptionChange: (v: { key: string; value: string }) => void;
+}) => {
   const reviews = useQuery(api.review.getReviewsByProduct, {
     productId: product._id,
   });
@@ -20,7 +27,7 @@ const ProductPicker = ({ product }: { product: Doc<"product"> }) => {
       : null;
 
   return (
-    <div className="flex flex-col pr-20 pl-10 overflow-auto">
+    <div className="flex flex-col sm:pr-20 sm:pl-14 px-1 overflow-auto">
       <div className="flex justify-between w-full items-center relative md:pr-12 pt-2">
         <h1 className="text-2xl md:text-3xl md:leading-[42px] pr-2 font-extrabold">
           {product.name}
@@ -85,11 +92,11 @@ const ProductPicker = ({ product }: { product: Doc<"product"> }) => {
         <GenerateHtml className=" text-xs" json={product.description} />
       </div>
       <div className="mt-3">
-        <OptionPicker product={product} />
+        <OptionPicker onOptionChange={onOptionChange} product={product} />
       </div>
       <div className="flex items-start mt-3 flex-col gap-3">
         <div className="flex items-center gap-4 mt-2">
-          <div className=" w-12 text-blue-800">
+          <div className=" sm:w-12 w-24 text-blue-800">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -116,7 +123,7 @@ const ProductPicker = ({ product }: { product: Doc<"product"> }) => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <div className=" w-12 text-blue-800">
+          <div className=" sm:w-12 w-28 text-blue-800">
             <svg
               id="fi_10428795"
               enable-background="new 0 0 64 64"

@@ -21,7 +21,7 @@ const RatingStar = ({
     <Rating
       className={cn("h-[18px]", className)}
       style={{ maxWidth: 100 }}
-      value={rating ? rating : 4}
+      value={rating ? rating : 0}
       readOnly
       itemStyles={customStyles}
     />

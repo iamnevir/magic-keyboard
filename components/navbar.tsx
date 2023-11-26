@@ -28,12 +28,12 @@ import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
-  const isMobile = false;
+  const isMobile = window.screen.width <= 768;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
   const cart = useCart();
   const cartDrawer = useCartDrawer();
-  const menuItems = ["Magic", "Library", "Products", "Discord"];
+  const menuItems = ["Magic", "Library", "Collections", "Discord"];
   const lottieRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
   const [isSound, setIsSound] = useState(false);
@@ -79,10 +79,10 @@ const NavbarPage = () => {
                 }
                 width={25}
                 height={25}
-                className=" w-[25px] h-[25px]"
+                className=" w-[25px] "
                 alt="logo"
               />
-              <p className="font-bold text-inherit">KEYBOARD</p>{" "}
+              <p className="font-bold sm:flex hidden text-inherit">KEYBOARD</p>{" "}
             </Link>
           </NavbarBrand>
         </NavbarContent>
@@ -96,7 +96,7 @@ const NavbarPage = () => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="#" color="foreground">
+            <Link href="/collections/all" color="foreground">
               Products
             </Link>
           </NavbarItem>

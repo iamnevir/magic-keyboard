@@ -6,12 +6,20 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import AnimateButton from "../animate-button";
-import ProductItem from "./product-item";
+import ProductItem from "../product-item";
 import { SwipeDirection } from "./swiper-navigation";
-import { Doc } from "@/convex/_generated/dataModel";
-const ProductList = ({ productList }: { productList?: Doc<"product">[] }) => {
+import { Doc, Id } from "@/convex/_generated/dataModel";
+import { useRouter } from "next/navigation";
+const ProductList = ({
+  productList,
+  collectionId,
+}: {
+  productList?: Doc<"product">[];
+  collectionId?: Id<"collection">;
+}) => {
   const productsList = useQuery(api.product.getProducts);
   const products = productList ? productList : productsList;
+  const router = useRouter();
   return (
     <div className=" overflow-hidden sm:p-4 p-2">
       <div className={cn("relative")}>
@@ -20,7 +28,11 @@ const ProductList = ({ productList }: { productList?: Doc<"product">[] }) => {
           <span className="text-slate-500">Yes, even that.</span>
         </p>
         <div className=" absolute right-0 top-0">
-          <AnimateButton color="white" text="SHOP MORE" />
+          <AnimateButton
+            color="white"
+            text="SHOP MORE"
+            onClick={() => router.push(`/collections/${collectionId}`)}
+          />
         </div>
         <Swiper
           slidesPerView={1}
@@ -46,12 +58,12 @@ const ProductList = ({ productList }: { productList?: Doc<"product">[] }) => {
           modules={[Pagination]}
           className=" w-full h-full"
         >
-          <SwipeDirection direction="left" />
-          <SwipeDirection direction="right" />
+          <SwipeDirection direction="left" className=" top-[20%]" />
+          <SwipeDirection direction="right" className=" top-[20%]" />
           {products?.map((product) => (
             <SwiperSlide key={product._id}>
               <>
-                <ProductItem product={product} />
+                <ProductItem loop product={product} />
               </>
             </SwiperSlide>
           ))}

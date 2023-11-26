@@ -41,7 +41,7 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
   const create = useMutation(api.review.create);
   const [isWriteReview, setIsWriteReview] = useState(false);
   const [page, setPage] = useState(0);
-
+  const isMobile = window.screen.width <= 768;
   const reviews = useQuery(api.review.getReviewsByProduct, {
     productId,
   });
@@ -101,10 +101,22 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
   const reviewsList =
     reviews?.length! > 0 ? chunkArray<Doc<"review">>(reviews!, 3) : null;
   return (
-    <div className=" w-full h-full px-40 py-20">
+    <div className=" w-full h-full sm:px-40 sm:py-20 px-2 py-2">
+      {isMobile ? (
+        <div className=" flex items-center pb-3">
+          <AnimateButton
+            text={!isWriteReview ? "Thêm một đánh giá" : "Đóng"}
+            onClick={() => setIsWriteReview((v) => !v)}
+            color="white"
+            className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
+          />
+        </div>
+      ) : null}
       <div className=" flex items-start justify-between">
-        <div className=" flex flex-col">
-          <span className=" font-semibold text-3xl">Phản hồi khách hàng</span>
+        <div className=" flex flex-col w-full">
+          <span className=" font-semibold text-2xl sm:text-3xl">
+            Phản hồi <span className=" hidden sm:flex">khách hàng</span>
+          </span>
           <div className=" flex items-center gap-3">
             <RatingStar rating={rating} />
             <span>{`${ratingList?.length} Đánh giá`}</span>
@@ -131,14 +143,16 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
               </div>
             ))}
         </div>
-        <div className=" flex items-center">
-          <AnimateButton
-            text={!isWriteReview ? "Viết một đánh giá" : "Đóng"}
-            onClick={() => setIsWriteReview((v) => !v)}
-            color="white"
-            className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
-          />
-        </div>
+        {!isMobile ? (
+          <div className=" flex items-center">
+            <AnimateButton
+              text={!isWriteReview ? "Thêm một đánh giá" : "Đóng"}
+              onClick={() => setIsWriteReview((v) => !v)}
+              color="white"
+              className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
+            />
+          </div>
+        ) : null}
       </div>
       <Divider className="mt-5 mb-2" />
       <div
@@ -254,12 +268,14 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
           </div>
         ))}
         <div>
-          <Pagination
-            total={Math.round(reviews?.length! / 3)}
-            initialPage={page + 1}
-            color="primary"
-            onChange={(page: number) => setPage(page - 1)}
-          />
+          {reviews && reviews?.length > 3 ? (
+            <Pagination
+              total={Math.round(reviews?.length! / 3)}
+              initialPage={page + 1}
+              color="primary"
+              onChange={(page: number) => setPage(page - 1)}
+            />
+          ) : null}
         </div>
       </div>
     </div>

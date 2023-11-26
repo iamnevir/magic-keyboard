@@ -9,7 +9,7 @@ export const fadeIn = (
     y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
     opacity: 0,
   },
-  show: {
+  visible: {
     x: 0,
     y: 0,
     opacity: 1,

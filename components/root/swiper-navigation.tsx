@@ -16,6 +16,7 @@ export const SwipeDirection = ({
   onMouseLeave?: () => void;
 }) => {
   const swiper = useSwiper();
+
   return (
     <button
       onClick={() =>

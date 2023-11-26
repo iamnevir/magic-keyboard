@@ -16,31 +16,35 @@ import ProductReview from "./product-review";
 import Recommendation from "./recommendation";
 import Footer from "../root/footer";
 import Breadcrumb from "../bread-crum";
+import { useState } from "react";
 
 const Product = ({ product }: { product: Doc<"product"> }) => {
   const collection = useQuery(api.collection.getCollectionById, {
     collectionId: product.collectionId,
   });
-
+  const category = useQuery(api.category.getCategoryById, {
+    categoryId: collection?.categoryId!,
+  });
+  const [option, setOption] = useState<{ key: string; value: string }>();
   return (
     <div className=" w-full h-full">
       <Breadcrumb
-        item={collection?.name}
+        item={category?.name}
         item2={product.name}
-        href={`/collections/${collection?._id}`}
-        className="py-10"
+        href={`/collections/${category?._id}`}
+        className="sm:py-10 "
       />
 
-      <div className="flex items-start px-10 py-10 w-full h-full">
-        <ProductSwiper product={product} />
-        <div className="w-[50%] overflow-auto">
-          <ProductPicker product={product} />
+      <div className="flex sm:flex-row flex-col items-start sm:px-10 px-1 sm:py-10 py-2 w-full h-full">
+        <ProductSwiper option={option} product={product} />
+        <div className="sm:w-[50%] w-full overflow-auto">
+          <ProductPicker onOptionChange={setOption} product={product} />
         </div>
       </div>
       <Divider className="my-4" />
-      <div className=" w-full h-full flex items-center justify-center mt-20 prose-headings:font-bold prose-p:text-sm prose-p:font-semibold">
+      <div className=" w-full h-full flex items-center justify-center sm:mt-20 mt-2 prose-headings:font-bold prose-p:text-sm prose-p:font-semibold">
         <GenerateHtml
-          className=" w-full h-full max-w-[60dvw]"
+          className=" w-full h-full sm:max-w-[60dvw] sm:px-0 px-3"
           json={product.infomation}
         />
       </div>

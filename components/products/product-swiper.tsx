@@ -7,14 +7,30 @@ import { Doc } from "@/convex/_generated/dataModel";
 import { ListImage, cn } from "@/lib/utils";
 import "photoswipe/style.css";
 import ProductImageGallery from "./product-image-gallery";
+import { ChangeImage } from "./change-image";
 
-const ProductSwiper = ({ product }: { product: Doc<"product"> }) => {
+const ProductSwiper = ({
+  product,
+  className,
+  option,
+  classNameUnder,
+}: {
+  product: Doc<"product">;
+  className?: string;
+  classNameUnder?: string;
+  option?: { key: string; value: string };
+}) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [hoverImage, setHoverImage] = useState(false);
-
+  const isMobile = window.screen.width <= 768;
   const images = ListImage({ product });
+  const optionImage = product.options
+    ?.find((o) => o.name === option?.key)
+    ?.option.find((o) => o.name === option?.value)?.image;
+  const index = images?.indexOf(images?.find((q) => q === optionImage)!);
+
   return (
-    <div className="w-[50%] h-full ">
+    <div className={cn("sm:w-[50%] w-full h-full ", className)}>
       <>
         <Swiper
           thumbs={{
@@ -25,37 +41,42 @@ const ProductSwiper = ({ product }: { product: Doc<"product"> }) => {
           spaceBetween={25}
           loop={true}
           modules={[Thumbs]}
-          className={cn(" w-[650px] h-full items-center flex justify-center")}
+          className={cn(
+            " sm:w-[650px] w-[365px]  h-full items-center flex justify-center"
+          )}
         >
-          <>
-            <SwipeDirection
-              direction="left"
-              className={`${
-                hoverImage ? "left-0" : " -left-14"
-              }  sm:top-[50%] top-[20%] transition-all duration-100 border-[0.5px]`}
-              ArrowClassName="text-black"
-              onMouseEnter={() => setHoverImage(true)}
-              onMouseLeave={() => setHoverImage(false)}
-            />
-            <SwipeDirection
-              direction="right"
-              className={`${
-                hoverImage ? "right-0" : " -right-14"
-              }  sm:top-[50%] top-[20%] transition-all duration-100 border-[0.5px]`}
-              ArrowClassName="text-black"
-              onMouseEnter={() => setHoverImage(true)}
-              onMouseLeave={() => setHoverImage(false)}
-            />
-          </>
+          {!isMobile ? (
+            <>
+              <ChangeImage index={index} />
+              <SwipeDirection
+                direction="left"
+                className={`${
+                  hoverImage ? "left-0" : " -left-14"
+                }  sm:top-[50%] top-[20%] transition-all duration-100 border-[0.5px]`}
+                ArrowClassName="text-black"
+                onMouseEnter={() => setHoverImage(true)}
+                onMouseLeave={() => setHoverImage(false)}
+              />
+              <SwipeDirection
+                direction="right"
+                className={`${
+                  hoverImage ? "right-0" : " -right-14"
+                }  sm:top-[50%] top-[20%] transition-all duration-100 border-[0.5px]`}
+                ArrowClassName="text-black"
+                onMouseEnter={() => setHoverImage(true)}
+                onMouseLeave={() => setHoverImage(false)}
+              />
+            </>
+          ) : null}
 
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
               <div
-                onClick={ProductImageGallery({ index, images: product.images })}
+                onClick={ProductImageGallery({ index, images: images })}
                 onMouseEnter={() => setHoverImage(true)}
                 onMouseLeave={() => setHoverImage(false)}
                 className={cn(
-                  " w-[650px] h-full bg-transparent space-y-4  hover:cursor-zoom-in"
+                  " sm:w-[650px] w-[365px] h-full bg-transparent sm:hover:cursor-zoom-in"
                 )}
               >
                 <Image
@@ -64,7 +85,7 @@ const ProductSwiper = ({ product }: { product: Doc<"product"> }) => {
                   height={650}
                   alt="image"
                   objectFit="contain"
-                  className=" w-[650px] h-[650px] object-contain"
+                  className=" sm:w-[650px] sm:h-[650px] w-[365px] h-[365px] object-contain rounded-[10px]"
                 />
               </div>
             </SwiperSlide>
@@ -73,22 +94,22 @@ const ProductSwiper = ({ product }: { product: Doc<"product"> }) => {
         <Swiper
           onSwiper={setThumbsSwiper}
           loop={true}
-          spaceBetween={10}
+          spaceBetween={isMobile ? 0 : 10}
           slidesPerView={4}
           watchSlidesProgress={true}
           modules={[Thumbs]}
-          className="mySwiper  mt-2"
+          className={cn(" mt-2", classNameUnder)}
         >
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className=" cursor-pointer w-[120px] p-1 border-black h-full bg-transparent space-y-4 sm:ml-5 ml-[5dvw]">
+              <div className=" rounded-[10px] cursor-pointer w-full pb-5 h-full bg-transparent space-y-4 sm:ml-5 ml-1">
                 <Image
                   src={item ? item : ""}
                   width={110}
                   height={110}
                   alt="image"
                   objectFit="contain"
-                  className=" w-[110px] h-[110px]"
+                  className=" sm:w-[120px]  sm:h-[110px] rounded-[10px] hover:shadow-lg dark:shadow-white/70 hover:shadow-black duration-500"
                 />
               </div>
             </SwiperSlide>

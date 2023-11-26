@@ -7,6 +7,8 @@ import { formatCurrency } from "@/lib/utils";
 import CartItem from "./cart-item";
 import { ExternalLinkIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/lib/motion";
 const ShoppingCartDrawer = () => {
   const cartDrawer = useCartDrawer();
   const router = useRouter();
@@ -33,27 +35,48 @@ const ShoppingCartDrawer = () => {
               Giỏ hàng
             </div>
             {cart.items.map((item, index) => (
-              <div key={index}>
-                {" "}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                variants={fadeIn("left", "spring", 0.2 * index, 1)}
+                key={index}
+              >
                 <CartItem item={item} />
-              </div>
+              </motion.div>
             ))}
           </div>
           <div className=" fixed dark:bg-black bg-white w-full bottom-0 h-[30%] px-4 ">
-            <div className=" w-full flex items-center justify-between  font-semibold py-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={fadeIn("left", "spring", 0.1, 1)}
+              className=" w-full flex items-center justify-between  font-semibold py-3"
+            >
               <span className="">Tổng tiền</span>
               <span>{formatCurrency(totalPrice)}</span>
-            </div>
-            <AnimateButton
-              text="Đặt hàng"
-              color="white"
-              className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
-            />
-            <AnimateButton
-              text="Thanh toán ngay"
-              color="white"
-              className="mt-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
-            />
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={fadeIn("left", "spring", 0.3, 1)}
+            >
+              <AnimateButton
+                text="Đặt hàng"
+                color="white"
+                className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+              />
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              variants={fadeIn("left", "spring", 0.5, 1)}
+            >
+              <AnimateButton
+                text="Thanh toán ngay"
+                color="white"
+                className="my-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+              />
+            </motion.div>
           </div>
         </div>
       </Drawer>

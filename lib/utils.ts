@@ -52,6 +52,8 @@ export const ListImage = ({ product }: { product: Doc<"product"> }) => {
       return [...product.images];
     }
   } else {
-    return [...imageList.flat(), ...product.images!];
+    return [...imageList.flat(), ...product.images!].filter(
+      Boolean
+    ) as string[];
   }
 };
