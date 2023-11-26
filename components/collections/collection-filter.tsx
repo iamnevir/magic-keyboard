@@ -20,7 +20,7 @@ import { useQuery } from "convex/react";
 import { ChevronDown, ChevronUp, Filter } from "lucide-react";
 import { useEffect, useState } from "react";
 import BrandFilter from "./brand-filter";
-import { fadeIn } from "@/lib/motion";
+import { fadeInOne } from "@/lib/motion";
 import { motion } from "framer-motion";
 import getCollectionByCategory from "@/actions/getCollectionByCategory";
 import getCollections from "@/actions/getCollections";
@@ -51,7 +51,7 @@ const CollectionFilter = ({
           className=" space-y-5"
           initial="hidden"
           animate="visible"
-          variants={fadeIn("right", "spring", 0.1, 1)}
+          variants={fadeInOne("right", "spring", 0.1, 1)}
         >
           {" "}
           <span className=" font-semibold text-2xl flex items-center">Lọc</span>
@@ -77,7 +77,7 @@ const CollectionFilter = ({
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("right", "spring", 0.3, 1)}
+          variants={fadeInOne("right", "spring", 0.3, 1)}
         >
           {" "}
           <Card>
@@ -100,7 +100,7 @@ const CollectionFilter = ({
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("right", "spring", 0.5, 1)}
+          variants={fadeInOne("right", "spring", 0.5, 1)}
         >
           <Card>
             <CardHeader className=" flex items-center justify-between">
@@ -141,7 +141,7 @@ const CollectionFilter = ({
               <motion.div
                 initial="hidden"
                 animate="visible"
-                variants={fadeIn("right", "spring", 0.1, 1)}
+                variants={fadeInOne("right", "spring", 0.1, 1)}
                 className="flex items-center "
               >
                 Lọc <Filter className="" />

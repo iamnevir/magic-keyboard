@@ -17,7 +17,7 @@ import QuantityPicker from "../products/quantity-picker";
 import { Trash2 } from "lucide-react";
 import AnimateButton from "../animate-button";
 import { motion } from "framer-motion";
-import { fadeIn } from "@/lib/motion";
+import { fadeInOne } from "@/lib/motion";
 export default function CartTable() {
   const cart = useCart();
   const isMobile = window.screen.width <= 768;
@@ -197,7 +197,7 @@ export default function CartTable() {
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("left", "spring", 0.1, 1)}
+          variants={fadeInOne("left", "spring", 0.1, 1)}
           className=" w-full flex items-center justify-between  font-semibold py-3"
         >
           <span className="">Tổng tiền</span>
@@ -206,7 +206,7 @@ export default function CartTable() {
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("left", "spring", 0.3, 1)}
+          variants={fadeInOne("left", "spring", 0.3, 1)}
         >
           <AnimateButton
             text="Đặt hàng"
@@ -217,7 +217,7 @@ export default function CartTable() {
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("left", "spring", 0.5, 1)}
+          variants={fadeInOne("left", "spring", 0.5, 1)}
         >
           <AnimateButton
             text="Thanh toán ngay"

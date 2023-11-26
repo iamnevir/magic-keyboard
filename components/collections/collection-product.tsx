@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
 import slugify from "react-slugify";
-import { fadeIn } from "@/lib/motion";
+import { fadeInOne } from "@/lib/motion";
 import LoadMore from "./load-more";
 const ProductCollection = ({
   collectionIdList,
@@ -134,7 +134,7 @@ const ProductCollection = ({
         <motion.div
           initial="hidden"
           animate="visible"
-          variants={fadeIn("left", "spring", 0.1, 1)}
+          variants={fadeInOne("left", "spring", 0.1, 1)}
           className="flex items-center justify-between"
         >
           <Select
