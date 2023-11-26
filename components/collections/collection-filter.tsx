@@ -22,11 +22,9 @@ import { useEffect, useState } from "react";
 import BrandFilter from "./brand-filter";
 import { fadeIn } from "@/lib/motion";
 import { motion } from "framer-motion";
-const getCollections = (categoryId: Id<"category">) =>
-  useQuery(api.collection.getCollectionsByCategory, {
-    categoryId,
-  });
-const collectionsList = () => useQuery(api.collection.getCollections);
+import getCollectionByCategory from "@/actions/getCollectionByCategory";
+import getCollections from "@/actions/getCollections";
+
 const CollectionFilter = ({
   categoryId,
   onLocChange,
@@ -40,7 +38,9 @@ const CollectionFilter = ({
   onBrandChange: (value: string[]) => void;
   isAll?: boolean;
 }) => {
-  const collections = isAll ? collectionsList() : getCollections(categoryId);
+  const collections = isAll
+    ? getCollections()
+    : getCollectionByCategory({ categoryId });
   const [brandOpen, setBrandOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
   const isMobile = window.screen.width <= 768;
@@ -63,8 +63,10 @@ const CollectionFilter = ({
                 label="Bộ sưu tập"
               >
                 {collections
-                  ? collections?.map((item) => (
-                      <Checkbox value={item._id}>{item.name}</Checkbox>
+                  ? collections?.map((item, index) => (
+                      <Checkbox key={index} value={item._id}>
+                        {item.name}
+                      </Checkbox>
                     ))
                   : null}
               </CheckboxGroup>
@@ -196,8 +198,10 @@ const CollectionFilter = ({
                   >
                     <CheckboxGroup onValueChange={onLocChange} color="success">
                       {collections
-                        ? collections?.map((item) => (
-                            <Checkbox value={item._id}>{item.name}</Checkbox>
+                        ? collections?.map((item, index) => (
+                            <Checkbox key={index} value={item._id}>
+                              {item.name}
+                            </Checkbox>
                           ))
                         : null}
                     </CheckboxGroup>

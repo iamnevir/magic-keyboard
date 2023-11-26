@@ -12,8 +12,10 @@ const BrandFilter = ({ onChange }: { onChange: (value: string[]) => void }) => {
     });
   return (
     <CheckboxGroup onValueChange={onChange} color="success">
-      {brands?.map((item) => (
-        <Checkbox value={slugify(item)}>{item}</Checkbox>
+      {brands?.map((item, index) => (
+        <Checkbox key={index} value={slugify(item)}>
+          {item}
+        </Checkbox>
       ))}
     </CheckboxGroup>
   );

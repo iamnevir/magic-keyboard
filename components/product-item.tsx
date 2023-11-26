@@ -40,7 +40,7 @@ const ProductItem = ({
     if (setOnFilter) {
       setOnFilter(false);
     }
-  }, [onFilter, images]);
+  }, [onFilter, images, setOnFilter]);
 
   const [active, setActive] = useState(0);
 

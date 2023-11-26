@@ -8,7 +8,7 @@ const LoadMore = ({ loadMore }: { loadMore: () => void }) => {
     if (inView) {
       loadMore();
     }
-  }, [inView]);
+  }, [inView, loadMore]);
   return (
     <div className=" w-full flex justify-center py-5">
       <CircularProgress ref={ref} size="sm" aria-label="Loading..." />
