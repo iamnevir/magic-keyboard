@@ -94,7 +94,7 @@ export function AddressModal({
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className=" sm:max-w-md max-w-xs mr-14 sm:m-0"
+        className="sm:max-w-md max-w-sm"
       >
         <ModalContent>
           <>
@@ -113,7 +113,7 @@ export function AddressModal({
                       name="tinh"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="uppercase text-xs font-bold dark:bg-xam dark:text-white">
+                          <FormLabel className="uppercase text-xs font-bold w-full dark:bg-xam dark:text-white">
                             Tỉnh/Thành phố
                           </FormLabel>
                           <FormControl>

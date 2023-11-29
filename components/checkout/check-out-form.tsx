@@ -138,11 +138,11 @@ const CheckOutForm = () => {
     return <NoCartItem />;
   }
   return (
-    <div className=" sm:px-[20dvw] flex flex-col sm:flex-row items-start sm:gap-0 gap-4 pb-10">
-      <div className=" w-full sm:w-[50%] flex flex-col gap-4 items-start sm:px-0 px-2">
-        <div className=" text-3xl font-semibold">Sản phẩm</div>
-        <Card className="max-w-xs sm:max-w-none">
-          <CardBody className="p-5 gap-4">
+    <div className=" sm:px-[20dvw] flex flex-col sm:flex-row items-start sm:gap-5 gap-4 pb-10 w-full">
+      <div className=" w-full sm:w-[50%] sm:px-0 px-2 ">
+        <div className=" text-3xl font-semibold mb-4">Sản phẩm</div>
+        <Card className="max-w-sm sm:max-w-none">
+          <CardBody className="p-5 gap-4 w-full">
             <div className="flex flex-col gap-3 items-center  w-full">
               {cart.items.map((item, index) => (
                 <div
@@ -184,7 +184,7 @@ const CheckOutForm = () => {
               ))}
             </div>
           </CardBody>
-          <CardFooter className="p-5">
+          <CardFooter className="p-5 w-full">
             <div className=" flex flex-col items-start w-full gap-3">
               <div className="flex items-center justify-between sm:gap-5 gap-2 w-full">
                 <Input
@@ -228,7 +228,7 @@ const CheckOutForm = () => {
         <div className=" text-3xl font-semibold mb-4">Đặt hàng</div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <Card className="max-w-xs sm:max-w-none">
+            <Card className="max-w-sm sm:max-w-none">
               <CardBody className="gap-2 sm:gap-5 ">
                 <div className=" flex items-start sm:flex-row flex-col sm:items-center  sm:space-x-5 w-full sm:justify-between">
                   <FormField

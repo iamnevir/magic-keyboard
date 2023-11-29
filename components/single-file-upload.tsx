@@ -17,7 +17,7 @@ const SingleFileUpload = ({
   return (
     <div
       onClick={() => imageInput.current?.click()}
-      className=" cursor-pointer sm:p-10 p-5 rounded-[10px] border-dashed border-blue-500 border-2 flex flex-col items-center"
+      className=" cursor-pointer sm:p-10 p-5 rounded-[10px] border-dashed border-blue-500 border-2 flex flex-col items-center max-w-[346px] sm:max-w-[400px]"
     >
       {value ? (
         <Image
