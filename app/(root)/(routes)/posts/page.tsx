@@ -27,8 +27,9 @@ const PostsPage = () => {
         modules={[Mousewheel, Pagination, Parallax]}
         className=" w-full h-full"
       >
-        {posts?.map((item) => (
+        {posts?.map((item, index) => (
           <SwiperSlide
+            key={index}
             onClick={() => router.push(`/posts/${item._id}`)}
             className=" relative cursor-pointer"
           >
