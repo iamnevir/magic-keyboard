@@ -19,6 +19,7 @@ const News = ({
   news?: Doc<"post">[];
   slidesPerView?: number;
 }) => {
+  const isMobile = window.screen.width < 768;
   const newsList = news ? news : getNews();
   return (
     <motion.div
@@ -28,7 +29,7 @@ const News = ({
       className={cn(" sm:ml-10 sm:w-[55%] w-full", className)}
     >
       <Swiper
-        slidesPerView={slidesPerView ? slidesPerView : 1}
+        slidesPerView={slidesPerView ? (!isMobile ? slidesPerView : 1) : 1}
         spaceBetween={10}
         breakpoints={
           !slidesPerView
@@ -47,6 +48,13 @@ const News = ({
                 },
                 1224: {
                   slidesPerView: 3,
+                  spaceBetween: 50,
+                },
+              }
+            : isMobile
+            ? {
+                640: {
+                  slidesPerView: 1,
                   spaceBetween: 50,
                 },
               }

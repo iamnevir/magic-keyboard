@@ -26,6 +26,7 @@ import { api } from "@/convex/_generated/api";
 import useCart from "@/hooks/use-shopping-cart";
 import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 import { useMusic } from "@/hooks/use-bg-music";
+import { cn } from "@/lib/utils";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
@@ -131,7 +132,12 @@ const NavbarPage = () => {
         <NavbarContent justify="end" className=" flex items-center">
           {auth.userId ? (
             <>
-              <NavbarItem className="max-sm:absolute max-sm:-left-20 max-sm:w-8">
+              <NavbarItem
+                className={cn(
+                  "absolute w-10 right-[90px] -top-6 sm:right-[487px] sm:top-4",
+                  pathname !== "/" ? "sm:right-[540px] right-[140px]" : ""
+                )}
+              >
                 <UserButton afterSignOutUrl="/" />
               </NavbarItem>
             </>

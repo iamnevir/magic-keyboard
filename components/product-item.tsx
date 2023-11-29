@@ -98,7 +98,7 @@ const ProductItem = ({
         </Modal>
       ) : null}
 
-      <div className=" flex flex-col justify-start items-center w-[250px] h-[450px] gap-3 ">
+      <div className=" flex flex-col justify-start items-center w-[250px] h-[450px] gap-3 sm:ml-0 ml-[60px]">
         <Tilt>
           <motion.div
             initial="hidden"
