@@ -13,9 +13,9 @@ const Footer = () => {
     { text: "Thái Nguyên", ml: "0" },
   ];
   const socialMedia = [
-    { text: "Facebook", url: "#" },
-    { text: "Instagram", url: "#" },
-    { text: "Github", url: "#" },
+    { text: "Facebook", url: "https://www.facebook.com/iamnanhdz" },
+    { text: "Instagram", url: "https://www.instagram.com/it.nevir" },
+    { text: "Github", url: "https://github.com/iamnevir" },
   ];
   return (
     <motion.div

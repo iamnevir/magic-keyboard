@@ -63,14 +63,21 @@ export default defineSchema({
     dislike: v.optional(v.number()),
   }).index("by_productId", ["productId"]),
   order: defineTable({
+    userId: v.optional(v.string()),
     phone: v.string(),
+    name: v.string(),
     address: v.string(),
+    payment: v.string(),
     totalPrice: v.number(),
     isPaid: v.boolean(),
+    code: v.string(),
+    orderStatus: v.optional(v.string()),
     orderItems: v.array(
       v.object({
         product: v.id("product"),
+        image: v.optional(v.string()),
         quantity: v.number(),
+        price: v.number(),
         option: v.string(),
       })
     ),
@@ -98,4 +105,16 @@ export default defineSchema({
     email: v.string(),
     content: v.string(),
   }).index("by_postId", ["postId"]),
+  voucher: defineTable({
+    code: v.string(),
+    time: v.optional(v.number()),
+    type: v.string(),
+    percent: v.optional(v.number()),
+    price: v.optional(v.number()),
+  }),
+  checkout: defineTable({
+    image: v.id("_storage"),
+    orderId: v.id("order"),
+    accept: v.boolean(),
+  }).index("by_order", ["orderId"]),
 });

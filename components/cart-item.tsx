@@ -2,8 +2,6 @@ import { formatCurrency } from "@/lib/utils";
 import { ProductCart } from "@/type";
 import Image from "next/image";
 import QuantityPicker from "./products/quantity-picker";
-import { useState } from "react";
-import AnimateButton from "./animate-button";
 import { Button } from "@nextui-org/button";
 import UnderlineText from "./underline-animate";
 import useCart from "@/hooks/use-shopping-cart";
@@ -11,7 +9,7 @@ import useCart from "@/hooks/use-shopping-cart";
 const CartItem = ({ item }: { item: ProductCart }) => {
   const cart = useCart();
   return (
-    <div className=" flex items-start justify-start gap-3 w-full pl-5">
+    <div className=" flex items-start justify-start gap-3 w-full sm:pl-5">
       <div className=" p-1">
         {" "}
         <Image

@@ -18,10 +18,12 @@ import { Trash2 } from "lucide-react";
 import AnimateButton from "../animate-button";
 import { motion } from "framer-motion";
 import { fadeInOne } from "@/lib/motion";
+import { useRouter } from "next/navigation";
+import NoCartItem from "./no-cart-item";
 export default function CartTable() {
   const cart = useCart();
   const isMobile = window.screen.width <= 768;
-
+  const router = useRouter();
   const renderCell = React.useCallback(
     (product: ProductCart, columnKey: React.Key) => {
       switch (columnKey) {
@@ -109,7 +111,7 @@ export default function CartTable() {
           );
         case "totalPrice":
           return (
-            <div className="sm:w-20 hidden">
+            <div className="sm:flex sm:w-20 hidden">
               {" "}
               <span className=" font-semibold text-xl">
                 {formatCurrency(product.totalPrice ? product.totalPrice : 0)}
@@ -159,6 +161,9 @@ export default function CartTable() {
     (sum, price) => sum + price.totalPrice!,
     0
   );
+  if (cart.items.length < 1) {
+    return <NoCartItem />;
+  }
   return (
     <div className="flex flex-col items-end sm:px-20 p-2 space-y-5">
       <Table aria-label="Shopping Cart Item Table">
@@ -209,6 +214,7 @@ export default function CartTable() {
           variants={fadeInOne("left", "spring", 0.3, 1)}
         >
           <AnimateButton
+            onClick={() => router.push(`/checkout`)}
             text="Đặt hàng"
             color="white"
             className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
@@ -221,6 +227,7 @@ export default function CartTable() {
         >
           <AnimateButton
             text="Thanh toán ngay"
+            onClick={() => router.push(`/checkout`)}
             color="white"
             className="my-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
           />

@@ -31,7 +31,7 @@ const ProductList = ({
           <AnimateButton
             color="white"
             text="SHOP MORE"
-            onClick={() => router.push(`/collections/${collectionId}`)}
+            onClick={() => router.push(`/collections/all`)}
           />
         </div>
         <Swiper
@@ -42,16 +42,24 @@ const ProductList = ({
           }}
           loop={true}
           breakpoints={{
-            640: {
+            450: {
               slidesPerView: 1,
               spaceBetween: 20,
             },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
             768: {
-              slidesPerView: 1,
+              slidesPerView: 3,
               spaceBetween: 40,
             },
             1024: {
               slidesPerView: 4,
+              spaceBetween: 50,
+            },
+            1224: {
+              slidesPerView: 5,
               spaceBetween: 50,
             },
           }}
@@ -61,7 +69,7 @@ const ProductList = ({
           <SwipeDirection direction="left" className=" top-[20%]" />
           <SwipeDirection direction="right" className=" top-[20%]" />
           {products?.map((product) => (
-            <SwiperSlide key={product._id}>
+            <SwiperSlide key={product._id} className="sm:ml-[0px]">
               <>
                 <ProductItem loop product={product} />
               </>

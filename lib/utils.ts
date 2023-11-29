@@ -31,6 +31,32 @@ export function convertTimestampToRelativeTime(timestamp: number): string {
     return `${seconds} giây trước`;
   }
 }
+export function formatVietnameseDate(timespanInMilliseconds: number): string {
+  const months: string[] = [
+    "Tháng 1",
+    "Tháng 2",
+    "Tháng 3",
+    "Tháng 4",
+    "Tháng 5",
+    "Tháng 6",
+    "Tháng 7",
+    "Tháng 8",
+    "Tháng 9",
+    "Tháng 10",
+    "Tháng 11",
+    "Tháng 12",
+  ];
+
+  const date = new Date(timespanInMilliseconds);
+
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  const formattedDate = ` ${day}, ${months[month]}, ${year}`;
+
+  return formattedDate;
+}
 
 export const formatCurrency = (value: number) => {
   const formatter = Intl.NumberFormat("vi-VN", {

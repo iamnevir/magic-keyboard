@@ -17,7 +17,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                   "hover:scale-[1.05] duration-300 dark:bg-white bg-black dark:text-black text-white dark:hover:bg-white hover:bg-black",
                 socialButtonsBlockButton:
                   "hover:scale-[1.05] duration-300 dark:bg-black bg-white dark:text-white text-black dark:border-white border-black border-1 dark:border-opacity-10 border-opacity-10",
-                card: "rounded-tr-[20px] rounded-br-[20px] rounded-tl-[0px] rounded-bl-[0px] border-transparent h-[550px] dark:bg-black bg-white",
+                card: "rounded-tr-[20px] rounded-br-[20px] rounded-tl-[0px]  rounded-bl-[0px] border-transparent h-[550px] dark:bg-black bg-white",
                 modalCloseButton:
                   " rounded-full dark:bg-black bg-white dark:text-white text-black  ",
                 rootBox: "sm:ml-[400px] mr-5 sm:mr-0 mt-10 sm:mt-0",

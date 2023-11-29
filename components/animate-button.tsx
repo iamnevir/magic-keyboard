@@ -9,11 +9,13 @@ const AnimateButton = ({
   onClick,
   color,
   className,
+  classNameFill,
 }: {
   text: string;
   onClick?: () => void;
   color?: "black" | "white";
   className?: string;
+  classNameFill?: string;
 }) => {
   const [isPlay, setIsPlay] = useState(false);
   return (
@@ -36,7 +38,12 @@ const AnimateButton = ({
           className
         )}
       >
-        <div className=" left-2 absolute rounded-full translate-x-3 dark:bg-white group-hover:translate-x-0 w-2 h-2 bg-black group-hover:w-full group-hover:h-full group-hover:bg-[#1A2FFB] group-hover:absolute duration-300 group-hover:left-0" />
+        <div
+          className={cn(
+            " left-2 absolute rounded-full translate-x-3 dark:bg-white group-hover:translate-x-0 w-2 h-2 bg-black group-hover:w-full group-hover:h-full group-hover:bg-[#1A2FFB] group-hover:absolute duration-300 group-hover:left-0",
+            classNameFill
+          )}
+        />
         <span className=" font-semibold translate-x-4 dark:text-white group-hover:translate-x-0 text-black uppercase whitespace-nowrap z-10 group-hover:text-white text-sm duration-500">
           {text}
         </span>

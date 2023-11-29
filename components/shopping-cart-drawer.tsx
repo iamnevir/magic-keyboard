@@ -37,7 +37,7 @@ const ShoppingCartDrawer = () => {
             {cart.items.map((item, index) => (
               <motion.div
                 initial="hidden"
-                whileInView="visible"
+                whileInView="show"
                 variants={fadeIn("left", "spring", 0.2 * index, 1)}
                 key={index}
               >
@@ -48,7 +48,7 @@ const ShoppingCartDrawer = () => {
           <div className=" fixed dark:bg-black bg-white w-full bottom-0 h-[30%] px-4 ">
             <motion.div
               initial="hidden"
-              whileInView="visible"
+              whileInView="show"
               variants={fadeIn("left", "spring", 0.1, 1)}
               className=" w-full flex items-center justify-between  font-semibold py-3"
             >
@@ -57,22 +57,24 @@ const ShoppingCartDrawer = () => {
             </motion.div>
             <motion.div
               initial="hidden"
-              whileInView="visible"
+              whileInView="show"
               variants={fadeIn("left", "spring", 0.3, 1)}
             >
               <AnimateButton
                 text="Đặt hàng"
+                onClick={() => router.push(`/checkout`)}
                 color="white"
                 className=" bg-yellow-400 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
               />
             </motion.div>
             <motion.div
               initial="hidden"
-              whileInView="visible"
+              whileInView="show"
               variants={fadeIn("left", "spring", 0.5, 1)}
             >
               <AnimateButton
                 text="Thanh toán ngay"
+                onClick={() => router.push(`/checkout`)}
                 color="white"
                 className="my-5 bg-green-500 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
               />

@@ -1,9 +1,9 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import AnimateButton from "../animate-button";
+import { useRouter } from "next/navigation";
 const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
+  const router = useRouter();
   return (
     <motion.div className=" relative w-full h-full flex items-center justify-center">
       <motion.img
@@ -31,6 +31,7 @@ const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
               ? "Order Now"
               : "Comming Soon"
           }
+          onClick={() => router.push(billboard.url ? billboard.url : "")}
         />
       </div>
     </motion.div>

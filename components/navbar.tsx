@@ -25,18 +25,19 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import useCart from "@/hooks/use-shopping-cart";
 import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
+import { useMusic } from "@/hooks/use-bg-music";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
+  const isPLay = useMusic();
   const isMobile = window.screen.width <= 768;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const auth = useAuth();
   const cart = useCart();
   const cartDrawer = useCartDrawer();
-  const menuItems = ["Magic", "Library", "Collections", "Discord"];
+  const menuItems = ["Magic", "Posts", "Library", "Collections", "Discord"];
   const lottieRef = useRef<any>();
   const [isLoading, setIsLoading] = useState(false);
-  const [isSound, setIsSound] = useState(false);
   const pathname = usePathname();
   useEffect(() => {
     if (pathname === "/") {
@@ -51,12 +52,23 @@ const NavbarPage = () => {
       }
     }
   }, [isMobile, pathname]);
+  useEffect(() => {
+    isPLay.onClose();
+    const timeoutId = setTimeout(() => {
+      if (isPLay.isOpen) {
+        isPLay.onClose();
+      }
+      isPLay.onOpen();
+    }, 10000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
   if (isLoading) {
     return null;
   }
   return (
     <>
-      <BackgroundMusic isPlay={isSound} />
+      <BackgroundMusic />
       <Navbar
         className="sm:bg-transparent sm:fixed z-[99999]"
         isBordered={false}
@@ -97,7 +109,12 @@ const NavbarPage = () => {
           </NavbarItem>
           <NavbarItem>
             <Link href="/collections/all" color="foreground">
-              Products
+              Collections
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/posts" color="foreground">
+              Posts
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -140,22 +157,18 @@ const NavbarPage = () => {
                 onClick={() => cartDrawer.toggle()}
                 className=" w-10 h-10 rounded-[10px] p-1 cursor-pointer dark:bg-slate-400 bg-transparent  items-center flex"
               >
-                <Lottie
-                  animationData={cartIcon}
-                  color={theme === "dark" ? "#ffffff" : "#000000"}
-                  loop={false}
-                />
+                <Lottie animationData={cartIcon} loop={false} />
               </div>
             </Badge>
           )}
 
           <div
             onClick={() => {
-              if (isSound) {
-                setIsSound(false);
+              if (isPLay.isOpen) {
+                isPLay.onClose();
                 lottieRef.current.play();
               } else {
-                setIsSound(true);
+                isPLay.onOpen();
                 lottieRef.current.stop();
               }
             }}
@@ -164,7 +177,7 @@ const NavbarPage = () => {
             <Lottie
               lottieRef={lottieRef}
               animationData={sound}
-              loop={isSound}
+              loop={isPLay.isOpen}
             />
           </div>
           <ModeToggle />

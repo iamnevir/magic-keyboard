@@ -46,7 +46,15 @@ export const getProductsByCategory = query({
     return products;
   },
 });
-
+export const getProductsByIds = query({
+  args: {
+    productIdList: v.array(v.id("product")),
+  },
+  handler: async (ctx, args) => {
+    const products = args.productIdList.map(async (e) => await ctx.db.get(e));
+    return products;
+  },
+});
 export const getProductsByCollection = query({
   args: {
     collectionId: v.id("collection"),

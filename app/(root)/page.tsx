@@ -24,7 +24,7 @@ export default function Home() {
         <CarouselCategoryList />
         <AboutUs />
         <div className=" w-full h-full sm:flex sm:my-20 my-5 space-y-5 sm:space-y-0">
-          <News />
+          <News slidesPerView={2} />
 
           <Feedback />
         </div>

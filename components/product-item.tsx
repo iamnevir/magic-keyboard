@@ -98,12 +98,12 @@ const ProductItem = ({
         </Modal>
       ) : null}
 
-      <div className=" flex flex-col justify-start items-center w-[250ppx] h-[450px] gap-3 ">
+      <div className=" flex flex-col justify-start items-center w-[250px] h-[450px] gap-3 ">
         <Tilt>
           <motion.div
             initial="hidden"
-            animate={loop ? "" : "visible"}
-            whileInView={loop ? "visible" : ""}
+            animate={loop ? "" : "show"}
+            whileInView={loop ? "show" : ""}
             variants={fadeIn("up", "spring", 0.1, 0.1)}
             style={{ backgroundImage: `url(${bg})` }}
             onClick={() => router.push(`/products/${product._id}`)}
@@ -162,8 +162,8 @@ const ProductItem = ({
         </Tilt>
         <motion.div
           initial="hidden"
-          animate={loop ? "" : "visible"}
-          whileInView={loop ? "visible" : ""}
+          animate={loop ? "" : "show"}
+          whileInView={loop ? "show" : ""}
           variants={fadeIn("left", "spring", 0.1, 1)}
           className=" flex flex-col items-center text-center w-full gap-1"
         >

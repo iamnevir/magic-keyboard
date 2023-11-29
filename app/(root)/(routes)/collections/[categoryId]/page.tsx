@@ -49,7 +49,7 @@ const CollectionPage = ({
     return (
       <div>
         <div className=" ">
-          <Breadcrumb item="Product" className="sm:py-5 pb-3" />
+          <Breadcrumb item="Collections" className="sm:py-5 pb-3" />
           <ProductCollection isAll categoryId={params.categoryId} />
         </div>
       </div>

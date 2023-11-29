@@ -13,6 +13,9 @@ const nextConfig = {
         hostname: "files.edgestore.dev",
       },
       {
+        hostname: "robust-gull-20.convex.cloud",
+      },
+      {
         hostname: "epomaker.com",
       },
     ],
