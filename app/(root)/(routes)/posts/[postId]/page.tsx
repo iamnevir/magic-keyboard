@@ -17,6 +17,7 @@ import {
 import News from "@/components/root/news";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import PostComments from "@/components/posts/post-comment";
 const PostPage = ({ params }: { params: { postId: Id<"post"> } }) => {
   const post = useQuery(api.post.getpostById, { postId: params.postId });
   const router = useRouter();
@@ -151,6 +152,7 @@ const PostPage = ({ params }: { params: { postId: Id<"post"> } }) => {
         </span>
         <News className=" sm:w-full mt-10" news={relatedPost} />
       </div>
+      <PostComments postId={post._id} />
     </>
   );
 };

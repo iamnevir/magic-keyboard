@@ -162,7 +162,12 @@ export default function CartTable() {
     0
   );
   if (cart.items.length < 1) {
-    return <NoCartItem />;
+    return (
+      <NoCartItem
+        content="Giỏ hàng của bạn trống trơn như túi tiền của bạn vậy. Mua sắm ngay thôi
+    nào!!"
+      />
+    );
   }
   return (
     <div className="flex flex-col items-end sm:px-20 p-2 space-y-5">

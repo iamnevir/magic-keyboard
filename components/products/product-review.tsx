@@ -1,6 +1,6 @@
 "use client";
 import { useMutation, useQuery } from "convex/react";
-import RatingStar, { customStyles } from "../rating-star";
+import RatingStar from "../rating-star";
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import {
@@ -24,12 +24,13 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Rating } from "@smastrom/react-rating";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import ReviewItem from "./review-item";
+import { useUser } from "@clerk/clerk-react";
+import RatingReviewPicker from "./rating-review-picker";
 
-function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
+export function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
   const chunks: T[][] = [];
   for (let i = 0; i < arr.length; i += chunkSize) {
     chunks.push(arr.slice(i, i + chunkSize));
@@ -38,6 +39,7 @@ function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
 }
 
 const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
+  const { user } = useUser();
   const create = useMutation(api.review.create);
   const [isWriteReview, setIsWriteReview] = useState(false);
   const [page, setPage] = useState(0);
@@ -68,18 +70,29 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
           0
         ) / ratingList!.length
       : null;
-  const formSchema = z.object({
-    userName: z.optional(z.string()),
-    email: z.string().email({
-      message: "Mail mà ông :v",
-    }),
-    rating: z.number(),
-    title: z.optional(z.string()),
-    comments: z.string().min(2, {
-      message: "Viết dài lên ông :v",
-    }),
-    images: z.optional(z.array(z.string())),
-  });
+  const formSchema = !user
+    ? z.object({
+        userName: z.optional(z.string()),
+        email: z.string().email({
+          message: "Mail mà ông :v",
+        }),
+        rating: z.number(),
+        title: z.optional(z.string()),
+        comments: z.string().min(2, {
+          message: "Viết dài lên ông :v",
+        }),
+        images: z.optional(z.array(z.string())),
+      })
+    : z.object({
+        userName: z.optional(z.string()),
+        email: z.string().optional(),
+        rating: z.number(),
+        title: z.optional(z.string()),
+        comments: z.string().min(2, {
+          message: "Viết dài lên ông :v",
+        }),
+        images: z.optional(z.array(z.string())),
+      });
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -93,26 +106,33 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsWriteReview(false);
-    create({
-      productId,
-      ...values,
-    });
+    if (user) {
+      create({
+        productId,
+        title: values.title,
+        images: values.images,
+        email: user.emailAddresses[0].emailAddress,
+        userName: user.fullName ? user.fullName : "Ẩn danh",
+        rating: values.rating,
+        comments: values.comments,
+      });
+    } else {
+      create({
+        productId,
+        title: values.title,
+        images: values.images,
+        email: values.email!,
+        userName: values.userName,
+        rating: values.rating,
+        comments: values.comments,
+      });
+    }
   }
   const reviewsList =
     reviews?.length! > 0 ? chunkArray<Doc<"review">>(reviews!, 3) : null;
   return (
     <div className=" w-full h-full sm:px-40 sm:py-20 px-2 py-2">
-      {isMobile ? (
-        <div className=" flex items-center pb-3">
-          <AnimateButton
-            text={!isWriteReview ? "Thêm một đánh giá" : "Đóng"}
-            onClick={() => setIsWriteReview((v) => !v)}
-            color="white"
-            className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
-          />
-        </div>
-      ) : null}
-      <div className=" flex items-start justify-between">
+      <div className=" flex sm:flex-row flex-col gap-2 items-start justify-between">
         <div className=" flex flex-col w-full">
           <span className=" font-semibold text-2xl sm:text-3xl">
             Phản hồi <span className=" hidden sm:flex">khách hàng</span>
@@ -143,16 +163,15 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
               </div>
             ))}
         </div>
-        {!isMobile ? (
-          <div className=" flex items-center">
-            <AnimateButton
-              text={!isWriteReview ? "Thêm một đánh giá" : "Đóng"}
-              onClick={() => setIsWriteReview((v) => !v)}
-              color="white"
-              className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
-            />
-          </div>
-        ) : null}
+
+        <div className=" flex items-center">
+          <AnimateButton
+            text={!isWriteReview ? "Thêm một đánh giá" : "Đóng"}
+            onClick={() => setIsWriteReview((v) => !v)}
+            color="white"
+            className="shadow-md dark:shadow-slate-500 shadow-black/50 bg-white"
+          />
+        </div>
       </div>
       <Divider className="mt-5 mb-2" />
       <div
@@ -165,52 +184,54 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <Card>
               <CardBody className=" gap-5">
-                <div className=" flex items-center space-x-5 w-full justify-between">
-                  <FormField
-                    control={form.control}
-                    name="userName"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormControl>
-                          <Input
-                            placeholder="Nhập tên hoặc không nhập để ẩn danh"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="w-full">
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="Nhập email (email của bạn sẽ được bảo mật)"
-                            {...field}
-                          />
-                        </FormControl>{" "}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
+                {!user ? (
+                  <div className=" flex items-center space-x-5 w-full justify-between">
+                    <FormField
+                      control={form.control}
+                      name="userName"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormControl>
+                            <Input
+                              placeholder="Nhập tên hoặc không nhập để ẩn danh"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="Nhập email (email của bạn sẽ được bảo mật)"
+                              {...field}
+                            />
+                          </FormControl>{" "}
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                ) : null}
+
                 <FormField
                   control={form.control}
                   name="rating"
                   render={({ field }) => (
                     <FormItem className="w-full py-2 justify-center flex items-center ">
                       <FormControl>
-                        <Rating
-                          className="h-[50px]"
-                          style={{ maxWidth: 200 }}
-                          value={field.value ? field.value : 5}
-                          onChange={field.onChange}
-                          itemStyles={customStyles}
-                        />
+                        <div>
+                          <RatingReviewPicker
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

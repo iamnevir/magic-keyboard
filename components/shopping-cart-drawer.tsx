@@ -5,7 +5,7 @@ import AnimateButton from "./animate-button";
 import useCart from "@/hooks/use-shopping-cart";
 import { formatCurrency } from "@/lib/utils";
 import CartItem from "./cart-item";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
@@ -29,10 +29,11 @@ const ShoppingCartDrawer = () => {
           <div className=" w-full pb-[60%] h-full flex items-center flex-col pt-16 gap-2 overflow-y-auto overflowCart ">
             <div
               onClick={() => router.push("/cart")}
-              className=" absolute top-5 group hover:translate-x-3 -translate-x-5  cursor-pointer duration-500 flex items-center gap-2 font-semibold left-4"
+              className=" absolute top-5 group hover:translate-x-3 z-[99999] -translate-x-5  cursor-pointer duration-500 flex items-center gap-2 font-semibold left-4"
             >
               <ExternalLinkIcon className="w-5 h-5 opacity-0 group-hover:opacity-100 duration-500" />
               Giỏ hàng
+              <ShoppingCart className="w-5 h-5 " />
             </div>
             {cart.items.map((item, index) => (
               <motion.div

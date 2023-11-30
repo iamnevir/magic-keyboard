@@ -71,7 +71,7 @@ const NavbarPage = () => {
     <>
       <BackgroundMusic />
       <Navbar
-        className="sm:bg-transparent sm:fixed z-[99999]"
+        className="sm:bg-transparent sm:fixed z-[99]"
         isBordered={false}
         isBlurred={isMobile ? true : false}
         maxWidth="full"

@@ -32,8 +32,10 @@ import { api } from "@/convex/_generated/api";
 import CheckOutModal from "./checkout-modal";
 
 import ImageModal from "./image-modal";
+import { useRouter } from "next/navigation";
 const OrderItem = ({ item }: { item: Doc<"order"> }) => {
   const update = useMutation(api.order.update);
+  const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const huyDonHang = () => {
     if (item) {
@@ -167,7 +169,15 @@ const OrderItem = ({ item }: { item: Doc<"order"> }) => {
                 {item.address}
               </div>
               <div className="font-semibold flex items-center  gap-5">
-                <Button variant="shadow" color="success">
+                <Button
+                  onClick={() =>
+                    router.push(
+                      "https://www.facebook.com/profile.php?id=61553767545916"
+                    )
+                  }
+                  variant="shadow"
+                  color="success"
+                >
                   <MessageCircle className="w-5 h-5" />
                   Liên hệ
                 </Button>
@@ -177,7 +187,13 @@ const OrderItem = ({ item }: { item: Doc<"order"> }) => {
                   </Button>
                 ) : null}
                 {item.isPaid ? (
-                  <Button variant="shadow" color="success">
+                  <Button
+                    onClick={() =>
+                      router.push(`/products/${item.orderItems[0].product}`)
+                    }
+                    variant="shadow"
+                    color="success"
+                  >
                     Mua lại
                   </Button>
                 ) : null}

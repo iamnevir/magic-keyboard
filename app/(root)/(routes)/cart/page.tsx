@@ -1,18 +1,10 @@
 "use client";
 import Breadcrumb from "@/components/bread-crum";
+import NoCartItem from "@/components/cart/no-cart-item";
 import OrderItem from "@/components/cart/order-item";
 import { api } from "@/convex/_generated/api";
-import { formatCurrency } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
-import {
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Tab,
-  Tabs,
-} from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import { useQuery } from "convex/react";
 import { Store } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -40,11 +32,15 @@ const CartPage = () => {
         title="Đơn hàng"
         className="flex flex-col gap-4 overflow-auto"
       >
-        {orders?.map((item, index) => (
-          <div key={index}>
-            <OrderItem item={item} />
-          </div>
-        ))}
+        {orders && orders.length > 0 ? (
+          orders?.map((item, index) => (
+            <div key={index}>
+              <OrderItem item={item} />
+            </div>
+          ))
+        ) : (
+          <NoCartItem content="Bạn còn chưa mua gì mà." />
+        )}
       </Tab>
     </Tabs>
   );

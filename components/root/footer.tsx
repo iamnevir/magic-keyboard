@@ -1,11 +1,41 @@
 import { motion } from "framer-motion";
 import { TypingText } from "../typing-text";
-import { ArrowRight, ArrowUp, ExternalLinkIcon } from "lucide-react";
+import { ArrowUp, ExternalLinkIcon, SendHorizonal } from "lucide-react";
 import { Input } from "@nextui-org/react";
 import UnderlineText from "../underline-animate";
 import { fadeIn } from "@/lib/motion";
+import { useUser } from "@clerk/clerk-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Footer = () => {
+  const { user } = useUser();
+  const [email, setEmail] = useState("");
+  async function handleOnSubmit(e: any) {
+    e.preventDefault();
+    try {
+      if (user) {
+        await fetch("/api/send", {
+          method: "POST",
+          body: JSON.stringify({
+            userName: user.fullName,
+            email: email.trim(),
+          }),
+        });
+      } else {
+        await fetch("/api/send", {
+          method: "POST",
+          body: JSON.stringify({
+            userName: "Khách hàng của Magic Keyboard",
+            email,
+          }),
+        });
+      }
+      toast.success("Thank for contact!");
+    } catch (error) {
+      console.log("Có gì đó sai sai!!!");
+    }
+  }
   const andress = [
     { text: "ICTU", ml: "2" },
     { text: "Z115", ml: "0" },
@@ -114,9 +144,15 @@ const Footer = () => {
           <Input
             type="email"
             placeholder="Your Email"
+            onValueChange={setEmail}
             className=" max-w-3xl w-[300px] sm:w-[470px] h-[61px] dark:text-white"
+            endContent={
+              <SendHorizonal
+                onClick={handleOnSubmit}
+                className="w-8 h-8 cursor-pointer"
+              />
+            }
           />
-          <ArrowRight className=" absolute sm:right-3 top-[20%] right-10 z-10 w-8 h-8 cursor-pointer" />
         </motion.div>
       </motion.div>
       <motion.div
@@ -140,9 +176,7 @@ const Footer = () => {
           textStyles="font-normal text-[15px]"
         />
         <div
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className=" absolute dark:bg-white bg-black rounded-full items-center sm:p-4 p-3 cursor-pointer sm:right-40 sm:bottom-5 right-2"
         >
           <ArrowUp className=" sm:w-7 sm:h-7 h-4 w-4 text-white dark:text-black" />
