@@ -12,12 +12,19 @@ export const getCollections = query({
 });
 export const getCollectionsByCategory = query({
   args: {
-    categoryId: v.id("category"),
+    slug: v.string(),
   },
   handler: async (ctx, args) => {
+    const category = await ctx.db
+      .query("category")
+      .filter((q) => q.eq(q.field("slug"), args.slug))
+      .first();
+    if (!category) {
+      return null;
+    }
     const collections = await ctx.db
       .query("collection")
-      .withIndex("by_category", (q) => q.eq("categoryId", args.categoryId))
+      .withIndex("by_category", (q) => q.eq("categoryId", category._id))
       .collect();
     return collections;
   },
@@ -29,5 +36,17 @@ export const getCollectionById = query({
   handler: async (ctx, args) => {
     const collection = await ctx.db.get(args.collectionId);
     return collection;
+  },
+});
+export const getcollectionBySlug = query({
+  args: {
+    slug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const post = await ctx.db
+      .query("collection")
+      .filter((q) => q.eq(q.field("slug"), args.slug))
+      .first();
+    return post;
   },
 });

@@ -1,5 +1,5 @@
+"use client";
 import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
-import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import AnimateButton from "./animate-button";
 import useCart from "@/hooks/use-shopping-cart";
@@ -9,6 +9,8 @@ import { ExternalLinkIcon, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
+import dynamic from "next/dynamic";
+const Drawer = dynamic(() => import("react-modern-drawer"), { ssr: false });
 const ShoppingCartDrawer = () => {
   const cartDrawer = useCartDrawer();
   const router = useRouter();

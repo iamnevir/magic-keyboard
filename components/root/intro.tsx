@@ -1,3 +1,4 @@
+"use client";
 import loading from "@/public/loading.json";
 import Lottie from "lottie-react";
 import { useEffect, useState } from "react";

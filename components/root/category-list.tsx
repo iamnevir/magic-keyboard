@@ -41,7 +41,7 @@ const CategoryItem = ({ category }: { category: Doc<"category"> }) => {
   return (
     <Tilt>
       <motion.div
-        onClick={() => router.push(`/collections/${category._id}`)}
+        onClick={() => router.push(`/collections/${category.slug}`)}
         initial="hidden"
         whileInView="show"
         variants={fadeIn("up", "spring", 0.2, 0.5)}

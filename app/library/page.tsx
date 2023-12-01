@@ -1,11 +1,23 @@
-"use client";
+import { BackButton } from "@/components/library/back-button";
 import { LibraryCanvas } from "@/components/library/library-keyboard";
-import TransitionPage from "@/components/transition-page";
-import { useRouter } from "next/navigation";
+import { webUrl } from "@/lib/utils";
+import { Metadata } from "next";
 import { Suspense } from "react";
-
+export const metadata: Metadata = {
+  title: "Magic Keyboard - Library",
+  description: "Thứ ma thuật kì lạ mang đến trải nghiệm phím cơ số một.",
+  openGraph: {
+    siteName: "Magic Keyboard",
+    url: `${webUrl}/library`,
+    title: `Magic Keyboard - Library`,
+    description: `Thư viện 3D - Những mẫu bàn phím ma thuật kì dị.`,
+    type: "website",
+    images: [
+      "https://utfs.io/f/c70f383e-32c1-4a32-a184-7910589422b5-66gey4.png",
+    ],
+  },
+};
 const LibraryPage = () => {
-  const router = useRouter();
   const images = [
     // Front
     {
@@ -68,12 +80,7 @@ const LibraryPage = () => {
   ];
   return (
     <div className=" sm:h-full sm:w-full w-[100vw] h-[100vh]">
-      <div
-        className="absolute dark:text-white left-10 top-10 w-10 h-5 z-50 cursor-pointer "
-        onClick={() => router.push("/")}
-      >
-        back
-      </div>
+      <BackButton />
       <Suspense
         fallback={
           <div className=" absolute sm:left-[50%] sm:top-[50%] left-[40%] top-[40%] font-semibold w-10 h-10 dark:text-white">

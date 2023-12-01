@@ -28,7 +28,7 @@ const OrderItemProduct = ({
           alt="image"
           width={150}
           height={150}
-          onClick={() => router.push(`/products/${orderItem.product}`)}
+          onClick={() => router.push(`/products/${product?.slug}`)}
           className=" w-[150px] h-[150px] object-contain rounded-[5px] cursor-pointer"
         />
         <div className=" flex items-start flex-col sm:flex-row w-full sm:justify-between">

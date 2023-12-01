@@ -1,3 +1,4 @@
+"use client";
 import { Chip, Modal, ModalBody, ModalContent } from "@nextui-org/react";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
@@ -106,7 +107,7 @@ const ProductItem = ({
             whileInView={loop ? "show" : ""}
             variants={fadeIn("up", "spring", 0.1, 0.1)}
             style={{ backgroundImage: `url(${bg})` }}
-            onClick={() => router.push(`/products/${product._id}`)}
+            onClick={() => router.push(`/products/${product.slug}`)}
             className={cn(
               `relative  sm:w-[250px] sm:h-[250px] w-[80dvw] h-[30dvh] bg-cover bg-shrink-0 cursor-pointer rounded-2xl transition-all duration-1000`
             )}
@@ -134,7 +135,7 @@ const ProductItem = ({
               >
                 <AnimateButton
                   text="Select options"
-                  onClick={() => router.push(`/products/${product._id}`)}
+                  onClick={() => router.push(`/products/${product.slug}`)}
                   className=" h-10"
                 />
               </div>

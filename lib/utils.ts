@@ -83,3 +83,5 @@ export const ListImage = ({ product }: { product: Doc<"product"> }) => {
     ) as string[];
   }
 };
+
+export const webUrl = process.env.PUBLIC_WEB_URL;

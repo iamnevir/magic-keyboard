@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 import { TypingText } from "../typing-text";
 import { ArrowUp, ExternalLinkIcon, SendHorizonal } from "lucide-react";

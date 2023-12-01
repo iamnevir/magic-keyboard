@@ -135,7 +135,12 @@ const CheckOutForm = () => {
     router.push("/cart");
   }
   if (cart.items.length < 1) {
-    return <NoCartItem />;
+    return (
+      <NoCartItem
+        content="Giỏ hàng của bạn trống trơn như túi tiền của bạn vậy. Mua sắm ngay thôi
+    nào!!"
+      />
+    );
   }
   return (
     <div className=" sm:px-[20dvw] flex flex-col sm:flex-row items-start sm:gap-5 gap-4 pb-10 w-full">

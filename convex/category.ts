@@ -16,3 +16,15 @@ export const getCategoryById = query({
     return category;
   },
 });
+export const getcategoryBySlug = query({
+  args: {
+    slug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const post = await ctx.db
+      .query("category")
+      .filter((q) => q.eq(q.field("slug"), args.slug))
+      .first();
+    return post;
+  },
+});

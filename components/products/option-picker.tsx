@@ -54,7 +54,7 @@ const OptionPicker = ({
       (item) => `${item.key}=${item.value.replaceAll(" ", "-")}`
     );
     const href = hrefList?.join("&");
-    router.push(`/products/${product._id}?${href}`, { scroll: false });
+    router.push(`/products/${product.slug}?${href}`, { scroll: false });
   }, [optionList]);
   const addToCart = () => {
     if (optionList) {

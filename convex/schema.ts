@@ -14,10 +14,14 @@ export default defineSchema({
   category: defineTable({
     name: v.string(),
     imageUrl: v.optional(v.string()),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
   }).index("by_name", ["name"]),
   collection: defineTable({
     name: v.string(),
     categoryId: v.id("category"),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
   }).index("by_category", ["categoryId"]),
 
   product: defineTable({

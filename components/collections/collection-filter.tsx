@@ -26,13 +26,13 @@ import getCollectionByCategory from "@/actions/getCollectionByCategory";
 import getCollections from "@/actions/getCollections";
 
 const CollectionFilter = ({
-  categoryId,
+  slug,
   onLocChange,
   onPriceChange,
   onBrandChange,
   isAll,
 }: {
-  categoryId: Id<"category">;
+  slug: string;
   onLocChange: (value: string[]) => void;
   onPriceChange: (v: SliderValue) => void;
   onBrandChange: (value: string[]) => void;
@@ -40,7 +40,7 @@ const CollectionFilter = ({
 }) => {
   const collections = isAll
     ? getCollections()
-    : getCollectionByCategory({ categoryId });
+    : getCollectionByCategory({ slug });
   const [brandOpen, setBrandOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
   const isMobile = window.screen.width <= 768;

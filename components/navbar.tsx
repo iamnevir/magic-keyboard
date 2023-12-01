@@ -138,7 +138,7 @@ const NavbarPage = () => {
                   pathname !== "/" ? "sm:right-[540px] right-[140px]" : ""
                 )}
               >
-                <UserButton afterSignOutUrl="/" />
+                <UserButton />
               </NavbarItem>
             </>
           ) : (

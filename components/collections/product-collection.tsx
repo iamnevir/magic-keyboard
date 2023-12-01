@@ -1,14 +1,14 @@
-import { Id } from "@/convex/_generated/dataModel";
+"use client";
 import { SliderValue } from "@nextui-org/react";
 import CollectionFilter from "./collection-filter";
 import CollectionProduct from "./collection-product";
 import { useState } from "react";
 
 const ProductCollection = ({
-  categoryId,
+  slug,
   isAll,
 }: {
-  categoryId: Id<"category">;
+  slug: string;
   isAll?: boolean;
 }) => {
   const [listId, setListId] = useState<string[]>([]);
@@ -24,7 +24,7 @@ const ProductCollection = ({
           onBrandChange={setBrand}
           onPriceChange={setPrice}
           onLocChange={onLocChange}
-          categoryId={categoryId}
+          slug={slug}
           isAll={isAll}
         />
         <CollectionProduct

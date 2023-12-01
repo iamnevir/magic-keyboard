@@ -18,6 +18,9 @@ const nextConfig = {
       {
         hostname: "epomaker.com",
       },
+      {
+        hostname: "cdn.shopifycdn.net",
+      },
     ],
   },
 };

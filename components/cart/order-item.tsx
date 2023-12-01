@@ -33,8 +33,11 @@ import CheckOutModal from "./checkout-modal";
 
 import ImageModal from "./image-modal";
 import { useRouter } from "next/navigation";
+import useCart from "@/hooks/use-shopping-cart";
+import { BuyAgain } from "./buy-again";
 const OrderItem = ({ item }: { item: Doc<"order"> }) => {
   const update = useMutation(api.order.update);
+  const cart = useCart();
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const huyDonHang = () => {
@@ -45,6 +48,7 @@ const OrderItem = ({ item }: { item: Doc<"order"> }) => {
   const checkout = useQuery(api.checkout.getcheckoutByOrder, {
     orderId: item._id,
   });
+
   return (
     <>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -186,17 +190,7 @@ const OrderItem = ({ item }: { item: Doc<"order"> }) => {
                     Hủy đơn
                   </Button>
                 ) : null}
-                {item.isPaid ? (
-                  <Button
-                    onClick={() =>
-                      router.push(`/products/${item.orderItems[0].product}`)
-                    }
-                    variant="shadow"
-                    color="success"
-                  >
-                    Mua lại
-                  </Button>
-                ) : null}
+                {item.isPaid ? <BuyAgain item={item} /> : null}
               </div>
             </div>
           </div>

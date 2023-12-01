@@ -18,8 +18,8 @@ import News from "@/components/root/news";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import PostComments from "@/components/posts/post-comment";
-const PostPage = ({ params }: { params: { postId: Id<"post"> } }) => {
-  const post = useQuery(api.post.getpostById, { postId: params.postId });
+export const PostDetail = ({ slug }: { slug: string }) => {
+  const post = useQuery(api.post.getpostBySlug, { slug });
   const router = useRouter();
   const relatedPost = useQuery(api.post.getPostByType, { type: post?.type! });
   let index: number | undefined;
@@ -156,5 +156,3 @@ const PostPage = ({ params }: { params: { postId: Id<"post"> } }) => {
     </>
   );
 };
-
-export default PostPage;

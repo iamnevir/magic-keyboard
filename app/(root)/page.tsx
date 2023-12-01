@@ -1,6 +1,4 @@
-"use client";
 import AboutUs from "@/components/root/about-us";
-import BackgroundMusic from "@/components/root/bg-music";
 import Billboard from "@/components/root/billboard";
 import CarouselCategoryList from "@/components/root/category-list";
 import Feedback from "@/components/root/feedback";

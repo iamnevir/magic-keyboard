@@ -29,3 +29,15 @@ export const getpostById = query({
     return post;
   },
 });
+export const getpostBySlug = query({
+  args: {
+    slug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const post = await ctx.db
+      .query("post")
+      .filter((q) => q.eq(q.field("slug"), args.slug))
+      .first();
+    return post;
+  },
+});

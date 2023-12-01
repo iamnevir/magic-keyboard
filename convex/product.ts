@@ -77,3 +77,15 @@ export const getProductById = query({
     return products;
   },
 });
+export const getProductBySlug = query({
+  args: {
+    slug: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const product = await ctx.db
+      .query("product")
+      .filter((q) => q.eq(q.field("slug"), args.slug))
+      .first();
+    return product;
+  },
+});

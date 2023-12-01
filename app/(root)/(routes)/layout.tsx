@@ -1,10 +1,5 @@
-"use client";
+import ShoppingCartDrawer from "@/components/shopping-cart-drawer";
 
-import dynamic from "next/dynamic";
-const ShoppingCartDrawer = dynamic(
-  () => import("@/components/shopping-cart-drawer"),
-  { ssr: false }
-);
 export default function HomeLayout({
   children,
 }: {

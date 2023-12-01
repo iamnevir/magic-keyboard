@@ -20,6 +20,7 @@ import { motion } from "framer-motion";
 import { fadeInOne } from "@/lib/motion";
 import { useRouter } from "next/navigation";
 import NoCartItem from "./no-cart-item";
+
 export default function CartTable() {
   const cart = useCart();
   const isMobile = window.screen.width <= 768;

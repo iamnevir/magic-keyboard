@@ -7,9 +7,9 @@ import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@nextui-org/react";
 import { useQuery } from "convex/react";
 
-const ProductPage = ({ params }: { params: { productId: Id<"product"> } }) => {
-  const product = useQuery(api.product.getProductById, {
-    productId: params.productId,
+export const ProductPageComponent = ({ slug }: { slug: string }) => {
+  const product = useQuery(api.product.getProductBySlug, {
+    slug,
   });
 
   if (product === undefined) {
@@ -35,5 +35,3 @@ const ProductPage = ({ params }: { params: { productId: Id<"product"> } }) => {
     </div>
   );
 };
-
-export default ProductPage;
