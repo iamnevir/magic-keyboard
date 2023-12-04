@@ -1,7 +1,7 @@
 import { ProductPageComponent } from "@/components/products/product-page";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { webUrl } from "@/lib/utils";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 
 type Props = {
   params: { slug: string };

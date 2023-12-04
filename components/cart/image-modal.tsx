@@ -57,6 +57,8 @@ const ImageModal = ({ orderId }: { orderId: Id<"order"> }) => {
                   className=" rounded-[10px] object-contain"
                   width={390}
                   height={350}
+                  placeholder="blur"
+                  blurDataURL="/loader.png"
                   src={imageUrl ? imageUrl : ""}
                   alt=""
                 />

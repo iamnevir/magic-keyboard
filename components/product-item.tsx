@@ -32,11 +32,11 @@ const ProductItem = ({
   const cart = useCart();
   const images = ListImage({ product });
   const isMobile = window.screen.width <= 768;
-  const [bg, setBg] = useState(images ? images[0] : "");
+  const [bg, setBg] = useState(images ? images[0] : "/loader.png");
   const [hover, setHover] = useState(false);
   useEffect(() => {
     if (onFilter) {
-      setBg(images ? images[0] : "");
+      setBg(images ? images[0] : "/loader.png");
     }
     if (setOnFilter) {
       setOnFilter(false);
@@ -99,13 +99,14 @@ const ProductItem = ({
         </Modal>
       ) : null}
 
-      <div className=" flex flex-col justify-start items-center w-[250px] h-[450px] gap-3 sm:ml-0 ml-[60px]">
-        <Tilt>
+      <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+        <Tilt disabled={isMobile}>
           <motion.div
             initial="hidden"
             animate={loop ? "" : "show"}
             whileInView={loop ? "show" : ""}
             variants={fadeIn("up", "spring", 0.1, 0.1)}
+            viewport={{ once: true }}
             style={{ backgroundImage: `url(${bg})` }}
             onClick={() => router.push(`/products/${product.slug}`)}
             className={cn(
@@ -127,37 +128,41 @@ const ProductItem = ({
                 </div>
               ) : null}
 
-              <div
-                className={cn(
-                  " absolute left-0 bottom-2  w-full px-6 duration-500",
-                  !hover ? "translate-y-10 opacity-0" : ""
-                )}
-              >
-                <AnimateButton
-                  text="Select options"
-                  onClick={() => router.push(`/products/${product.slug}`)}
-                  className=" h-10"
-                />
-              </div>
-              <div
-                className={cn(
-                  " absolute right-3 space-y-3 top-3 duration-500",
-                  !hover ? "translate-x-10 opacity-0" : ""
-                )}
-              >
-                <TooltipAction tooltip="Add to wishlist">
-                  <Star className=" w-3 h-3 group-hover:text-white" />
-                </TooltipAction>
-                <TooltipAction onClick={addToCart} tooltip="Add to cart">
-                  <ShoppingBag className=" group-hover:text-white w-3 h-3" />
-                </TooltipAction>
-                <TooltipAction
-                  onClick={() => setOpen(true)}
-                  tooltip="Quick view"
-                >
-                  <Eye className=" group-hover:text-white w-3 h-3" />
-                </TooltipAction>
-              </div>
+              {!isMobile ? (
+                <>
+                  <div
+                    className={cn(
+                      " absolute left-0 bottom-2  w-full px-6 duration-500",
+                      !hover ? "translate-y-10 opacity-0" : ""
+                    )}
+                  >
+                    <AnimateButton
+                      text="Select options"
+                      onClick={() => router.push(`/products/${product.slug}`)}
+                      className=" h-10"
+                    />
+                  </div>
+                  <div
+                    className={cn(
+                      " absolute right-3 space-y-3 top-3 duration-500",
+                      !hover ? "translate-x-10 opacity-0" : ""
+                    )}
+                  >
+                    <TooltipAction tooltip="Add to wishlist">
+                      <Star className=" w-3 h-3 group-hover:text-white" />
+                    </TooltipAction>
+                    <TooltipAction onClick={addToCart} tooltip="Add to cart">
+                      <ShoppingBag className=" group-hover:text-white w-3 h-3" />
+                    </TooltipAction>
+                    <TooltipAction
+                      onClick={() => setOpen(true)}
+                      tooltip="Quick view"
+                    >
+                      <Eye className=" group-hover:text-white w-3 h-3" />
+                    </TooltipAction>
+                  </div>
+                </>
+              ) : null}
             </div>
           </motion.div>
         </Tilt>
@@ -165,6 +170,7 @@ const ProductItem = ({
           initial="hidden"
           animate={loop ? "" : "show"}
           whileInView={loop ? "show" : ""}
+          viewport={{ once: true }}
           variants={fadeIn("left", "spring", 0.1, 1)}
           className=" flex flex-col items-center text-center w-full gap-1"
         >
@@ -222,6 +228,7 @@ const ProductItem = ({
                   alt="image"
                   width={50}
                   height={30}
+                  sizes=""
                   className=" w-[50px] h-[30px] object-contain "
                 />
               </div>

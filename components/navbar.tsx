@@ -1,5 +1,5 @@
 "use client";
-import { SignInButton, SignUpButton, UserButton, useAuth } from "@clerk/nextjs";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 import {
   Navbar,
   NavbarBrand,
@@ -11,7 +11,6 @@ import {
   NavbarMenuItem,
   Badge,
 } from "@nextui-org/react";
-import { Search } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -21,8 +20,6 @@ import Lottie from "lottie-react";
 import sound from "@/public/sound.json";
 import cartIcon from "@/public/cart.json";
 import { usePathname } from "next/navigation";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import useCart from "@/hooks/use-shopping-cart";
 import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 import { useMusic } from "@/hooks/use-bg-music";
@@ -90,9 +87,9 @@ const NavbarPage = () => {
                     ? "https://utfs.io/f/7e35cd7d-fd1b-4e34-85ba-e79501bd2be6-sqxz0n.png"
                     : "https://utfs.io/f/aa690307-8655-4f7b-ba0e-ed88b08ae4fc-sfgo65.png"
                 }
-                width={25}
-                height={25}
-                className=" w-[25px] "
+                width={20}
+                height={30}
+                className=" w-[20px] h-[30px]"
                 alt="logo"
               />
               <p className="font-bold sm:flex hidden text-inherit">KEYBOARD</p>{" "}

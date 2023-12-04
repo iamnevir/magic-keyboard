@@ -1,6 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { convertTimestampToRelativeTime } from "@/lib/utils";
-import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Card, CardHeader } from "@nextui-org/react";
 
 const commentItem = ({ comment }: { comment: Doc<"comment"> }) => {
   return (

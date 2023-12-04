@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import UnderlineText from "../underline-animate";
 import { useTheme } from "next-themes";
@@ -13,6 +12,7 @@ const Help = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={container}
           className="flex flex-col space-y-5"
         >
@@ -39,6 +39,7 @@ const Help = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={container}
           className="grid sm:flex grid-cols-2 sm:items-center items-start md:ml-10 md:-mt-5 mt-5"
         >

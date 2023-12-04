@@ -1,5 +1,5 @@
 import { PostDetail } from "@/components/posts/post-detail";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { webUrl } from "@/lib/utils";
 import { Metadata } from "next";
 

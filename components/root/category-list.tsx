@@ -1,13 +1,10 @@
 "use client";
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
-import { container, fadeIn } from "@/lib/motion";
+
 import { useQuery } from "convex/react";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
-import slugify from "react-slugify";
-import { Tilt } from "@jdion/tilt-react";
-import { useRouter } from "next/navigation";
+import CategoryItem from "./category-item";
 const CarouselCategoryList = () => {
   const targetRef = useRef(null);
   const categories = useQuery(api.category.getCategories);
@@ -16,7 +13,7 @@ const CarouselCategoryList = () => {
   });
   const isMobile = window.screen.width <= 768;
   const x1 = useTransform(scrollYProgress, [0, 2], ["44%", "-135%"]);
-  const x2 = useTransform(scrollYProgress, [0, 2], ["35%", "-105%"]);
+  const x2 = useTransform(scrollYProgress, [0, 2], ["32%", "-95%"]);
   const x = isMobile ? x1 : x2;
   return (
     <div className="flex flex-col items-center justify-center w-full h-full overflow-clip">
@@ -33,36 +30,6 @@ const CarouselCategoryList = () => {
         </div>
       </div>
     </div>
-  );
-};
-
-const CategoryItem = ({ category }: { category: Doc<"category"> }) => {
-  const router = useRouter();
-  return (
-    <Tilt>
-      <motion.div
-        onClick={() => router.push(`/collections/${category.slug}`)}
-        initial="hidden"
-        whileInView="show"
-        variants={fadeIn("up", "spring", 0.2, 0.5)}
-        key={category._id}
-        className="group cursor-pointer relative sm:h-[450px] sm:w-[450px] h-[300px] w-[300px] overflow-hidden bg-neutral-200"
-      >
-        <div
-          style={{
-            backgroundImage: `url(${category.imageUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="absolute inset-0 z-0 transition-transform duration-500 group-hover:scale-110"
-        ></div>
-        <div className="absolute inset-0 z-10 grid place-content-center">
-          <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-4xl font-black uppercase text-white backdrop-blur-lg">
-            {category.name}
-          </p>
-        </div>
-      </motion.div>
-    </Tilt>
   );
 };
 

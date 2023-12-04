@@ -6,7 +6,6 @@ import GenerateHtml from "@/lib/json-to-html";
 import OptionPicker from "./option-picker";
 import RatingStar from "../rating-star";
 import { ArrowUpDown, HelpCircle, Share2 } from "lucide-react";
-import { useState } from "react";
 const ProductPicker = ({
   product,
   onOptionChange,

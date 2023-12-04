@@ -1,6 +1,5 @@
 "use client";
 import { useMutation, useQuery } from "convex/react";
-import RatingStar, { customStyles } from "../rating-star";
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import {
@@ -24,7 +23,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Rating } from "@smastrom/react-rating";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import CommentItem from "./comment-item";

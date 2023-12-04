@@ -2,17 +2,25 @@ import { Doc } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
 import AnimateButton from "../animate-button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
   const router = useRouter();
   return (
     <motion.div className=" relative w-full h-full flex items-center justify-center">
-      <motion.img
+      <motion.div
         whileInView={{ scale: 1.1 }}
         transition={{ duration: 5 }}
-        src={billboard.imageUrl}
-        alt="billboard"
-        className=" object-cover absolute w-full h-full"
-      />
+        className=" object-cover relative w-full h-full"
+      >
+        <Image
+          src={billboard.imageUrl}
+          alt="billboard"
+          fill
+          priority
+          sizes="100dvw"
+          className=" object-cover"
+        />
+      </motion.div>
       <div className=" max-w-4xl w-[60dvw] text-center absolute flex flex-col items-center justify-center text-white">
         <span className="text-xl font-semibold mb-2 md:mb-[14px] text-white">
           {billboard.producer}

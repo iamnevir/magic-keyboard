@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Children } from "react";
+import { BackButton } from "../library/back-button";
 
 const TextUnderMagic = () => {
   const state = useStore();
@@ -23,17 +24,7 @@ const TextUnderMagic = () => {
           05/02/2023
         </div>
       </div>
-      <div className="  sm:top-[8%] left-[5%] top-[4%] sm:w-10 w-8 absolute">
-        <Link href="/">
-          <Image
-            src="https://utfs.io/f/aa690307-8655-4f7b-ba0e-ed88b08ae4fc-sfgo65.png"
-            width={40}
-            height={40}
-            alt="logo"
-            objectFit="contain"
-          />
-        </Link>
-      </div>
+      <BackButton />
       <div
         className={cn(
           state.open

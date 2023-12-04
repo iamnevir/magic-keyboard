@@ -14,8 +14,6 @@ import {
   Input,
   Button,
   Textarea,
-  Switch,
-  cn,
 } from "@nextui-org/react";
 import {
   Form,
@@ -25,8 +23,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import AnimateButton from "../animate-button";
-import { useState } from "react";
 const formOption = z.object({
   tinh: z.string().min(3, { message: "vl ngắn thế, thêm tí đê =))" }),
   huyen: z.string().min(3, { message: "vl ngắn thế, thêm tí đê =))" }),

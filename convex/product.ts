@@ -46,6 +46,7 @@ export const getProductsByCategory = query({
     return products;
   },
 });
+
 export const getProductsByIds = query({
   args: {
     productIdList: v.array(v.id("product")),
@@ -74,6 +75,122 @@ export const getProductById = query({
   },
   handler: async (ctx, args) => {
     const products = await ctx.db.get(args.productId);
+    return products;
+  },
+});
+
+export const create = mutation({
+  args: {
+    name: v.string(),
+    slug: v.string(),
+    producer: v.optional(v.string()),
+    description: v.optional(v.any()),
+    infomation: v.optional(v.any()),
+    price: v.optional(v.number()),
+    pay: v.optional(v.string()),
+    isSale: v.optional(v.boolean()),
+    salePrice: v.optional(v.number()),
+    timeSale: v.optional(v.number()),
+    quantity: v.optional(v.number()),
+    collectionId: v.id("collection"),
+    options: v.optional(
+      v.array(
+        v.object({
+          name: v.string(),
+          option: v.array(
+            v.object({
+              name: v.string(),
+              image: v.optional(v.string()),
+              price: v.optional(v.number()),
+              quantity: v.optional(v.number()),
+            })
+          ),
+        })
+      )
+    ),
+    images: v.optional(v.array(v.string())),
+    isPublish: v.boolean(),
+  },
+  handler: async (ctx, args) => {
+    const products = await ctx.db.insert("product", {
+      name: args.name,
+      slug: args.slug,
+      producer: args.producer,
+      description: args.description,
+      infomation: args.infomation,
+      price: args.price,
+      pay: args.pay,
+      isSale: args.isSale,
+      salePrice: args.salePrice,
+      timeSale: args.timeSale,
+      quantity: args.quantity,
+      collectionId: args.collectionId,
+      options: args.options,
+      images: args.images,
+      isPublish: args.isPublish,
+    });
+    return products;
+  },
+});
+export const remove = mutation({
+  args: {
+    id: v.id("product"),
+  },
+  handler: async (ctx, args) => {
+    const products = await ctx.db.delete(args.id);
+    return products;
+  },
+});
+export const update = mutation({
+  args: {
+    id: v.id("product"),
+    name: v.string(),
+    slug: v.string(),
+    producer: v.optional(v.string()),
+    description: v.optional(v.any()),
+    infomation: v.optional(v.any()),
+    price: v.optional(v.number()),
+    isSale: v.optional(v.boolean()),
+    salePrice: v.optional(v.number()),
+    timeSale: v.optional(v.number()),
+    pay: v.optional(v.string()),
+    quantity: v.optional(v.number()),
+    collectionId: v.id("collection"),
+    options: v.optional(
+      v.array(
+        v.object({
+          name: v.string(),
+          option: v.array(
+            v.object({
+              name: v.string(),
+              image: v.optional(v.string()),
+              price: v.optional(v.number()),
+              quantity: v.optional(v.number()),
+            })
+          ),
+        })
+      )
+    ),
+    images: v.optional(v.array(v.string())),
+    isPublish: v.boolean(),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...rest } = args;
+    const products = await ctx.db.patch(args.id, {
+      ...rest,
+    });
+    return products;
+  },
+});
+export const removeAll = mutation({
+  args: {
+    id: v.array(v.id("product")),
+  },
+  handler: async (ctx, args) => {
+    const products = args.id.forEach(async (id) => {
+      await ctx.db.delete(id);
+    });
+
     return products;
   },
 });

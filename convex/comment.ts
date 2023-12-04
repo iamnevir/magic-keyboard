@@ -14,7 +14,7 @@ export const getCommentByPost = query({
     return comments;
   },
 });
-export const getPostById = query({
+export const getCommentById = query({
   args: {
     commentId: v.id("comment"),
   },

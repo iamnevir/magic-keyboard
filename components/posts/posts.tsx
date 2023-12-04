@@ -33,7 +33,13 @@ export const Posts = () => {
             onClick={() => router.push(`/posts/${item.slug}`)}
             className=" relative cursor-pointer"
           >
-            <Image src={item.thumnail} alt="thumnail" fill />
+            <Image
+              src={item.thumnail}
+              alt="thumnail"
+              fill
+              priority
+              sizes="100vw"
+            />
             <motion.div
               whileInView="show"
               initial="hidden"

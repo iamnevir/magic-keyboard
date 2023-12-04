@@ -1,6 +1,4 @@
 "use client";
-
-import { Button } from "@nextui-org/react";
 import Lottie from "lottie-react";
 import errorIcon from "@/public/404.json";
 import AnimateButton from "@/components/animate-button";

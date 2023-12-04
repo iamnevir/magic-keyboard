@@ -21,7 +21,6 @@ const CheckOutModal = ({ orderId }: { orderId: Id<"order"> }) => {
   const [isLoading, setIsLoading] = useState(false);
   const generateUploadUrl = useMutation(api.checkout.generateUploadUrl);
   const create = useMutation(api.checkout.create);
-  const update = useMutation(api.order.update);
   async function handleSendImage() {
     try {
       setIsLoading(true);

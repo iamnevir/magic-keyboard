@@ -1,6 +1,6 @@
 "use client";
 
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import {
   Button,
   Card,
@@ -18,7 +18,6 @@ import {
 } from "@nextui-org/react";
 import {
   CheckCircle2,
-  Compass,
   MessageCircle,
   ShieldCheck,
   ShieldX,
@@ -37,7 +36,6 @@ import useCart from "@/hooks/use-shopping-cart";
 import { BuyAgain } from "./buy-again";
 const OrderItem = ({ item }: { item: Doc<"order"> }) => {
   const update = useMutation(api.order.update);
-  const cart = useCart();
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const huyDonHang = () => {

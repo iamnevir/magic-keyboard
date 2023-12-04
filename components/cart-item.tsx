@@ -9,7 +9,7 @@ import useCart from "@/hooks/use-shopping-cart";
 const CartItem = ({ item }: { item: ProductCart }) => {
   const cart = useCart();
   return (
-    <div className=" flex items-start justify-start gap-3 w-full sm:pl-5">
+    <div className=" flex items-start justify-start gap-3 w-full">
       <div className=" p-1">
         {" "}
         <Image
@@ -17,6 +17,9 @@ const CartItem = ({ item }: { item: ProductCart }) => {
           alt="image"
           width={150}
           height={100}
+          placeholder="blur"
+          blurDataURL="/loader.png"
+          priority
           className=" w-[150px] h-[100px]"
         />
       </div>

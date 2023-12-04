@@ -29,6 +29,35 @@ export const getVoucherByCode = query({
     return voucher;
   },
 });
+
+export const create = mutation({
+  args: {
+    code: v.string(),
+    time: v.optional(v.number()),
+    type: v.string(),
+    percent: v.optional(v.number()),
+    price: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const vouchers = await ctx.db.insert("voucher", {
+      code: args.code,
+      time: args.time,
+      type: args.code,
+      percent: args.percent,
+      price: args.price,
+    });
+    return vouchers;
+  },
+});
+export const remove = mutation({
+  args: {
+    id: v.id("voucher"),
+  },
+  handler: async (ctx, args) => {
+    const vouchers = await ctx.db.delete(args.id);
+    return vouchers;
+  },
+});
 export const getVoucherByType = query({
   args: {
     type: v.string(),
@@ -39,5 +68,35 @@ export const getVoucherByType = query({
       .filter((q) => q.eq(q.field("type"), args.type))
       .unique();
     return voucher;
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("voucher"),
+    code: v.string(),
+    time: v.optional(v.number()),
+    type: v.string(),
+    percent: v.optional(v.number()),
+    price: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...rest } = args;
+    const vouchers = await ctx.db.patch(args.id, {
+      ...rest,
+    });
+    return vouchers;
+  },
+});
+export const removeAll = mutation({
+  args: {
+    id: v.array(v.id("voucher")),
+  },
+  handler: async (ctx, args) => {
+    const vouchers = args.id.forEach(async (id) => {
+      await ctx.db.delete(id);
+    });
+
+    return vouchers;
   },
 });

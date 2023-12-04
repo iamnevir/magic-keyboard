@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -20,12 +19,13 @@ import { motion } from "framer-motion";
 import { fadeInOne } from "@/lib/motion";
 import { useRouter } from "next/navigation";
 import NoCartItem from "./no-cart-item";
+import { useCallback } from "react";
 
 export default function CartTable() {
   const cart = useCart();
   const isMobile = window.screen.width <= 768;
   const router = useRouter();
-  const renderCell = React.useCallback(
+  const renderCell = useCallback(
     (product: ProductCart, columnKey: React.Key) => {
       switch (columnKey) {
         case "product":
@@ -36,6 +36,8 @@ export default function CartTable() {
                 <Image
                   src={product.image ? product.image : ""}
                   alt="image"
+                  placeholder="blur"
+                  blurDataURL="/loader.png"
                   width={150}
                   height={100}
                   className=" sm:w-[150px] sm:h-[100px] w-[100px] h-[70px] object-contain"

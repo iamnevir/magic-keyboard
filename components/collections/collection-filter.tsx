@@ -1,5 +1,3 @@
-import { api } from "@/convex/_generated/api";
-import { Doc, Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import {
   Button,
@@ -11,14 +9,12 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  DropdownSection,
   DropdownTrigger,
   Slider,
   SliderValue,
 } from "@nextui-org/react";
-import { useQuery } from "convex/react";
 import { ChevronDown, ChevronUp, Filter } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BrandFilter from "./brand-filter";
 import { fadeInOne } from "@/lib/motion";
 import { motion } from "framer-motion";

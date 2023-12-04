@@ -10,6 +10,7 @@ export const getCollections = query({
     return collections;
   },
 });
+
 export const getCollectionsByCategory = query({
   args: {
     slug: v.string(),
@@ -36,6 +37,62 @@ export const getCollectionById = query({
   handler: async (ctx, args) => {
     const collection = await ctx.db.get(args.collectionId);
     return collection;
+  },
+});
+export const create = mutation({
+  args: {
+    name: v.string(),
+    categoryId: v.id("category"),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const collection = await ctx.db.insert("collection", {
+      name: args.name,
+      categoryId: args.categoryId,
+      slug: args.slug,
+      description: args.description,
+    });
+    return collection;
+  },
+});
+
+export const remove = mutation({
+  args: {
+    id: v.id("collection"),
+  },
+  handler: async (ctx, args) => {
+    const collection = await ctx.db.delete(args.id);
+    return collection;
+  },
+});
+export const update = mutation({
+  args: {
+    id: v.id("collection"),
+    name: v.string(),
+    categoryId: v.id("category"),
+    slug: v.optional(v.string()),
+    description: v.optional(v.string()),
+    products: v.optional(v.array(v.id("product"))),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...rest } = args;
+    const category = await ctx.db.patch(args.id, {
+      ...rest,
+    });
+    return category;
+  },
+});
+export const removeAll = mutation({
+  args: {
+    id: v.array(v.id("collection")),
+  },
+  handler: async (ctx, args) => {
+    const categories = args.id.forEach(async (id) => {
+      await ctx.db.delete(id);
+    });
+
+    return categories;
   },
 });
 export const getcollectionBySlug = query({

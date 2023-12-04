@@ -1,18 +1,10 @@
 import { api } from "@/convex/_generated/api";
-import {
-  Button,
-  CircularProgress,
-  Select,
-  SelectItem,
-  Selection,
-  Skeleton,
-  SliderValue,
-} from "@nextui-org/react";
-import { usePaginatedQuery, useQuery } from "convex/react";
+import { Select, SelectItem, Skeleton, SliderValue } from "@nextui-org/react";
+import { usePaginatedQuery } from "convex/react";
 import ProductItem from "../product-item";
 import "@leenguyen/react-flip-clock-countdown/dist/index.css";
 import { useEffect, useState } from "react";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { motion } from "framer-motion";
 import slugify from "react-slugify";
 import { fadeInOne } from "@/lib/motion";
@@ -26,10 +18,11 @@ const ProductCollection = ({
   brandFilter: string[];
   priceFilter?: SliderValue;
 }) => {
+  const isMobile = window.screen.width <= 768;
   const { results, status, loadMore } = usePaginatedQuery(
     api.product.getMoreProducts,
     {},
-    { initialNumItems: 12 }
+    { initialNumItems: isMobile ? 3 : 12 }
   );
   const [onFilter, setOnFilter] = useState(false);
   const [products, setProducts] = useState<Doc<"product">[]>(results!);
@@ -161,9 +154,9 @@ const ProductCollection = ({
               />
             </div>
           ))}
-        </div>{" "}
+        </div>
         {status === "CanLoadMore" ? (
-          <LoadMore loadMore={() => loadMore(12)} />
+          <LoadMore loadMore={() => loadMore(isMobile ? 3 : 12)} />
         ) : null}
       </div>
     </>

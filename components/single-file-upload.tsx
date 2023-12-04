@@ -2,8 +2,6 @@ import Lottie from "lottie-react";
 import upload from "@/public/upload.json";
 import { Chip } from "@nextui-org/react";
 import { ElementRef, useRef, useState } from "react";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import Image from "next/image";
 const SingleFileUpload = ({
   value,

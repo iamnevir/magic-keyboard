@@ -1,9 +1,7 @@
 "use client";
 import Error from "@/app/not-found";
 import Product from "@/components/products/product";
-import ShoppingCartDrawer from "@/components/shopping-cart-drawer";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@nextui-org/react";
 import { useQuery } from "convex/react";
 

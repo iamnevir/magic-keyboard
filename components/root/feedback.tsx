@@ -74,6 +74,7 @@ const Feedback = () => {
               <motion.div
                 initial="hidden"
                 whileInView="show"
+                viewport={{ once: true }}
                 variants={fadeIn("left", "spring", index * 0.2, 1)}
                 className=" relative w-[350px] h-[500px] bg-contain bg-no-repeat p-7"
                 style={{ backgroundImage: `url(${item.avatar})` }}

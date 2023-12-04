@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { container, fadeIn } from "@/lib/motion";
@@ -11,7 +10,7 @@ const Shipping = () => {
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: false, amount: 0.25 }}
+      viewport={{ once: true }}
       variants={container}
       className="w-full items-center justify-center sm:px-28 px-2 sm:py-10 pt-10 "
     >

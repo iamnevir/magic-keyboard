@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide, useSwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { SwipeDirection } from "../root/swiper-navigation";
 import Image from "next/image";
 import { Thumbs } from "swiper/modules";
-import { ElementRef, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Doc } from "@/convex/_generated/dataModel";
 import { ListImage, cn } from "@/lib/utils";
 import "photoswipe/style.css";
@@ -30,7 +30,7 @@ const ProductSwiper = ({
   const index = images?.indexOf(images?.find((q) => q === optionImage)!);
 
   return (
-    <div className={cn("sm:w-[50%] w-full h-full ", className)}>
+    <div className={cn("lg:w-[50%] w-full h-full ", className)}>
       <>
         <Swiper
           thumbs={{
@@ -42,7 +42,7 @@ const ProductSwiper = ({
           loop={true}
           modules={[Thumbs]}
           className={cn(
-            " sm:w-[650px] w-[365px]  h-full items-center flex justify-center"
+            " sm:max-w-[650px] max-w-[365px]  w-full h-full items-center flex justify-center"
           )}
         >
           {!isMobile ? (
@@ -76,7 +76,7 @@ const ProductSwiper = ({
                 onMouseEnter={() => setHoverImage(true)}
                 onMouseLeave={() => setHoverImage(false)}
                 className={cn(
-                  " sm:w-[650px] w-[365px] h-full bg-transparent sm:hover:cursor-zoom-in"
+                  " sm:max-w-[650px] max-w-[365px] w-full h-full  bg-transparent sm:hover:cursor-zoom-in"
                 )}
               >
                 <Image
@@ -84,8 +84,12 @@ const ProductSwiper = ({
                   width={650}
                   height={650}
                   alt="image"
+                  placeholder="blur"
+                  blurDataURL="/loader.png"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1000px) 50vw, 33vw"
                   objectFit="contain"
-                  className=" sm:w-[650px] sm:h-[650px] w-[365px] h-[365px] object-contain rounded-[10px]"
+                  className=" sm:max-w-[650px] w-full h-full sm:max-h-[650px] max-w-[365px] max-h-[365px] object-contain rounded-[10px]"
                 />
               </div>
             </SwiperSlide>
@@ -98,18 +102,21 @@ const ProductSwiper = ({
           slidesPerView={4}
           watchSlidesProgress={true}
           modules={[Thumbs]}
-          className={cn(" mt-2", classNameUnder)}
+          className={cn(" mt-2 flex items-center", classNameUnder)}
         >
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className=" rounded-[10px] cursor-pointer w-full pb-5 h-full bg-transparent space-y-4 sm:ml-5 ml-1">
+              <div className=" rounded-[10px] cursor-pointer w-full pb-5 h-full bg-transparent space-y-4 ">
                 <Image
                   src={item ? item : ""}
                   width={110}
                   height={110}
                   alt="image"
+                  placeholder="blur"
+                  blurDataURL="/loader.png"
+                  priority
                   objectFit="contain"
-                  className=" sm:w-[120px]  sm:h-[110px] rounded-[10px] hover:shadow-lg dark:shadow-white/70 hover:shadow-black duration-500"
+                  className=" sm:max-w-[120px] w-full h-full sm:max-h-[110px] rounded-[10px] hover:shadow-lg dark:shadow-white/70 hover:shadow-black duration-500"
                 />
               </div>
             </SwiperSlide>

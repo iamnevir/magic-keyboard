@@ -26,6 +26,7 @@ const News = ({
     <motion.div
       initial="hidden"
       whileInView="show"
+      viewport={{ once: true }}
       variants={fadeIn("right", "spring", 0.1, 1)}
       className={cn(" sm:ml-10 sm:w-[55%] w-full", className)}
     >

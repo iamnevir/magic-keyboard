@@ -52,13 +52,19 @@ const Footer = () => {
     <motion.div
       initial="hidden"
       whileInView="show"
+      viewport={{ once: true }}
       className="flex-col flex sm:flex-row sm:items-start pt-40 items-start w-[99dvw] h-[100dvh] overflow-x-clip relative sm:space-x-28 space-y-20"
     >
       <TypingText
         title="Magic Keyboard"
         textStyles="sm:absolute font-semibold ml-5 sm:ml-0 sm:left-20 sm:top-14 top-5 text-3xl"
       />
-      <motion.div initial="hidden" whileInView="show" className=" flex">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className=" flex"
+      >
         <div className="flex-col flex sm:ml-5 ml-14 font-medium group/address">
           {andress.map((item) => (
             <div
@@ -87,6 +93,7 @@ const Footer = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           className=" ml-14 flex-col flex"
         >
           <TypingText title="Hiring Dev" textStyles=" font-medium" />
@@ -103,6 +110,7 @@ const Footer = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           className="ml-14 flex-col flex"
         >
           <TypingText title="Contact enquires" textStyles=" font-medium" />
@@ -122,11 +130,13 @@ const Footer = () => {
 
       <motion.div
         initial="hidden"
+        viewport={{ once: true }}
         whileInView="show"
         className="space-y-10 ml-5 sm:ml-0"
       >
         <motion.span
           initial="hidden"
+          viewport={{ once: true }}
           whileInView="show"
           className=" flex flex-col"
         >
@@ -139,6 +149,7 @@ const Footer = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("right", "spring", 0.1, 1)}
           className=" relative items-center"
         >
@@ -158,6 +169,7 @@ const Footer = () => {
       </motion.div>
       <motion.div
         initial="hidden"
+        viewport={{ once: true }}
         whileInView="show"
         className="sm:flex-row flex flex-col items-start sm:absolute w-full ml-5 sm:ml-0 h-[50px] bottom-0 sm:space-x-[300px]"
       >

@@ -18,12 +18,14 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="show"
+            viewport={{ once: true }}
             variants={fadeIn("up", "spring", 0.2, 1.25)}
             className="  inline-block  h-[10dvh] relative"
           >
             <motion.div
               initial="hidden"
               whileInView="show"
+              viewport={{ once: true }}
               variants={{
                 hidden: { marginLeft: 0 },
                 show: {
@@ -40,6 +42,7 @@ const AboutUs = () => {
             </motion.div>
             <motion.div
               initial="hidden"
+              viewport={{ once: true }}
               whileInView="show"
               variants={{
                 hidden: { marginLeft: 0 },
@@ -60,12 +63,14 @@ const AboutUs = () => {
           <motion.div
             initial="hidden"
             whileInView="show"
+            viewport={{ once: true }}
             variants={fadeIn("down", "spring", 0.2, 1.25)}
             className=" inline-block h-[10dvh] relative"
           >
             <motion.div
               initial="hidden"
               whileInView="show"
+              viewport={{ once: true }}
               variants={{
                 hidden: { marginTop: 0 },
                 show: {
@@ -83,6 +88,7 @@ const AboutUs = () => {
             </motion.div>
             <motion.div
               initial="hidden"
+              viewport={{ once: true }}
               whileInView="show"
               variants={{
                 hidden: { marginTop: 0 },
@@ -104,6 +110,7 @@ const AboutUs = () => {
       <div className=" ml-auto sm:w-[45dvw] w-full mr-20">
         <motion.div
           initial="hidden"
+          viewport={{ once: true }}
           whileInView="show"
           variants={fadeIn("down", "spring", 0.2, 0.8)}
           className=" text-xl font-normal"
@@ -113,6 +120,7 @@ const AboutUs = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("down", "spring", 0.2, 1)}
           className=" text-xl font-normal"
         >
@@ -122,6 +130,7 @@ const AboutUs = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("down", "spring", 0.2, 1.15)}
           className=" text-xl font-normal"
         >
@@ -130,6 +139,7 @@ const AboutUs = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("down", "spring", 0.2, 1.3)}
           className=" text-xl font-normal"
         >
@@ -139,6 +149,7 @@ const AboutUs = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("down", "spring", 0.2, 1.45)}
           className=" text-xl font-normal"
         >
@@ -147,6 +158,7 @@ const AboutUs = () => {
         <motion.div
           initial="hidden"
           whileInView="show"
+          viewport={{ once: true }}
           variants={fadeIn("left", "spring", 0.2, 1.6)}
           className=" w-40 h-10 mt-10"
         >

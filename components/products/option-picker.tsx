@@ -3,11 +3,14 @@ import OptionPickerItem from "./option-picker-item";
 import { cn, formatCurrency } from "@/lib/utils";
 import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import AnimateButton from "../animate-button";
 import useCart from "@/hooks/use-shopping-cart";
 import QuantityPicker from "./quantity-picker";
+import { Tilt } from "@jdion/tilt-react";
+import FlipClockCountdown from "@leenguyen/react-flip-clock-countdown";
+import "@leenguyen/react-flip-clock-countdown/dist/index.css";
+import { useTheme } from "next-themes";
 const OptionPicker = ({
   product,
   onOptionChange,
@@ -15,9 +18,18 @@ const OptionPicker = ({
   product: Doc<"product">;
   onOptionChange: (v: { key: string; value: string }) => void;
 }) => {
+  const isMobile = window.screen.width <= 768;
   const searchParams = useSearchParams();
   const router = useRouter();
   const cart = useCart();
+  const { theme } = useTheme();
+  const containerStyle = {
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+    ...(theme === "dark" && {
+      boxShadow:
+        "0 4px 6px rgba(255, 255, 255, 0.1), 0 2px 4px rgba(255, 255, 255, 0.06)",
+    }),
+  };
   const [optionList, setOptionList] = useState<
     { key: string; value: string }[] | undefined
   >([]);
@@ -51,7 +63,7 @@ const OptionPicker = ({
   }, []);
   useEffect(() => {
     const hrefList = optionList?.map(
-      (item) => `${item.key}=${item.value.replaceAll(" ", "-")}`
+      (item) => `${item.key}=${item.value.trim().replaceAll(" ", "-")}`
     );
     const href = hrefList?.join("&");
     router.push(`/products/${product.slug}?${href}`, { scroll: false });
@@ -113,6 +125,37 @@ const OptionPicker = ({
           {product.isSale ? formatCurrency(product.salePrice!) : null}
         </p>
       </div>
+      {product.isSale && (
+        <Tilt disabled={isMobile}>
+          <FlipClockCountdown
+            to={new Date(product.timeSale!)}
+            labels={["NGÀY", "GIỜ", "PHÚT", "GIÂY"]}
+            labelStyle={{
+              fontSize: 10,
+              fontWeight: 500,
+              color: theme === "dark" ? "white" : "black",
+              textTransform: "uppercase",
+            }}
+            digitBlockStyle={{
+              width: 36,
+              height: 60,
+              fontSize: 30,
+              color: theme === "dark" ? "white" : "black",
+              backgroundColor: theme === "dark" ? "black" : "white",
+              ...containerStyle,
+            }}
+            dividerStyle={{
+              color: theme === "dark" ? "black" : "white",
+              height: 1,
+            }}
+            className="sm:max-w-none max-w-xs"
+            separatorStyle={{
+              color: "blue",
+              size: "6px",
+            }}
+          />
+        </Tilt>
+      )}
       <span className="font-semibold">Số lượng</span>
       {product.pay === "order" ? (
         <>
@@ -144,53 +187,64 @@ const OptionPicker = ({
             color="white"
           />
         </>
+      ) : product.pay === "preorder" ? (
+        <>
+          <div className=" flex items-center w-full space-x-3">
+            <QuantityPicker
+              quantity={quantity}
+              minus={() => {
+                if (quantity > 1) {
+                  setQuantity((q) => q - 1);
+                }
+              }}
+              plus={() => {
+                if (quantity < product.quantity!) {
+                  setQuantity((q) => q + 1);
+                }
+              }}
+              size="md"
+            />
+            <AnimateButton
+              onClick={addToCart}
+              text="Thêm vào giỏ hàng"
+              color="white"
+              className=" shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+            />
+          </div>
+          <AnimateButton
+            className=" bg-blue-300 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+            text="Pre-Order Now"
+            color="white"
+          />
+        </>
       ) : (
         <>
           <div className=" flex items-center w-full space-x-3">
-            <div className="flex items-center shadow-md dark:shadow-white shadow-black rounded-[4px] px-3 bg-white dark:bg-black">
-              <div className=" h-4 w-4  cursor-pointer">
-                <svg
-                  viewBox="0 -12 32 32"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    id="Icon-Set-Filled"
-                    transform="translate(-414.000000, -1049.000000)"
-                    fill="#000000"
-                  >
-                    <path
-                      d="M442,1049 L418,1049 C415.791,1049 414,1050.79 414,1053 C414,1055.21 415.791,1057 418,1057 L442,1057 C444.209,1057 446,1055.21 446,1053 C446,1050.79 444.209,1049 442,1049"
-                      id="minus"
-                      className=" dark:fill-white"
-                    ></path>
-                  </g>
-                </svg>
-              </div>
-
-              <span className="m-2 dark:text-white text-black">{quantity}</span>
-              <div className=" h-4 w-4 cursor-pointer">
-                <svg
-                  viewBox="0 0 32 32"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g
-                    transform="translate(-362.000000, -1037.000000)"
-                    fill="#000000"
-                  >
-                    <path
-                      className="dark:fill-white"
-                      d="M390,1049 L382,1049 L382,1041 C382,1038.79 380.209,1037 378,1037 C375.791,1037 374,1038.79 374,1041 L374,1049 L366,1049 C363.791,1049 362,1050.79 362,1053 C362,1055.21 363.791,1057 366,1057 L374,1057 L374,1065 C374,1067.21 375.791,1069 378,1069 C380.209,1069 382,1067.21 382,1065 L382,1057 L390,1057 C392.209,1057 394,1055.21 394,1053 C394,1050.79 392.209,1049 390,1049"
-                    ></path>
-                  </g>
-                </svg>
-              </div>
-            </div>
-            <Button className=" font-semibold w-full bg-blue-700 rounded-[4px] hover:bg-purple-600 hover:scale-105 text-white duration-500 transition-all ">
-              Pre-Order{" "}
-            </Button>
-          </div>{" "}
+            <QuantityPicker
+              quantity={quantity}
+              minus={() => {
+                if (quantity > 1) {
+                  setQuantity((q) => q - 1);
+                }
+              }}
+              plus={() => {
+                if (quantity < product.quantity!) {
+                  setQuantity((q) => q + 1);
+                }
+              }}
+              size="md"
+            />
+            <AnimateButton
+              text="Comming Soon"
+              color="white"
+              className=" shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+            />
+          </div>
+          <AnimateButton
+            className=" bg-blue-300 shadow-md dark:shadow-slate-500 shadow-black/50 w-full justify-center"
+            text="Đăng ký trước"
+            color="white"
+          />
         </>
       )}
     </div>

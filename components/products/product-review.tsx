@@ -43,7 +43,6 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
   const create = useMutation(api.review.create);
   const [isWriteReview, setIsWriteReview] = useState(false);
   const [page, setPage] = useState(0);
-  const isMobile = window.screen.width <= 768;
   const reviews = useQuery(api.review.getReviewsByProduct, {
     productId,
   });

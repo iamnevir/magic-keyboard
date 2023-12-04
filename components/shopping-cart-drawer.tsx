@@ -12,6 +12,7 @@ import { fadeIn } from "@/lib/motion";
 import dynamic from "next/dynamic";
 const Drawer = dynamic(() => import("react-modern-drawer"), { ssr: false });
 const ShoppingCartDrawer = () => {
+  const isMobile = window.screen.width < 768;
   const cartDrawer = useCartDrawer();
   const router = useRouter();
   const cart = useCart();
@@ -25,7 +26,7 @@ const ShoppingCartDrawer = () => {
         open={cartDrawer.isOpen}
         onClose={cartDrawer.onClose}
         direction="right"
-        size={400}
+        size={isMobile ? 350 : 384}
       >
         <div className=" relative dark:bg-black w-full h-full shadow-md dark:shadow-slate-500 shadow-black/50">
           <div className=" w-full pb-[60%] h-full flex items-center flex-col pt-16 gap-2 overflow-y-auto overflowCart ">

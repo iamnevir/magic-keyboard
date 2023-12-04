@@ -28,6 +28,8 @@ const OrderItemProduct = ({
           alt="image"
           width={150}
           height={150}
+          placeholder="blur"
+          blurDataURL="/loader.png"
           onClick={() => router.push(`/products/${product?.slug}`)}
           className=" w-[150px] h-[150px] object-contain rounded-[5px] cursor-pointer"
         />

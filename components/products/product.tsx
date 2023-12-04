@@ -14,7 +14,6 @@ import { Divider } from "@nextui-org/react";
 import GenerateHtml from "@/lib/json-to-html";
 import ProductReview from "./product-review";
 import Recommendation from "./recommendation";
-import Footer from "../root/footer";
 import Breadcrumb from "../bread-crum";
 import { useState } from "react";
 
@@ -35,9 +34,9 @@ const Product = ({ product }: { product: Doc<"product"> }) => {
         className="sm:py-10 "
       />
 
-      <div className="flex sm:flex-row flex-col items-start sm:px-10 px-1 sm:py-10 py-2 w-full h-full">
+      <div className="flex lg:flex-row flex-col items-start lg:px-10 px-1 lg:py-10 py-2 w-full h-full">
         <ProductSwiper option={option} product={product} />
-        <div className="sm:w-[50%] w-full overflow-auto">
+        <div className="lg:w-[50%] w-full overflow-auto">
           <ProductPicker onOptionChange={setOption} product={product} />
         </div>
       </div>

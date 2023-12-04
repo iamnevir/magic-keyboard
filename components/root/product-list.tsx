@@ -67,10 +67,10 @@ const ProductList = ({
           modules={[Pagination]}
           className=" w-full h-full"
         >
-          <SwipeDirection direction="left" className=" top-[20%]" />
-          <SwipeDirection direction="right" className=" top-[20%]" />
+          <SwipeDirection direction="left" className=" top-[25%]" />
+          <SwipeDirection direction="right" className=" top-[25%]" />
           {products?.map((product) => (
-            <SwiperSlide key={product._id} className="sm:ml-[0px]">
+            <SwiperSlide key={product._id}>
               <>
                 <ProductItem loop product={product} />
               </>

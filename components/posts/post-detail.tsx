@@ -1,6 +1,6 @@
 "use client";
 import { api } from "@/convex/_generated/api";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { Avatar, Chip, Divider, Skeleton } from "@nextui-org/react";
 import { useQuery } from "convex/react";
 import Error from "@/app/not-found";
@@ -55,6 +55,8 @@ export const PostDetail = ({ slug }: { slug: string }) => {
         <Image
           width={1000}
           height={600}
+          priority
+          sizes="100vw"
           src={post.thumnail}
           alt="thumnail"
           className=" object-cover rounded-[10px]"
