@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Skeleton } from "@nextui-org/react";
 export const Posts = () => {
   const posts = getNews();
+  const router = useRouter();
   if (posts === undefined) {
     return (
       <div>
@@ -16,7 +17,7 @@ export const Posts = () => {
       </div>
     );
   }
-  const router = useRouter();
+
   return (
     <div className=" sm:w-[90dvw] sm:h-[90dvh] h-60 w-full">
       {" "}
