@@ -26,7 +26,7 @@ const OptionPickerItem = ({
         {": "}
         <span className=" font-normal text-base">{selectedOption?.value}</span>
       </span>
-      <div className="flex items-center gap-2 text-sm">
+      <div className="flex items-center flex-wrap gap-2 text-sm">
         {options.name === "Color"
           ? options.option.map((item, index) => (
               <div

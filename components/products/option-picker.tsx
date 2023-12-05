@@ -17,7 +17,6 @@ const OptionPicker = ({
   product: Doc<"product">;
   onOptionChange: (v: { key: string; value: string }) => void;
 }) => {
-  const isMobile = window.screen.width <= 768;
   const searchParams = useSearchParams();
   const router = useRouter();
   const cart = useCart();
@@ -125,7 +124,7 @@ const OptionPicker = ({
         </p>
       </div>
       {product.isSale && (
-        <Tilt disabled={isMobile}>
+        <Tilt>
           <FlipClockCountdown
             to={new Date(product.timeSale!)}
             labels={["NGÀY", "GIỜ", "PHÚT", "GIÂY"]}

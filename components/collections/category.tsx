@@ -12,15 +12,18 @@ export const Category = ({ slug }: { slug: string }) => {
   });
   if (category === undefined) {
     return (
-      <div className="w-full ml-8 mt-14 flex flex-col items-start gap-3">
+      <div className="w-full sm:ml-8 ml-5 sm:mt-14  flex flex-col items-start gap-3">
         <div className=" w-full flex justify-center">
-          <Skeleton className="h-5 w-40 rounded-[10px] -translate-x-5 mt-4" />
+          <Skeleton className="h-5 w-40 rounded-[10px] -translate-x-5 sm:mt-4" />
         </div>
-        <div className="w-full max-w-[300px] flex flex-col gap-2 mt-20">
-          <Skeleton className="h-12 w-1/5 rounded-[10px]" />
-          <Skeleton className="h-12 w-4/5 rounded-[10px]" />
-          <Skeleton className="h-12 w-4/5 rounded-[10px]" />
-          <Skeleton className="h-12 w-4/5 rounded-[10px]" />
+        <div className="w-full max-w-[300px] flex flex-col gap-2 sm:mt-20">
+          <Skeleton className="sm:h-12 w-20 h-8 rounded-[10px]" />
+
+          <div className="sm:flex hidden flex-col gap-2">
+            <Skeleton className="h-12 w-4/5 rounded-[10px]" />
+            <Skeleton className="h-12 w-4/5 rounded-[10px]" />
+            <Skeleton className="h-12 w-4/5 rounded-[10px]" />
+          </div>
         </div>
       </div>
     );

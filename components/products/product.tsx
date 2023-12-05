@@ -25,7 +25,7 @@ const Product = ({ product }: { product: Doc<"product"> }) => {
       <Breadcrumb
         item={category?.name}
         item2={product.name}
-        href={`/collections/${category?._id}`}
+        href={`/collections/${category?.slug}`}
         className="sm:py-10 "
       />
 
