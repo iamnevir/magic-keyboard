@@ -2,14 +2,20 @@
 import getNews from "@/actions/getNews";
 import { Mousewheel, Pagination, Parallax } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "@nextui-org/react";
 export const Posts = () => {
   const posts = getNews();
+  if (posts === undefined) {
+    return (
+      <div>
+        <Skeleton className=" rounded-[10px] sm:w-[90dvw] sm:h-[90dvh] h-60 w-full" />
+      </div>
+    );
+  }
   const router = useRouter();
   return (
     <div className=" sm:w-[90dvw] sm:h-[90dvh] h-60 w-full">
@@ -21,10 +27,7 @@ export const Posts = () => {
         speed={1000}
         spaceBetween={0}
         mousewheel={true}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Mousewheel, Pagination, Parallax]}
+        modules={[Mousewheel, Parallax]}
         className=" w-full h-full"
       >
         {posts?.map((item, index) => (

@@ -110,13 +110,85 @@ const ProductCollection = ({
   };
   if (status === "LoadingFirstPage") {
     return (
-      <div className="max-w-[300px] w-full ml-20 mt-20 flex items-center gap-3">
-        <div>
-          <Skeleton className="flex rounded-full w-12 h-12" />
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <Skeleton className="h-3 w-3/5 rounded-lg" />
-          <Skeleton className="h-3 w-4/5 rounded-lg" />
+      <div className=" w-full flex flex-col items-start">
+        <Skeleton className="flex rounded-full w-60 h-10 ml-auto" />
+        <div className="mt-3 grid lg:grid-cols-3 xl:grid-cols-4  sm:grid-cols-2 grid-cols-1 items-center gap-x-2 w-full">
+          <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+            <Skeleton className=" sm:w-[250px] sm:h-[250px] w-[80dvw] h-[30dvh] rounded-2xl" />
+            <div className=" flex flex-col items-center text-center w-full gap-2">
+              <Skeleton className=" w-20 h-3 rounded-2xl" />
+              <Skeleton className=" w-56 h-5 rounded-2xl" />
+              <div className=" flex items-center justify-center gap-2">
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+              </div>
+
+              <Skeleton className=" w-36 h-4 rounded-2xl" />
+            </div>
+            <div className=" flex items-center justify-center gap-2">
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+            </div>
+          </div>
+          <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+            <Skeleton className=" sm:w-[250px] sm:h-[250px] w-[80dvw] h-[30dvh] rounded-2xl" />
+            <div className=" flex flex-col items-center text-center w-full gap-2">
+              <Skeleton className=" w-20 h-3 rounded-2xl" />
+              <Skeleton className=" w-56 h-5 rounded-2xl" />
+              <div className=" flex items-center justify-center gap-2">
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+              </div>
+
+              <Skeleton className=" w-36 h-4 rounded-2xl" />
+            </div>
+            <div className=" flex items-center justify-center gap-2">
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+            </div>
+          </div>
+          <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+            <Skeleton className=" sm:w-[250px] sm:h-[250px] w-[80dvw] h-[30dvh] rounded-2xl" />
+            <div className=" flex flex-col items-center text-center w-full gap-2">
+              <Skeleton className=" w-20 h-3 rounded-2xl" />
+              <Skeleton className=" w-56 h-5 rounded-2xl" />
+              <div className=" flex items-center justify-center gap-2">
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+              </div>
+
+              <Skeleton className=" w-36 h-4 rounded-2xl" />
+            </div>
+            <div className=" flex items-center justify-center gap-2">
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+            </div>
+          </div>
+          <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+            <Skeleton className=" sm:w-[250px] sm:h-[250px] w-[80dvw] h-[30dvh] rounded-2xl" />
+            <div className=" flex flex-col items-center text-center w-full gap-2">
+              <Skeleton className=" w-20 h-3 rounded-2xl" />
+              <Skeleton className=" w-56 h-5 rounded-2xl" />
+              <div className=" flex items-center justify-center gap-2">
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+                <Skeleton className=" w-24 h-4 rounded-2xl" />
+              </div>
+
+              <Skeleton className=" w-36 h-4 rounded-2xl" />
+            </div>
+            <div className=" flex items-center justify-center gap-2">
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+              <Skeleton className=" w-10 h-7" />
+            </div>
+          </div>
         </div>
       </div>
     );

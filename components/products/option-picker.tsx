@@ -1,7 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import OptionPickerItem from "./option-picker-item";
 import { cn, formatCurrency } from "@/lib/utils";
-import { Button } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AnimateButton from "../animate-button";
@@ -63,7 +62,7 @@ const OptionPicker = ({
   }, []);
   useEffect(() => {
     const hrefList = optionList?.map(
-      (item) => `${item.key}=${item.value.trim().replaceAll(" ", "-")}`
+      (item) => `${item.key}=${item.value.replaceAll(" ", "-")}`
     );
     const href = hrefList?.join("&");
     router.push(`/products/${product.slug}?${href}`, { scroll: false });

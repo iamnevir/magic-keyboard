@@ -87,7 +87,7 @@ const ProductPicker = ({
           <span className="whitespace-nowrap">No reviews.</span>
         )}
       </div>
-      <div className=" mt-2 prose-headings:text-sm prose-li:font-semibold prose-ul:mt-7">
+      <div className=" mt-2 prose-headings:text-sm prose-li:font-semibold prose-ul:mt-2">
         <GenerateHtml className=" text-xs" json={product.description} />
       </div>
       <div className="mt-3">
