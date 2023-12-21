@@ -20,6 +20,7 @@ import { fadeInOne } from "@/lib/motion";
 import { motion } from "framer-motion";
 import getCollectionByCategory from "@/actions/getCollectionByCategory";
 import getCollections from "@/actions/getCollections";
+import { useMediaQuery } from "usehooks-ts";
 
 const CollectionFilter = ({
   slug,
@@ -39,7 +40,7 @@ const CollectionFilter = ({
     : getCollectionByCategory({ slug });
   const [brandOpen, setBrandOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
     <>
       <div className=" h-full sm:flex sm:flex-col hidden sm:w-[27%] sm:p-4 space-y-5">

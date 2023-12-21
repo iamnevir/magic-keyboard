@@ -2,8 +2,6 @@
 import { useStore } from "@/hooks/use-valtio-store";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
 import { Children } from "react";
 import { BackButton } from "../library/back-button";
 

@@ -25,7 +25,7 @@ const ReviewItem = ({ review }: { review: Doc<"review"> }) => {
           <div className=" flex flex-col">
             <div className=" flex items-center gap-3 w-full whitespace-nowrap">
               {`@${review.userName ? review.userName : "Ẩn danh"}`}
-              <RatingStar rating={review.rating} />
+              <RatingStar rating={review.rating} size={25} />
             </div>
 
             <span className=" font-semibold text-lg"> {review.title}</span>

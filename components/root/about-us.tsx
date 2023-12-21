@@ -5,9 +5,10 @@ import { fadeIn } from "@/lib/motion";
 import AnimateButton from "../animate-button";
 import Lottie from "lottie-react";
 import work from "@/public/work.json";
+import { useMediaQuery } from "usehooks-ts";
 
 const AboutUs = () => {
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
     <div className=" w-full h-full relative p-10">
       <div className=" absolute">

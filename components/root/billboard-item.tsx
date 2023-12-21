@@ -16,7 +16,7 @@ const BillboardItem = ({ billboard }: { billboard: Doc<"billboard"> }) => {
           src={billboard.imageUrl}
           alt="billboard"
           fill
-          priority
+          priority={true}
           sizes="100dvw"
           className=" object-cover"
         />

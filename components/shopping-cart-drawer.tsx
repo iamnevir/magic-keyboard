@@ -10,9 +10,10 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import dynamic from "next/dynamic";
+import { useMediaQuery } from "usehooks-ts";
 const Drawer = dynamic(() => import("react-modern-drawer"), { ssr: false });
 const ShoppingCartDrawer = () => {
-  const isMobile = window.screen.width < 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   const cartDrawer = useCartDrawer();
   const router = useRouter();
   const cart = useCart();
@@ -29,7 +30,7 @@ const ShoppingCartDrawer = () => {
         size={isMobile ? 350 : 384}
       >
         <div className=" relative dark:bg-black w-full h-full shadow-md dark:shadow-slate-500 shadow-black/50">
-          <div className=" w-full pb-[60%] h-full flex items-center flex-col pt-16 gap-2 overflow-y-auto overflowCart ">
+          <div className=" w-full px-6 pb-[60%] h-full flex items-center flex-col pt-16 gap-2 overflow-y-auto overflowCart ">
             <div
               onClick={() => router.push("/cart")}
               className=" absolute top-5 group hover:translate-x-3 z-[99999] -translate-x-5  cursor-pointer duration-500 flex items-center gap-2 font-semibold left-4"

@@ -14,9 +14,9 @@ import {
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ModeToggle } from "./mode-toggle";
+import ModeToggle from "./mode-toggle";
 import BackgroundMusic from "./root/bg-music";
-import Lottie from "lottie-react";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import sound from "@/public/sound.json";
 import cartIcon from "@/public/cart.json";
 import { usePathname } from "next/navigation";
@@ -24,32 +24,23 @@ import useCart from "@/hooks/use-shopping-cart";
 import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 import { useMusic } from "@/hooks/use-bg-music";
 import { cn } from "@/lib/utils";
+import { useEventListener, useMediaQuery } from "usehooks-ts";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
   const isPLay = useMusic();
-  const isMobile = window.screen.width <= 768;
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useMediaQuery("(max-width:768px)");
   const auth = useAuth();
   const cart = useCart();
   const cartDrawer = useCartDrawer();
   const menuItems = ["Magic", "Posts", "Library", "Collections", "Discord"];
-  const lottieRef = useRef<any>();
-  const [isLoading, setIsLoading] = useState(false);
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
   const pathname = usePathname();
-  useEffect(() => {
-    if (pathname === "/") {
-      if (!isMobile) {
-        setIsLoading(true);
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
-        return () => clearTimeout(timer);
-      } else {
-        setIsLoading(false);
-      }
-    }
-  }, [isMobile, pathname]);
+  const [isAtTop, setIsAtTop] = useState(0);
+  const onScroll = (event: Event) => {
+    setIsAtTop(window.scrollY);
+  };
+  useEventListener("scroll", onScroll);
   useEffect(() => {
     isPLay.onClose();
     const timeoutId = setTimeout(() => {
@@ -61,24 +52,21 @@ const NavbarPage = () => {
 
     return () => clearTimeout(timeoutId);
   }, []);
-  if (isLoading) {
-    return null;
-  }
   return (
     <>
       <BackgroundMusic />
       <Navbar
-        className="sm:bg-transparent sm:fixed z-[99]"
+        className={cn(
+          " sm:fixed z-[99]",
+          isAtTop === 0 ? "sm:bg-transparent" : ""
+        )}
         isBordered={false}
-        isBlurred={isMobile ? true : false}
+        isBlurred={isMobile ? true : isAtTop === 0 ? false : true}
         maxWidth="full"
         shouldHideOnScroll
       >
         <NavbarContent justify="start">
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
-          />
+          <NavbarMenuToggle aria-label={"menu"} className="sm:hidden" />
           <NavbarBrand>
             <Link href="/" className="flex items-center gap-4 ml-5">
               <Image
@@ -169,13 +157,13 @@ const NavbarPage = () => {
             onClick={() => {
               if (isPLay.isOpen) {
                 isPLay.onClose();
-                lottieRef.current.play();
+                lottieRef.current?.play();
               } else {
                 isPLay.onOpen();
-                lottieRef.current.stop();
+                lottieRef.current?.stop();
               }
             }}
-            className=" w-10 h-10 rounded-full cursor-pointer bg-slate-100 dark:bg-black items-center flex"
+            className=" w-10 h-10 rounded-full cursor-pointer bg-transparent hover:shadow-inner dark:shadow-white shadow-black duration-500 items-center flex"
           >
             <Lottie
               lottieRef={lottieRef}

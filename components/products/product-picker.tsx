@@ -80,7 +80,7 @@ const ProductPicker = ({
       <div className="flex items-center gap-3">
         {reviews !== undefined && reviews.length > 0 ? (
           <>
-            <RatingStar rating={rating} />
+            <RatingStar rating={rating} size={30} />
             <span>{reviews.length} reviews</span>
           </>
         ) : (

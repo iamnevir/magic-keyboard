@@ -7,7 +7,7 @@ import { ListImage, cn, formatCurrency } from "@/lib/utils";
 import { Tilt } from "@jdion/tilt-react";
 import { useQuery } from "convex/react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import RatingStar from "./rating-star";
 import Image from "next/image";
@@ -16,6 +16,7 @@ import TooltipAction from "./tooltip-action";
 import { Eye, ShoppingBag, Star } from "lucide-react";
 import ProductSwiper from "./products/product-swiper";
 import useCart from "@/hooks/use-shopping-cart";
+import { useMediaQuery } from "usehooks-ts";
 
 const ProductItem = ({
   product,
@@ -31,7 +32,8 @@ const ProductItem = ({
   const router = useRouter();
   const cart = useCart();
   const images = ListImage({ product });
-  const isMobile = window.screen.width <= 768;
+  const pathname = usePathname();
+  const isMobile = useMediaQuery("(max-width:768px)");
   const [bg, setBg] = useState(images ? images[0] : "/loader.png");
   const [hover, setHover] = useState(false);
   useEffect(() => {
@@ -84,13 +86,13 @@ const ProductItem = ({
   return (
     <>
       {!isMobile ? (
-        <Modal size="3xl" isOpen={open} onOpenChange={() => setOpen(false)}>
+        <Modal size="xl" isOpen={open} onOpenChange={() => setOpen(false)}>
           <ModalContent>
             <>
-              <ModalBody>
+              <ModalBody className=" items-center justify-center">
                 <ProductSwiper
-                  className="w-full ml-8"
-                  classNameUnder="w-[690px]"
+                  className="w-[500px]"
+                  classNameUnder=" w-[500px]"
                   product={product}
                 />
               </ModalBody>
@@ -99,7 +101,12 @@ const ProductItem = ({
         </Modal>
       ) : null}
 
-      <div className=" flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3 p-5">
+      <div
+        className={cn(
+          " flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3  p-5",
+          pathname === "/" ? "mb-24" : ""
+        )}
+      >
         <Tilt disabled={isMobile}>
           <motion.div
             initial="hidden"
@@ -177,18 +184,18 @@ const ProductItem = ({
           <span className="text-xs font-semibold uppercase text-zinc-400">
             {product.producer}
           </span>
-          <p className="block text-base mb-[5px] leading-normal sf__pcard-name font-semibold truncate-lines hover:text-color-secondary">
+          <p className=" line-clamp-2 text-base mb-[5px] leading-normal sf__pcard-name font-semibold hover:text-color-secondary">
             {product.name}
           </p>
           {!rating ? (
             <div className="flex items-center gap-1 whitespace-nowrap">
               {" "}
-              <RatingStar rating={rating} />
+              <RatingStar rating={rating} size={20} />
               <span className=" text-xs font-semibold">No Reviews</span>
             </div>
           ) : (
             <div className="flex items-center gap-1 whitespace-nowrap">
-              <RatingStar rating={rating} />
+              <RatingStar rating={rating} size={20} />
               <span className=" text-xs font-semibold">
                 {ratingList?.length} Reviews
               </span>
@@ -228,8 +235,8 @@ const ProductItem = ({
                   alt="image"
                   width={50}
                   height={30}
-                  sizes=""
-                  className=" w-[50px] h-[30px] object-contain "
+                  style={{ width: "auto", objectFit: "contain" }}
+                  className=" w-[50px] h-[30px] "
                 />
               </div>
             ))}

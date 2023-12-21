@@ -8,6 +8,7 @@ import { ListImage, cn } from "@/lib/utils";
 import "photoswipe/style.css";
 import ProductImageGallery from "./product-image-gallery";
 import { ChangeImage } from "./change-image";
+import { useMediaQuery } from "usehooks-ts";
 
 const ProductSwiper = ({
   product,
@@ -22,7 +23,7 @@ const ProductSwiper = ({
 }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const [hoverImage, setHoverImage] = useState(false);
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   const images = ListImage({ product });
   const optionImage = product.options
     ?.find((o) => o.name === option?.key)
@@ -30,7 +31,7 @@ const ProductSwiper = ({
   const index = images?.indexOf(images?.find((q) => q === optionImage)!);
 
   return (
-    <div className={cn("lg:w-[50%] w-full h-full ", className)}>
+    <div className={cn(" w-full h-full ", className)}>
       <>
         <Swiper
           thumbs={{
@@ -88,7 +89,7 @@ const ProductSwiper = ({
                   blurDataURL="/loader.png"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1000px) 50vw, 33vw"
-                  objectFit="contain"
+                  style={{ objectFit: "contain" }}
                   className=" sm:max-w-[650px] w-full h-full sm:max-h-[650px] max-w-[365px] max-h-[365px] object-contain rounded-[10px]"
                 />
               </div>
@@ -115,7 +116,7 @@ const ProductSwiper = ({
                   placeholder="blur"
                   blurDataURL="/loader.png"
                   priority
-                  objectFit="contain"
+                  style={{ width: "auto", objectFit: "contain" }}
                   className=" sm:max-w-[120px] w-full h-full sm:max-h-[110px] rounded-[10px] hover:shadow-lg dark:shadow-white/70 hover:shadow-black duration-500"
                 />
               </div>

@@ -1,5 +1,6 @@
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
+import { useWindowSize } from "usehooks-ts";
 type imageType = {
   src?: string;
   width?: number;
@@ -12,8 +13,7 @@ export default function ProductImageGallery({
   index: number;
   images?: string[];
 }) {
-  const width = window.screen.width;
-  const height = window.screen.height;
+  const { width, height } = useWindowSize();
   const imagesUrl: imageType = images?.map((item) => ({
     src: item,
     width,

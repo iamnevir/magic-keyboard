@@ -3,7 +3,11 @@ import { v } from "convex/values";
 
 export const getBillboard = query({
   handler: async (ctx) => {
-    const billboards = await ctx.db.query("billboard").order("desc").collect();
+    const billboards = await ctx.db
+      .query("billboard")
+      .filter((q) => q.eq(q.field("isPublish"), true))
+      .order("desc")
+      .collect();
     return billboards;
   },
 });

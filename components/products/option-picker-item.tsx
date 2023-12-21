@@ -45,7 +45,10 @@ const OptionPickerItem = ({
                 <Image
                   src={item.image ? item.image : ""}
                   alt="color"
-                  className=" object-contain w-[50px] h-[50px]"
+                  placeholder="blur"
+                  blurDataURL="/loader.png"
+                  style={{ width: "auto", objectFit: "contain" }}
+                  className=" w-[50px] h-[50px]"
                   width={70}
                   height={70}
                 />

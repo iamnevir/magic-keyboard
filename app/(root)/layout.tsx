@@ -2,6 +2,8 @@ import FacebookMessage from "@/components/facebook-message";
 import { webUrl } from "@/lib/utils";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import Loading from "../loading";
 const NavbarPage = dynamic(() => import("@/components/navbar"), { ssr: false });
 export const metadata: Metadata = {
   title: "Magic Keyboard",

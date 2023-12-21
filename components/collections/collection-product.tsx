@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import slugify from "react-slugify";
 import { fadeInOne } from "@/lib/motion";
 import LoadMore from "./load-more";
+import { useMediaQuery } from "usehooks-ts";
 const ProductCollection = ({
   collectionIdList,
   priceFilter,
@@ -18,7 +19,7 @@ const ProductCollection = ({
   brandFilter: string[];
   priceFilter?: SliderValue;
 }) => {
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   const { results, status, loadMore } = usePaginatedQuery(
     api.product.getMoreProducts,
     {},

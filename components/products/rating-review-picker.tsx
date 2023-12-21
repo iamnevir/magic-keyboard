@@ -1,9 +1,16 @@
-import { Rating } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import { customStyles } from "../rating-star";
-import "@smastrom/react-rating/style.css";
-import { useEffect, useState } from "react";
-
+import { Rating } from "react-simple-star-rating";
+export const tooltipArray = [
+  "Terrible",
+  "Terrible+",
+  "Bad",
+  "Bad+",
+  "Average",
+  "Average+",
+  "Great",
+  "Great+",
+  "Awesome",
+  "Awesome+",
+];
 const RatingReviewPicker = ({
   value,
   onChange,
@@ -11,19 +18,21 @@ const RatingReviewPicker = ({
   value: number;
   onChange: (v: number) => void;
 }) => {
-  const [mouted, setMouted] = useState(false);
-  useEffect(() => {
-    setMouted(true);
-  }, []);
   return (
-    <div>
-      <Rating
-        style={{ maxWidth: 200 }}
-        value={value ? value : 5}
-        onChange={onChange}
-        itemStyles={customStyles}
-      />
-    </div>
+    <Rating
+      size={50}
+      tooltipClassName=" w-[115px] flex justify-center"
+      className=" justify-center"
+      transition
+      initialValue={value}
+      onClick={onChange}
+      SVGclassName="inline-block"
+      tooltipArray={tooltipArray}
+      showTooltip
+      fillColor="#0000FF"
+      SVGstyle={{ display: "inline-block" }}
+      allowFraction
+    />
   );
 };
 

@@ -137,7 +137,7 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
             Phản hồi <span className=" hidden sm:flex">khách hàng</span>
           </span>
           <div className=" flex items-center gap-3">
-            <RatingStar rating={rating} />
+            <RatingStar rating={rating} size={25} />
             <span>{`${ratingList?.length} Đánh giá`}</span>
           </div>
           {reviewArrays
@@ -148,7 +148,7 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
             })
             .map((item, index) => (
               <div key={index} className=" flex items-center gap-2">
-                <RatingStar className=" h-4" rating={item[0].rating} />
+                <RatingStar size={20} rating={item[0].rating} />
                 <Progress
                   value={Math.round((item.length / reviews!.length) * 100)}
                   maxValue={100}

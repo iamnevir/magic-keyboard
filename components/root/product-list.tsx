@@ -11,6 +11,7 @@ import ProductItem from "../product-item";
 import { SwipeDirection } from "./swiper-navigation";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
+import { useMediaQuery } from "usehooks-ts";
 const ProductList = ({
   productList,
   collectionId,
@@ -19,6 +20,7 @@ const ProductList = ({
   collectionId?: Id<"collection">;
 }) => {
   const productsList = useQuery(api.product.getProducts);
+  const isMobile = useMediaQuery("(max-width:768px)");
   const products = productList ? productList : productsList;
   const router = useRouter();
   return (
@@ -67,8 +69,12 @@ const ProductList = ({
           modules={[Pagination]}
           className=" w-full h-full"
         >
-          <SwipeDirection direction="left" className=" top-[25%]" />
-          <SwipeDirection direction="right" className=" top-[25%]" />
+          {!isMobile && products?.length! < 5 ? null : (
+            <>
+              <SwipeDirection direction="left" className=" top-[25%]" />
+              <SwipeDirection direction="right" className=" top-[25%]" />
+            </>
+          )}
           {products?.map((product) => (
             <SwiperSlide key={product._id}>
               <>

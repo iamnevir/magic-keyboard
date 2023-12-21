@@ -8,9 +8,10 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useStore } from "@/hooks/use-valtio-store";
+import { useMediaQuery } from "usehooks-ts";
 
 export function Keyboard1Canvas() {
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
     <Canvas eventPrefix="client" camera={{ position: [0, 0, 4], fov: 50 }}>
       <OrbitControls enableZoom={isMobile} />

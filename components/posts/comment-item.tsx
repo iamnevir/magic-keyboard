@@ -2,7 +2,7 @@ import { Doc } from "@/convex/_generated/dataModel";
 import { convertTimestampToRelativeTime } from "@/lib/utils";
 import { Card, CardHeader } from "@nextui-org/react";
 
-const commentItem = ({ comment }: { comment: Doc<"comment"> }) => {
+const CommentItem = ({ comment }: { comment: Doc<"comment"> }) => {
   return (
     <Card className=" shadow-md dark:shadow-slate-500 shadow-black/50 ">
       <CardHeader>
@@ -23,4 +23,4 @@ const commentItem = ({ comment }: { comment: Doc<"comment"> }) => {
   );
 };
 
-export default commentItem;
+export default CommentItem;

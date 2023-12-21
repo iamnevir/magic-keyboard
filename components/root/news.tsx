@@ -11,6 +11,7 @@ import { SwipeDirection } from "./swiper-navigation";
 import { cn, formatVietnameseDate } from "@/lib/utils";
 import { Doc } from "@/convex/_generated/dataModel";
 import getNews from "@/actions/getNews";
+import { useMediaQuery } from "usehooks-ts";
 const News = ({
   className,
   news,
@@ -20,7 +21,7 @@ const News = ({
   news?: Doc<"post">[];
   slidesPerView?: number;
 }) => {
-  const isMobile = window.screen.width < 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   const newsList = news ? news : getNews();
   return (
     <motion.div

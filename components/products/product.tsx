@@ -30,7 +30,11 @@ const Product = ({ product }: { product: Doc<"product"> }) => {
       />
 
       <div className="flex lg:flex-row flex-col items-start lg:px-10 px-1 lg:py-10 py-2 w-full h-full">
-        <ProductSwiper option={option} product={product} />
+        <ProductSwiper
+          option={option}
+          product={product}
+          className=" sm:w-[50%] "
+        />
         <div className="lg:w-[50%] w-full overflow-auto">
           <ProductPicker onOptionChange={setOption} product={product} />
         </div>
@@ -44,7 +48,10 @@ const Product = ({ product }: { product: Doc<"product"> }) => {
       </div>
       <Divider className="my-4" />
       <ProductReview productId={product._id} />
-      <Recommendation collectionId={product.collectionId} />
+      <Recommendation
+        collectionId={product.collectionId}
+        productId={product._id}
+      />
     </div>
   );
 };

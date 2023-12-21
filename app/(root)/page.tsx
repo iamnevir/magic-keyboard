@@ -1,19 +1,19 @@
-import AboutUs from "@/components/root/about-us";
 import Billboard from "@/components/root/billboard";
-import CarouselCategoryList from "@/components/root/category-list";
-import Feedback from "@/components/root/feedback";
-import Footer from "@/components/root/footer";
-import Help from "@/components/root/help";
-import Intro from "@/components/root/intro";
-import News from "@/components/root/news";
 import ProductList from "@/components/root/product-list";
-import Shipping from "@/components/root/shipping";
-
+import dynamic from "next/dynamic";
+const AboutUs = dynamic(() => import("@/components/root/about-us"));
+const CarouselCategoryList = dynamic(
+  () => import("@/components/root/category-list")
+);
+const Feedback = dynamic(() => import("@/components/root/feedback"));
+const Footer = dynamic(() => import("@/components/root/footer"));
+const News = dynamic(() => import("@/components/root/news"));
+const Shipping = dynamic(() => import("@/components/root/shipping"));
+const Help = dynamic(() => import("@/components/root/help"));
 export default function Home() {
   return (
     <>
-      <div className=" h-full w-full">
-        <Intro />
+      <div className=" h-full w-full overflow-x-hidden">
         <Billboard />
         <Shipping />
         <Help />

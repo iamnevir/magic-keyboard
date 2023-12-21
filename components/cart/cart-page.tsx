@@ -22,11 +22,7 @@ export const Cart = () => {
           <CartTable />
         </div>
       </Tab>
-      <Tab
-        key="donhang"
-        title="Đơn hàng"
-        className="flex flex-col gap-4 overflow-auto"
-      >
+      <Tab key="donhang" title="Đơn hàng" className="flex flex-col gap-4">
         {orders && orders.length > 0 ? (
           orders?.map((item, index) => (
             <div key={index}>

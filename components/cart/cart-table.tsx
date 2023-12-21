@@ -20,10 +20,11 @@ import { fadeInOne } from "@/lib/motion";
 import { useRouter } from "next/navigation";
 import NoCartItem from "./no-cart-item";
 import { useCallback } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 export default function CartTable() {
   const cart = useCart();
-  const isMobile = window.screen.width <= 768;
+  const isMobile = useMediaQuery("(max-width:768px)");
   const router = useRouter();
   const renderCell = useCallback(
     (product: ProductCart, columnKey: React.Key) => {

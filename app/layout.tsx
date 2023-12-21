@@ -24,7 +24,6 @@ export default function RootLayout({
             <Providers>
               <ThemeProvider attribute="class" defaultTheme="dark">
                 {children}
-
                 <Toaster richColors invert />
               </ThemeProvider>
             </Providers>

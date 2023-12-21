@@ -2,9 +2,10 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import React from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const isMobile = false;
+  const isMobile = useMediaQuery("(max-width:768px)");
   return (
     <ClerkProvider
       appearance={
