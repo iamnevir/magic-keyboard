@@ -85,3 +85,25 @@ export const ListImage = ({ product }: { product: Doc<"product"> }) => {
 };
 
 export const webUrl = process.env.PUBLIC_WEB_URL;
+
+// Hàm kiểm tra xem có phải đã qua 2 ngày hay không
+export function hasPassedTwoDays(timeSpan: number): boolean {
+  // Lấy ngày hiện tại
+  const today = new Date();
+
+  // Tính thời điểm cần kiểm tra dựa trên TimeSpan
+  const targetDate = new Date(timeSpan);
+
+  // Kiểm tra xem đã qua 2 ngày chưa
+  return today.getTime() - targetDate.getTime() >= 2 * 24 * 60 * 60 * 1000;
+}
+export const lerp = (v0: any, v1: any, t: any) => v0 * (1 - t) + v1 * t;
+
+/*--------------------
+Get Piramidal Index
+--------------------*/
+// Returns an array of decreasing index values in a pyramid shape, starting from the specified index with the highest value. These indices are often used to create overlapping effects among elements.
+export const getPiramidalIndex = (array: any, index: any) =>
+  array.map((_: any, i: any) =>
+    index === i ? array.length : array.length - Math.abs(index - i)
+  );

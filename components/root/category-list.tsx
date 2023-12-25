@@ -1,9 +1,9 @@
 "use client";
 import { api } from "@/convex/_generated/api";
-
 import { useQuery } from "convex/react";
 import CategoryItem from "./category-item";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 const CarouselCategoryList = () => {
   const categories = useQuery(api.category.getCategories);
 
@@ -17,6 +17,10 @@ const CarouselCategoryList = () => {
           slidesPerView={1}
           spaceBetween={20}
           loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
           breakpoints={{
             450: {
               slidesPerView: 1.5,
@@ -32,6 +36,7 @@ const CarouselCategoryList = () => {
               spaceBetween: 20,
             },
           }}
+          modules={[Autoplay]}
           className=" w-full h-full"
         >
           {categories?.map((category, index) => (

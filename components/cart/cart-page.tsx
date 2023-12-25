@@ -12,7 +12,7 @@ export const Cart = () => {
   const { user } = useUser();
   const orders = useQuery(api.order.getOrderByUserId, { userId: user?.id });
   return (
-    <Tabs color="success" aria-label="Options">
+    <Tabs aria-label="Options">
       <Tab key="cart" title="Giỏ hàng">
         <div className=" w-full h-full flex flex-col gap-3 sm:p-0 pt-5">
           <div className=" font-semibold text-3xl justify-center w-full h-full flex ">

@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import UnderlineText from "../underline-animate";
 import { useTheme } from "next-themes";
 import { container, fadeIn } from "@/lib/motion";
+import UnderlineText from "../link-underline";
 const Help = () => {
   const { theme } = useTheme();
   const color = theme === "light" ? "black" : "white";
@@ -24,7 +24,7 @@ const Help = () => {
             are having an issue with your order, we at EPOMAKER and our amazing
             community are here to help.
           </p>
-          <div className=" flex gap-5">
+          <div className=" flex gap-3 justify-start items-center">
             <UnderlineText>
               <span className=" text-xs font-semibold">Warranty Policy</span>
             </UnderlineText>
@@ -97,7 +97,7 @@ const Help = () => {
                   We respond to emails within 48 hours of your support request.
                 </p>
               </div>
-              <UnderlineText className=" w-[65px]">
+              <UnderlineText>
                 <span className=" text-xs font-semibold">Contact us</span>
               </UnderlineText>
             </div>
@@ -141,7 +141,7 @@ const Help = () => {
               <div className=" text-[#666666] text-sm">
                 <p>Join our online community and meet amazing people.</p>
               </div>
-              <UnderlineText className="w-[74px]">
+              <UnderlineText>
                 <span className=" text-xs font-semibold">Join Discord</span>
               </UnderlineText>
             </div>
@@ -187,7 +187,7 @@ const Help = () => {
               <div className=" text-[#666666] text-sm">
                 <p>All our products can be tracked using the following link.</p>
               </div>
-              <UnderlineText className="w-[99px]">
+              <UnderlineText>
                 <span className=" text-xs font-semibold">Track your Order</span>
               </UnderlineText>
             </div>

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { Rating } from "react-simple-star-rating";
 
 const RatingStar = ({

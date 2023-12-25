@@ -19,7 +19,7 @@ export const Posts = () => {
   }
 
   return (
-    <div className=" sm:w-[90dvw] sm:h-[90dvh] h-60 w-full">
+    <div className=" sm:w-[90dvw] sm:h-[90dvh] h-60 w-full overflow-hidden">
       {" "}
       <Swiper
         direction={"vertical"}
@@ -29,13 +29,13 @@ export const Posts = () => {
         spaceBetween={0}
         mousewheel={true}
         modules={[Mousewheel, Parallax]}
-        className=" w-full h-full"
+        className=" w-full h-full overflow-hidden"
       >
         {posts?.map((item, index) => (
           <SwiperSlide
             key={index}
             onClick={() => router.push(`/posts/${item.slug}`)}
-            className=" relative cursor-pointer"
+            className=" relative cursor-pointer overflow-hidden"
           >
             <Image
               src={item.thumnail}

@@ -92,11 +92,7 @@ const News = ({
                 </div>
                 <div className=" text-sm text-zinc-600">{item.subTitle}</div>
                 <div className=" w-[150px]">
-                  <AnimateButton
-                    color="white"
-                    className="shadow-md dark:shadow-slate-500 shadow-black/50 "
-                    text="Read More"
-                  />
+                  <AnimateButton color="white" text="Read More" />
                 </div>
               </div>
             </div>

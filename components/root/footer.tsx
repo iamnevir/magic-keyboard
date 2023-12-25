@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { TypingText } from "../typing-text";
 import { ArrowUp, ExternalLinkIcon, SendHorizonal } from "lucide-react";
 import { Input } from "@nextui-org/react";
-import UnderlineText from "../underline-animate";
 import { fadeIn } from "@/lib/motion";
 import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import UnderlineText from "../link-underline";
+import Line from "./line";
+import Magnetic from "../magnetic";
 
 const Footer = () => {
   const { user } = useUser();
@@ -53,7 +55,7 @@ const Footer = () => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="flex-col flex sm:flex-row sm:items-start pt-40 items-start w-[99dvw] h-[100dvh] overflow-x-clip relative sm:space-x-28 space-y-20"
+      className="flex-col flex  sm:flex-row sm:items-start pt-40 items-start w-[99dvw] h-[100dvh] overflow-x-hidden relative sm:space-x-28 space-y-20"
     >
       <TypingText
         title="Magic Keyboard"
@@ -89,7 +91,7 @@ const Footer = () => {
           </div>
         </div>
       </motion.div>
-      <motion.div className=" flex flex-col space-y-20">
+      <motion.div className=" flex flex-col space-y-20 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -98,7 +100,7 @@ const Footer = () => {
         >
           <TypingText title="Hiring Dev" textStyles=" font-medium" />
 
-          <span className="group/email cursor-pointer flex-col flex">
+          <span className=" cursor-pointer flex-col flex w-fit">
             <UnderlineText>
               <TypingText
                 title="iamnevir@magic.com"
@@ -114,16 +116,13 @@ const Footer = () => {
           className="ml-14 flex-col flex"
         >
           <TypingText title="Contact enquires" textStyles=" font-medium" />
-          <span className="group/email  cursor-pointer flex-col flex">
+          <span className="  cursor-pointer flex-col flex w-fit">
             <UnderlineText>
-              {" "}
               <TypingText
                 title="magickeyboard@magic.com"
-                textStyles="font-medium "
+                textStyles="font-medium"
               />
             </UnderlineText>
-
-            <div className=" dark:bg-white bg-black group-hover/email:w-full h-[2px] w-0 duration-300" />
           </span>
         </motion.div>
       </motion.div>
@@ -132,7 +131,7 @@ const Footer = () => {
         initial="hidden"
         viewport={{ once: true }}
         whileInView="show"
-        className="space-y-10 ml-5 sm:ml-0"
+        className="space-y-10 ml-5 sm:ml-0 relative z-10"
       >
         <motion.span
           initial="hidden"
@@ -153,20 +152,25 @@ const Footer = () => {
           variants={fadeIn("right", "spring", 0.1, 1)}
           className=" relative items-center"
         >
-          <Input
-            type="email"
-            placeholder="Your Email"
-            onValueChange={setEmail}
-            className=" max-w-3xl w-[300px] sm:w-[470px] h-[61px] dark:text-white"
-            endContent={
-              <SendHorizonal
-                onClick={handleOnSubmit}
-                className="w-8 h-8 cursor-pointer"
-              />
-            }
-          />
+          <Magnetic>
+            <Input
+              type="email"
+              placeholder="Your Email"
+              onValueChange={setEmail}
+              className=" max-w-3xl w-[300px] sm:w-[470px] h-[61px] dark:text-white"
+              endContent={
+                <SendHorizonal
+                  onClick={handleOnSubmit}
+                  className="w-8 h-8 cursor-pointer"
+                />
+              }
+            />
+          </Magnetic>
         </motion.div>
       </motion.div>
+      <div className="flex items-start sm:absolute w-full h-[50px] bottom-20 right-0 pl-28 pr-14">
+        <Line />
+      </div>
       <motion.div
         initial="hidden"
         viewport={{ once: true }}
@@ -198,5 +202,4 @@ const Footer = () => {
     </motion.div>
   );
 };
-
 export default Footer;

@@ -12,6 +12,7 @@ import { useMutation } from "convex/react";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { useState } from "react";
 import RatingStar from "../rating-star";
+import Image from "next/image";
 
 const ReviewItem = ({ review }: { review: Doc<"review"> }) => {
   const [like, setLike] = useState(false);
@@ -88,8 +89,21 @@ const ReviewItem = ({ review }: { review: Doc<"review"> }) => {
         </div>
       </CardHeader>
       <Divider />
-      <CardBody>
+      <CardBody className="gap-2">
         <div>{review.comments}</div>
+        <div className="grid lg:grid-cols-2 grid-cols-1 xl:grid-cols-3 gap-3">
+          {review.images?.map((item, index) => (
+            <div className=" relative w-[270px] h-[210px]" key={index}>
+              <Image
+                src={item}
+                alt=""
+                fill
+                className=" rounded-[10px]"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          ))}
+        </div>
       </CardBody>
       <Divider />
       <CardFooter className="gap-3">

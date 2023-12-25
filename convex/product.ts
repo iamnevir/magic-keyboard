@@ -21,6 +21,7 @@ export const getMoreProducts = query({
 export const getProductsByCategory = query({
   args: {
     categoryId: v.id("category"),
+    take: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const collections = await ctx.db
@@ -34,7 +35,7 @@ export const getProductsByCategory = query({
           .query("product")
           .withIndex("by_category", (q) => q.eq("collectionId", collection._id))
           .order("desc")
-          .collect()
+          .take(args.take ? args.take : 4)
     );
     const products = productsList.reduce(
       (accumulator, currentPromise) =>
@@ -47,6 +48,23 @@ export const getProductsByCategory = query({
   },
 });
 
+export const getProductsForNavbar = query({
+  handler: async (ctx) => {
+    const category = await ctx.db.query("category").collect();
+    const productList = category.map(
+      async (item) =>
+        await getProductsByCategory(ctx, { take: 1, categoryId: item._id })
+    );
+    const products = productList.reduce(
+      (accumulator, currentPromise) =>
+        accumulator.then((results) =>
+          currentPromise.then((result) => results.concat(result))
+        ),
+      Promise.resolve([])
+    );
+    return products;
+  },
+});
 export const getProductsByIds = query({
   args: {
     productIdList: v.array(v.id("product")),

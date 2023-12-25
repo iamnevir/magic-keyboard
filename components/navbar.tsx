@@ -25,6 +25,7 @@ import { useCartDrawer } from "@/hooks/use-shopping-cart-drawer";
 import { useMusic } from "@/hooks/use-bg-music";
 import { cn } from "@/lib/utils";
 import { useEventListener, useMediaQuery } from "usehooks-ts";
+import { Navigation } from "./navigation";
 
 const NavbarPage = () => {
   const { theme } = useTheme();
@@ -84,42 +85,15 @@ const NavbarPage = () => {
             </Link>
           </NavbarBrand>
         </NavbarContent>
-        <NavbarContent
-          justify="center"
-          className="hidden sm:flex space-x-10  z-50"
-        >
-          <NavbarItem>
-            <Link color="foreground" href="/magic">
-              Magic
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/collections/all" color="foreground">
-              Collections
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/posts" color="foreground">
-              Posts
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="/library">
-              Library
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="/discord">
-              Discord
-            </Link>
-          </NavbarItem>
+        <NavbarContent justify="center" className="hidden sm:flex w-full z-50">
+          <Navigation />
         </NavbarContent>
         <NavbarContent justify="end" className=" flex items-center">
           {auth.userId ? (
             <>
               <NavbarItem
                 className={cn(
-                  "absolute w-10 right-[90px] -top-6 sm:right-[487px] sm:top-4",
+                  "absolute w-10 right-[90px] -top-6 sm:right-[487px] sm:top-4 z-[99999]",
                   pathname !== "/" ? "sm:right-[540px] right-[140px]" : ""
                 )}
               >

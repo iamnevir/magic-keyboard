@@ -3,8 +3,8 @@ import { ProductCart } from "@/type";
 import Image from "next/image";
 import QuantityPicker from "./products/quantity-picker";
 import { Button } from "@nextui-org/button";
-import UnderlineText from "./underline-animate";
 import useCart from "@/hooks/use-shopping-cart";
+import UnderlineText from "./link-underline";
 
 const CartItem = ({ item }: { item: ProductCart }) => {
   const cart = useCart();

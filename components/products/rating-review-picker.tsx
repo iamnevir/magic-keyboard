@@ -1,16 +1,4 @@
 import { Rating } from "react-simple-star-rating";
-export const tooltipArray = [
-  "Terrible",
-  "Terrible+",
-  "Bad",
-  "Bad+",
-  "Average",
-  "Average+",
-  "Great",
-  "Great+",
-  "Awesome",
-  "Awesome+",
-];
 const RatingReviewPicker = ({
   value,
   onChange,
@@ -27,8 +15,6 @@ const RatingReviewPicker = ({
       initialValue={value}
       onClick={onChange}
       SVGclassName="inline-block"
-      tooltipArray={tooltipArray}
-      showTooltip
       fillColor="#0000FF"
       SVGstyle={{ display: "inline-block" }}
       allowFraction

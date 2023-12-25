@@ -23,11 +23,13 @@ const ProductItem = ({
   loop,
   onFilter,
   setOnFilter,
+  className,
 }: {
   product: Doc<"product">;
   loop?: boolean;
   onFilter?: boolean;
   setOnFilter?: (value: boolean) => void;
+  className?: string;
 }) => {
   const router = useRouter();
   const cart = useCart();
@@ -104,7 +106,8 @@ const ProductItem = ({
       <div
         className={cn(
           " flex flex-col sm:justify-start justify-center items-center sm:w-[250px] sm:h-[450px] gap-3  p-5",
-          pathname === "/" ? "mb-24" : ""
+          pathname === "/" ? "mb-24" : "",
+          className
         )}
       >
         <Tilt disabled={isMobile}>
@@ -112,7 +115,22 @@ const ProductItem = ({
             initial="hidden"
             animate={loop ? "" : "show"}
             whileInView={loop ? "show" : ""}
-            variants={fadeIn("up", "spring", 0.1, 0.1)}
+            variants={{
+              hidden: {
+                y: 10,
+                opacity: 0,
+              },
+              show: {
+                y: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  delay: 0.1,
+                  duration: 1,
+                  ease: "easeOut",
+                },
+              },
+            }}
             viewport={{ once: true }}
             style={{ backgroundImage: `url(${bg})` }}
             onClick={() => router.push(`/products/${product.slug}`)}
@@ -178,7 +196,22 @@ const ProductItem = ({
           animate={loop ? "" : "show"}
           whileInView={loop ? "show" : ""}
           viewport={{ once: true }}
-          variants={fadeIn("left", "spring", 0.1, 1)}
+          variants={{
+            hidden: {
+              y: 10,
+              opacity: 0,
+            },
+            show: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                delay: 0.1,
+                duration: 1,
+                ease: "easeOut",
+              },
+            },
+          }}
           className=" flex flex-col items-center text-center w-full gap-1"
         >
           <span className="text-xs font-semibold uppercase text-zinc-400">
@@ -224,7 +257,7 @@ const ProductItem = ({
                   setBg(item.image ? item.image : "");
                 }}
                 className={cn(
-                  "  cursor-pointer border-1",
+                  "  cursor-pointer border-1 w-[50px] h-[30px] relative",
                   active === index
                     ? "dark:border-white border-black"
                     : "border-none"
@@ -233,10 +266,10 @@ const ProductItem = ({
                 <Image
                   src={item.image ? item.image : ""}
                   alt="image"
-                  width={50}
-                  height={30}
-                  style={{ width: "auto", objectFit: "contain" }}
-                  className=" w-[50px] h-[30px] "
+                  fill
+                  sizes="33dvw"
+                  style={{ objectFit: "contain" }}
+                  className=""
                 />
               </div>
             ))}

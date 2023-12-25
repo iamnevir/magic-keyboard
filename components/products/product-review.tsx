@@ -6,6 +6,7 @@ import { Doc, Id } from "@/convex/_generated/dataModel";
 import {
   Card,
   CardBody,
+  CardHeader,
   Divider,
   Input,
   Pagination,
@@ -29,6 +30,7 @@ import { cn } from "@/lib/utils";
 import ReviewItem from "./review-item";
 import { useUser } from "@clerk/clerk-react";
 import RatingReviewPicker from "./rating-review-picker";
+import { MultiFileDropzoneUsage } from "../upload-multi-image";
 
 export function chunkArray<T>(arr: T[], chunkSize: number): T[][] {
   const chunks: T[][] = [];
@@ -133,8 +135,8 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
     <div className=" w-full h-full sm:px-40 sm:py-20 px-2 py-2">
       <div className=" flex sm:flex-row flex-col gap-2 items-start justify-between">
         <div className=" flex flex-col w-full">
-          <span className=" font-semibold text-2xl sm:text-3xl">
-            Phản hồi <span className=" hidden sm:flex">khách hàng</span>
+          <span className=" font-semibold flex gap-2 text-2xl sm:text-3xl">
+            Phản hồi <span className=" hidden sm:flex"> khách hàng</span>
           </span>
           <div className=" flex items-center gap-3">
             <RatingStar rating={rating} size={25} />
@@ -152,7 +154,7 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
                 <Progress
                   value={Math.round((item.length / reviews!.length) * 100)}
                   maxValue={100}
-                  color="success"
+                  classNames={{ indicator: "bg-blue-700" }}
                   className="max-w-md"
                 />
                 <span>
@@ -269,6 +271,25 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
                     </FormItem>
                   )}
                 />
+                <Card className=" dark:bg-zinc-800 bg-gray-100">
+                  <CardHeader>Ảnh đính kèm</CardHeader>
+                  <CardBody className="space-2">
+                    <FormField
+                      control={form.control}
+                      name="images"
+                      render={({ field }) => (
+                        <FormItem className=" w-full">
+                          <FormControl>
+                            <MultiFileDropzoneUsage
+                              value={field.value ? field.value : []}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </CardBody>
+                </Card>
                 <Button className=" max-w-[200px] my-3">
                   <AnimateButton text="Gửi đánh giá" color="white" />
                 </Button>
@@ -292,7 +313,7 @@ const ProductReview = ({ productId }: { productId: Id<"product"> }) => {
             <Pagination
               total={Math.round(reviews?.length! / 3)}
               initialPage={page + 1}
-              color="primary"
+              classNames={{ cursor: "bg-blue-700" }}
               onChange={(page: number) => setPage(page - 1)}
             />
           ) : null}
