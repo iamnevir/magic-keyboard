@@ -12,14 +12,14 @@ import { SwipeDirection } from "./swiper-navigation";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
-const ProductList = ({
+const SaleProductList = ({
   productList,
   collectionId,
 }: {
   productList?: Doc<"product">[];
   collectionId?: Id<"collection">;
 }) => {
-  const productsList = useQuery(api.product.getProducts);
+  const productsList = useQuery(api.product.getProductsSale);
   const isMobile = useMediaQuery("(max-width:768px)");
   const products = productList ? productList : productsList;
   const router = useRouter();
@@ -27,7 +27,7 @@ const ProductList = ({
     <div className=" overflow-hidden sm:p-4 p-2">
       <div className={cn("relative")}>
         <p className="mb-10 sm:text-2xl text-xl sm:w-full w-[50dvw]  font-semibold">
-          Mới ra mắt <span className="text-slate-500">Yes, even that.</span>
+          Sale <span className="text-slate-500">Yes, even that.</span>
         </p>
         <div className=" absolute right-0 top-0">
           <AnimateButton
@@ -87,4 +87,4 @@ const ProductList = ({
   );
 };
 
-export default ProductList;
+export default SaleProductList;

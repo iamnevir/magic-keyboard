@@ -1,5 +1,4 @@
 "use client";
-import Error from "@/app/not-found";
 import Breadcrumb from "@/components/bread-crum";
 import ProductCollection from "@/components/collections/product-collection";
 import { api } from "@/convex/_generated/api";
@@ -39,15 +38,17 @@ export const Category = ({ slug }: { slug: string }) => {
     );
   }
   return (
-    <div className=" ">
-      <div className=" flex items-center justify-center py-5">
-        <div className=" rounded-full bg-default-100 w-60 p-5 flex items-center justify-center">
-          <span className="font-semibold text-3xl">{category.name}</span>
+    <>
+      <div className=" ">
+        <div className=" flex items-center justify-center py-5">
+          <div className=" rounded-full bg-default-100 w-60 p-5 flex items-center justify-center">
+            <span className="font-semibold text-3xl">{category.name}</span>
+          </div>
         </div>
-      </div>
 
-      <Breadcrumb item={category.name} className="py-5" />
-      <ProductCollection isAll={false} slug={slug} />
-    </div>
+        <Breadcrumb item={category.name} className="py-5" />
+        <ProductCollection isAll={false} slug={slug} />
+      </div>
+    </>
   );
 };

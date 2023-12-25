@@ -224,3 +224,23 @@ export const getProductBySlug = query({
     return product;
   },
 });
+export const getProductsSale = query({
+  handler: async (ctx) => {
+    const products = await ctx.db
+      .query("product")
+      .filter((f) => f.eq(f.field("isSale"), true))
+      .order("desc")
+      .collect();
+    return products;
+  },
+});
+export const getCommingProducts = query({
+  handler: async (ctx) => {
+    const products = await ctx.db
+      .query("product")
+      .filter((f) => f.eq(f.field("pay"), "coming"))
+      .order("desc")
+      .collect();
+    return products;
+  },
+});

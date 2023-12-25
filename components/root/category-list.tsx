@@ -15,7 +15,7 @@ const CarouselCategoryList = () => {
       <div className=" w-full h-full pl-10">
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={40}
           loop={true}
           autoplay={{
             delay: 3000,
@@ -24,23 +24,23 @@ const CarouselCategoryList = () => {
           breakpoints={{
             450: {
               slidesPerView: 1.5,
-              spaceBetween: 20,
+              spaceBetween: 40,
             },
             768: {
               slidesPerView: 2.5,
-              spaceBetween: 20,
+              spaceBetween: 40,
             },
 
             1224: {
               slidesPerView: 3.5,
-              spaceBetween: 20,
+              spaceBetween: 40,
             },
           }}
           modules={[Autoplay]}
           className=" w-full h-full"
         >
           {categories?.map((category, index) => (
-            <SwiperSlide key={index} className=" hover:scale-110 duration-500">
+            <SwiperSlide key={index} className=" p-5">
               <CategoryItem category={category} key={category._id} />
             </SwiperSlide>
           ))}

@@ -13,7 +13,8 @@ const CategoryItem = ({ category }: { category: Doc<"category"> }) => {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      variants={fadeIn("up", "spring", 0.2, 0.5)}
+      variants={fadeIn("up", "spring", 0.2, 2)}
+      whileHover={{ scale: 1.05, transition: { duration: 0.5 } }}
       key={category._id}
       className="group cursor-pointer relative sm:h-[400px] sm:w-[400px] h-[300px] w-[300px]  overflow-hidden bg-neutral-200"
     >
@@ -24,7 +25,7 @@ const CategoryItem = ({ category }: { category: Doc<"category"> }) => {
         priority
         sizes="(min-width: 768px) 100dvw, 33dvw"
         style={{ objectFit: "cover" }}
-        className="group-hover:scale-110 duration-500"
+        className="group-hover:scale-100 scale-110 duration-500"
       />
 
       <div className="absolute inset-0 z-10 grid place-content-center">
